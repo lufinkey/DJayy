@@ -10,20 +10,24 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', function($scope, $tim
     var tracksToSend = [];
 
     //Scope functions
-    $scope.addTrack = function(title, artist) {
+    $scope.addTrack = function(id, uservote) {
         var track = {
-            title: title,
-            artist: artist,
-            userVote: 1
+            id: id,
+            userVote: uservote 
         };
 
-        sendTracks.push(track);
+        tracksToSend.push(track);
+    };
+
+    $scope.trackVote = function(id, vote) {
+        findTrackById(id).vote += vote;
+        $scope.addTrack(id, vote);
     };
     
     //Local functions
     var serverPoll = function() {
         $timeout(function() {
-            getTrackList("tracks.json");
+            getTrackList("/queue");
             sendTracks(tracksToSend);
 
             serverPoll();
@@ -39,8 +43,13 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', function($scope, $tim
     var sendTracks = function(tracks) {
         //Send the files to the server
         var tracksAsJson = JSON.stringify(tracks);
-        
-        tracksToSend = [];
+    };
+
+    var findTrackById = function(id) {
+        for (i = 0; i < $scope.tracks.length; i++) {
+            if ($scope.tracks[i].id == id)
+                return $scope.tracks[i];
+        }
     };
 
     serverPoll();

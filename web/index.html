@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="DJayy">
+<html ng-app="DJayyApp">
     <head>
 
      <meta charset="UTF-8"> 
@@ -24,10 +24,19 @@
 
     </head>
 
-    <body ng-controller="DJayyCtrl">
-    <div class="container">
+    <body ng-controller="MainCtrl">
+    
+        <div class="page-header">
+            <h1 class="text-center">DJayy</h1>
+        </div>
 
-        <h1>DJayy</h1>
+        <div class="container">
+
+            <h3>Play Queue</h3>
+
+            <ul class="list-group">
+                <li ng-repeat="track in tracks" class="list-group-item">{{track.title}} - {{track.artist}}</li>
+            </ul>
 
     </body>
 

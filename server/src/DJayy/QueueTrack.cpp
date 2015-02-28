@@ -5,7 +5,7 @@ namespace DJayy
 {
 	String QueueTrack::toJson() const
 	{
-		return "{\"queue_id\":\"" + queue_id + "\",\"id\":\"" + id + "\",\"title\":\"" + title + "\",\"artist\":\"" + artist + "\",\"album\":\"" + album + "\",\"votes\":" + getTotalVotes() + "}";
+		return "{\"queue_id\":\"" + queue_id + "\",\"track_id\":\"" + track_id + "\",\"title\":\"" + title + "\",\"artist\":\"" + artist + "\",\"album\":\"" + album + "\",\"votes\":" + getTotalVotes() + "}";
 	}
 	
 	long long QueueTrack::getTotalVotes() const

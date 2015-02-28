@@ -1,19 +1,19 @@
 {
     "tracks":[
         {   
-            "id":"aa3",
+            "track_id":"aa3",
             "title":"POWER",
             "artist":"Kanye West",
             "votes":0
         },
         {
-            "id":"bc2",
+            "track_id":"bc2",
             "title":"Somatic Serenade",
             "artist":"Bluetech",
             "votes":0
         },
         {
-            "id":"7e2",
+            "track_id":"7e2",
             "title":"Knuckle's Rap",
             "artist":"That Rapper from Sonic Adventure 2 Battle",
             "votes":0

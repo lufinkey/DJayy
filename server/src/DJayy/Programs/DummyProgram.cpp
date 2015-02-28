@@ -7,21 +7,21 @@ namespace DJayy
 	{
 		QueueTrack track1;
 		track1.queue_id = "01";
-		track1.id = "aa3";
+		track1.track_id = "aa3";
 		track1.title = "Power";
 		track1.artist = "Kanye West";
 		track1.album = "My Beautiful Dark Twisted Fantasy";
 
 		QueueTrack track2;
 		track2.queue_id = "02";
-		track2.id = "bc2";
+		track2.track_id = "bc2";
 		track2.title = "Somatic Serenade";
 		track2.artist = "Bluetech";
 		track2.album = "Matt please add album name";
 
 		QueueTrack track3;
 		track3.queue_id = "03";
-		track3.id = "7e2";
+		track3.track_id = "7e2";
 		track3.title = "Kick the Rock!";
 		track3.artist = "Hunnid-P";
 		track3.album = "Sonic Adventure 2 Multi-Dimensional Original Soundtrack";

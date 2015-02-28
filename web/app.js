@@ -12,16 +12,16 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', function($scope, $tim
     //Scope functions
     $scope.addTrack = function(id, uservote) {
         var track = {
-            id: id,
+            track_id: track_id,
             userVote: uservote 
         };
 
         tracksToSend.push(track);
     };
 
-    $scope.trackVote = function(id, vote) {
-        findTrackById(id).vote += vote;
-        $scope.addTrack(id, vote);
+    $scope.trackVote = function(track_id, vote) {
+        findTrackByTrackId(track_id).vote += vote;
+        $scope.addTrack(track_id, vote);
     };
     
     //Local functions
@@ -45,9 +45,9 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', function($scope, $tim
         var tracksAsJson = JSON.stringify(tracks);
     };
 
-    var findTrackById = function(id) {
+    var findTrackByTrackId = function(track_id) {
         for (i = 0; i < $scope.tracks.length; i++) {
-            if ($scope.tracks[i].id == id)
+            if ($scope.tracks[i].track_id == track_id)
                 return $scope.tracks[i];
         }
     };

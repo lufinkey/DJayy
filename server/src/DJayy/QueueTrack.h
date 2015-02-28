@@ -11,7 +11,7 @@ namespace DJayy
 	{
 	public:
 		String queue_id;
-		String id;
+		String track_id;
 		String title;
 		String artist;
 		String album;

@@ -71,7 +71,7 @@
                 </h3>
 
                 <ul class="list-group scrollable">
-                    <li ng-repeat="track in library | filter:q as results" class="list-group-item">
+                    <li ng-repeat="track in library track by $index | filter:q as results" class="list-group-item">
                         <div class="row">
                             <div class="col-md-6">{{track.title}} - {{track.artist}}</div>
                             <div class="col-md-6">

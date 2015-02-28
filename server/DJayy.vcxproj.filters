@@ -50,5 +50,8 @@
     <ClInclude Include="src\DJayy\QueueTrack.h">
       <Filter>src\DJayy</Filter>
     </ClInclude>
+    <ClInclude Include="src\DJayy\UserVote.h">
+      <Filter>src\DJayy</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

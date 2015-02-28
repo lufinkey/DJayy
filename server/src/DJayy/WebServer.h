@@ -4,8 +4,6 @@
 #include <server_http.hpp>
 #include <string>
 
-#include "../Util/String.h"
-
 #include "ProgramInterface.h"
 
 namespace DJayy
@@ -24,6 +22,7 @@ namespace DJayy
 	private:
 		void setup_GET();
 		void setup_queue();
+		void setup_queuevote();
 
 		String webRoot;
 		HttpServer*server;

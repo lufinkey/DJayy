@@ -11,14 +11,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="external\jsoncpp\src\lib_json\json_reader.cpp" />
-    <ClCompile Include="external\jsoncpp\src\lib_json\json_value.cpp" />
-    <ClCompile Include="external\jsoncpp\src\lib_json\json_writer.cpp" />
+    <ClCompile Include="src\DJayy\Programs\DummyProgram.cpp" />
+    <ClCompile Include="src\DJayy\QueueTrack.cpp" />
     <ClCompile Include="src\DJayy\WebServer.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Util\String.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\DJayy\ProgramInterface.h" />
+    <ClInclude Include="src\DJayy\Programs\DummyProgram.h" />
+    <ClInclude Include="src\DJayy\QueueTrack.h" />
     <ClInclude Include="src\DJayy\WebServer.h" />
     <ClInclude Include="src\Util\ArrayList.h" />
     <ClInclude Include="src\Util\String.h" />

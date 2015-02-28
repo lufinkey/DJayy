@@ -14,10 +14,10 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     var first_connect = true;
 
     //Scope functions
-    $scope.server_trackVote = function(event, queue_id, vote) {
+    $scope.server_trackVote = function($event, queue_id, vote) {
         $http.post("/queuevote", {user_id: user_id, queue_id: queue_id, vote: vote}).then(function(response) {
             var update_track = client_findTrackByQ_Id(response.data.queue_id);
-            var button = angular.element(event.sourceElement);
+            var button = angular.element($event.target);
 
             if (response.data.vote == 0) {
                     $(button).removeClass("active");

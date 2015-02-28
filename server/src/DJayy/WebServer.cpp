@@ -116,11 +116,14 @@ namespace DJayy
 					}
 					
 					result = "[";
-					for(size_t i=minEntry; i<maxEntry && i<queue.size(); i++)
+					size_t length = queue.size();
+					size_t last = length-1;
+					size_t last_alt = maxEntry-1;
+					for(size_t i=minEntry; i<maxEntry && i<length; i++)
 					{
 						QueueTrackPacket packet(tracks.get(i),this->program);
 						result += packet.toJson();
-						if(i != 0)
+						if(i!=last && i!=last_alt)
 						{
 							result += ",";
 						}

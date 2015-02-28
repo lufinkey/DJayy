@@ -12,11 +12,11 @@ namespace DJayy
 	{
 		String json = "[";
 		size_t length = tracks.size();
-		size_t last = tracks.size()-1;
-		for(size_t i=(length-1); i!=SIZE_MAX; i--)
+		size_t last = length-1;
+		for(size_t i=0; i<length; i--)
 		{
 			json += tracks.get(i).toJson();
-			if(i != 0)
+			if(i != last)
 			{
 				json += ",";
 			}
@@ -29,7 +29,7 @@ namespace DJayy
 	{
 		QueueTrack track((String)""+next_queue_id, track_id);
 		next_queue_id++;
-		tracks.add(0,track);
+		tracks.add(track);
 	}
 	
 	size_t Queue::size() const

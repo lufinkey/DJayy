@@ -18,7 +18,7 @@ namespace DJayy
 		server = new HttpServer(port, 4);
 
 		setup_GET();
-		//setup_library();
+		setup_search();
 		setup_queue();
 		setup_queuevote();
 	}
@@ -98,13 +98,25 @@ namespace DJayy
 				std::string str(std::istreambuf_iterator<char>(request->content), eos);
 				std::cout << "recieved queue request:" << std::endl << str << std::endl;
 				
+				boost::property_tree::ptree pt;
+				read_json(std::istringstream(str), pt);
+				
+				size_t minEntry = String::asUnsignedLong(pt.get<std::string>("minEntry"));
+				size_t maxEntry = String::asUnsignedLong(pt.get<std::string>("maxEntry"));
+				
 				String result;
 				if(this->program != nullptr)
 				{
 					const Queue& queue = this->program->getQueue();
 					const ArrayList<QueueTrack>& tracks = queue.getTracks();
+
+					if(minEntry == 0 && maxEntry == 0)
+					{
+						maxEntry = queue.size();
+					}
+					
 					result = "[";
-					for(size_t i=(queue.size()-1); i!=SIZE_MAX; i--)
+					for(size_t i=minEntry; i<maxEntry; i++)
 					{
 						QueueTrackPacket packet(tracks.get(i),this->program);
 						result += packet.toJson();
@@ -168,36 +180,28 @@ namespace DJayy
 			}
 		};
 	}
-
-	/*void WebServer::setup_library()
+	
+	void WebServer::setup_search()
 	{
-		server->resource["^/library$"]["GET"]=[this](HttpServer::Response& response, std::shared_ptr<HttpServer::Request> request) {
+		/*server->resource["^/search$"]["POST"]=[this](HttpServer::Response& response, std::shared_ptr<HttpServer::Request> request) {
 			try
 			{
 				std::istreambuf_iterator<char> eos;
 				std::string str(std::istreambuf_iterator<char>(request->content), eos);
-				std::cout << "recieved library request:" << std::endl << str << std::endl;
+				std::cout << "recieved search query:" << std::endl << str << std::endl;
 				
-				String result;
-				if(this->program != nullptr)
-				{
-					result = this->program->getLibrary().toJson();
-				}
-				else
-				{
-					result = "[]";
-				}
-
-				std::cout << "Sending library data:" << std::endl << result << std::endl;
-
-				response << "HTTP/1.1 200 OK\r\nContent-Length: " << result.length() << "\r\n\r\n" << result;
+				boost::property_tree::ptree pt;
+				read_json(std::istringstream(str), pt);
+				
+				
+				//response << "HTTP/1.1 200 OK\r\nContent-Length: " << reply.length() << "\r\n\r\n" << reply;
 			}
 			catch(const std::exception& e)
 			{
 				response << "HTTP/1.1 400 Bad Request\r\nContent-Length: " << strlen(e.what()) << "\r\n\r\n" << e.what();
 			}
-		};
-	}*/
+		};*/
+	}
 
 	void WebServer::setProgramInterface(ProgramInterface*programInterface)
 	{

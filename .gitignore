@@ -1,6 +1,15 @@
 *swp
 *~
 
+# Codeblocks
+bin/
+*.o
+*.out
+*.depend
+*.layout
+*.exe
+lab/
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db

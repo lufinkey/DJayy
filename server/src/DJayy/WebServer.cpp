@@ -186,7 +186,7 @@ namespace DJayy
 				}
 				else
 				{
-					result = "{\"library\":[]}";
+					result = "[]";
 				}
 
 				std::cout << "Sending library data:" << std::endl << result << std::endl;

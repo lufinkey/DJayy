@@ -40,7 +40,5 @@ int main(int argc, char *argv[])
 	WebServer server(getWebRoot(), 8080);
 	server.start();
 
-	std::system("PAUSE");
-
 	return 0;
 }

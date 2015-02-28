@@ -76,11 +76,6 @@ namespace DJayy
 	
 	void WebServer::start()
 	{
-		HttpServer* serverPtr = server;
-		std::thread server_thread([serverPtr](){
-			//Start server
-			serverPtr->start();
-		});
-		server_thread.detach();
+		server->start();
 	}
 }

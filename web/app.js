@@ -20,19 +20,19 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
             var button = angular.element(event.sourceElement);
 
             if (response.data.vote == '0') {
-                    button.css("active", "false");
+                    button.removeClass("active");
                 if (button.attr("id") == "up") {
-                    button.next().css("active", "false");
+                    button.next().removeClass("active");
                 } else {
-                    button.prev().css("active", "false");
+                    button.prev().removeClass("active");
                 }
             } else if (response.data.vote == '1') {
-                button.css("active", "true");
-                button.next().css("active", "false");
+                button.addClass("active");
+                button.next().removeClass("active");
             } else if (response.data.vote == '-1') {
                 //only downvote button is highlighted
-                button.css("active", "true");
-                button.prev().css("active", "false");
+                button.addClass("active");
+                button.prev().removeClass("active");
             }
 
             update_track.votes = response.data.totalVotes;

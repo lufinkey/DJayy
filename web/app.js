@@ -19,7 +19,21 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
             var update_track = client_findTrackByQ_Id(response.data.queue_id);
             var button = angular.element(event.sourceElement);
 
-            //TODO handle vote toggling
+            if (response.data.vote == '0') {
+                    button.css("active", "false");
+                if (button.attr("id") == "up") {
+                    button.next().css("active", "false");
+                } else {
+                    button.prev().css("active", "false");
+                }
+            } else if (response.data.vote == '1') {
+                button.css("active", "true");
+                button.next().css("active", "false");
+            } else if (response.data.vote == '-1') {
+                //only downvote button is highlighted
+                button.css("active", "true");
+                button.prev().css("active", "false");
+            }
 
             update_track.votes = response.data.totalVotes;
         });

@@ -43,18 +43,18 @@
             <h3>Play Queue</h3>
 
             <ul class="list-group">
-                <li ng-repeat="track in queue_page" class="list-group-item">
+                <li ng-repeat="i in client_queueRange()" class="list-group-item">
                     <div class="row">
-                        <div class="col-md-6">{{track.title}} - {{track.artist}}</div>
+                        <div class="col-md-6">{{queue[i].title}} - {{queue[i].artist}}</div>
                         <div class="col-md-6">
                             <span class="pull-right">
                             <div class="btn-group btn-group-xs" data-toggle="buttons">
-                                <button id="up" ng-click="server_trackVote($event, track.queue_id, 1)" type="button" class="btn btn-default">
+                                <button id="up" ng-click="server_trackVote($event, queue[i].queue_id, 1)" type="button" class="btn btn-default">
                                     <span class="glyphicon glyphicon-menu-up"></span></button>
-                                <button id="down" ng-click="server_trackVote($event, track.queue_id, -1)" type="button" class="btn btn-default">
+                                <button id="down" ng-click="server_trackVote($event, queue[i].queue_id, -1)" type="button" class="btn btn-default">
                                     <span class="glyphicon glyphicon-menu-down"></span></button>
                             </div>
-                            {{track.votes}}
+                            {{queue[i].votes}}
                             </span>
                         </div>
                     </div>
@@ -62,13 +62,13 @@
             </ul>
             <div class="row">
                 <div class="col-md-6">
-                    <button id="queue_back" ng-click="client_advanceQueuePage('left')"
-                        ng-if="queue_page_start - 10 > 0" type="button" class="btn btn-default">
+                    <button id="queue_back" ng-click="client_moveQueuePage(-10)"
+                        ng-if="client_queueCanMoveBack()" type="button" class="btn btn-default">
                         <span class="glyphicon glyphicon-menu-left"></span></button>
                 </div>
                 <div class="col-md-6"><span class="pull-right">
-                    <button id="queue_next" ng-click="client_advanceQueuePage('right')"
-                        ng-if="queue_page_start + 10 < queue_page_start + queue_page_start % 10" type="button" class="btn btn-default">
+                    <button id="queue_next" ng-click="client_moveQueuePage(10)"
+                        ng-if="client_queueCanMoveForward()" type="button" class="btn btn-default">
                         <span class="glyphicon glyphicon-menu-right"></span></button>
                 </div></span>
             </div>

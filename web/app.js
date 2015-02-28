@@ -6,7 +6,6 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     
     //Scope variables
     $scope.queue = [];
-    $scope.queue_page = []
     $scope.search = [];
 
     $scope.queue_page_start = 0;
@@ -45,16 +44,30 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
         });
     };
 
-    $scope.client_advanceQueuePage = function(direction) {
-        if (direction == 'right') {
-            $scope.queue_page_start += 10;
-        } else if (direction == 'left') {
-            $scope.queue_page_start -= 10;
-        }
-
-        client_setQueuePage();
+    $scope.client_moveQueuePage = function(amt) {
+        $scope.queue_page_start += amt;
     }
 
+    $scope.client_queueRange = function() {
+        range = [];
+
+        for (i = $scope.queue_page_start; i < $scope.queue_page_start + 9; i++) {
+            if (i > $scope.queue.length)
+                return range;
+
+            range.push(i);
+        }
+
+        return range;
+    }
+
+    $scope.client_queueCanMoveBack = function() {
+        return ($scope.queue_page_start - 10) > 0;
+    }
+
+    $scope.client_queueCanMoveForward = function() {
+        return ($scope.queue_page_start + 10) < ($scope.queue_page_start + $scope.queue_page_start % 10);
+    }
 
     //Local functions
     function server_poll() {
@@ -68,11 +81,6 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
         }, 1000);
     };
    
-    function client_setQueuePage() {
-        var endIndex = $scope.queue.length % 10 + 1;
-        $scope.queue_page = $scope.queue.splice($scope.queue_page_start, $scope.queue_page_start + endIndex);
-    }
-
     function server_getQueue(minEntry, maxEntry) {
         $http.post("/queue", {minEntry: minEntry, maxEntry: maxEntry}).then(function(response) {
             $scope.queue = $scope.queue.concat(response.data);
@@ -87,9 +95,9 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     }
 
     function client_findTrackByQ_Id(queue_id) {
-        for (i = 0; i < $scope.queue_page.length; i++) {
-            if ($scope.queue_page[i].queue_id == queue_id)
-                return $scope.queue_page[i];
+        for (i = 0; i < $scope.queue.length; i++) {
+            if ($scope.queue[i].queue_id == queue_id)
+                return $scope.queue[i];
         }
     };
 

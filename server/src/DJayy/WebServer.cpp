@@ -116,7 +116,7 @@ namespace DJayy
 					}
 					
 					result = "[";
-					for(size_t i=minEntry; i<maxEntry; i++)
+					for(size_t i=minEntry; i<maxEntry && i<queue.size(); i++)
 					{
 						QueueTrackPacket packet(tracks.get(i),this->program);
 						result += packet.toJson();
@@ -183,7 +183,7 @@ namespace DJayy
 	
 	void WebServer::setup_search()
 	{
-		/*server->resource["^/search$"]["POST"]=[this](HttpServer::Response& response, std::shared_ptr<HttpServer::Request> request) {
+		server->resource["^/search$"]["POST"]=[this](HttpServer::Response& response, std::shared_ptr<HttpServer::Request> request) {
 			try
 			{
 				std::istreambuf_iterator<char> eos;
@@ -192,15 +192,29 @@ namespace DJayy
 				
 				boost::property_tree::ptree pt;
 				read_json(std::istringstream(str), pt);
+
+				size_t minEntry = String::asUnsignedLong(pt.get<std::string>("minEntry"));
+				size_t maxEntry = String::asUnsignedLong(pt.get<std::string>("maxEntry"));
+				String query = pt.get<std::string>("query");
+
+				String reply;
 				
+				if(program != nullptr)
+				{
+					reply = this->program->search(query, minEntry, maxEntry).toJson();
+				}
+				else
+				{
+					reply = "[]";
+				}
 				
-				//response << "HTTP/1.1 200 OK\r\nContent-Length: " << reply.length() << "\r\n\r\n" << reply;
+				response << "HTTP/1.1 200 OK\r\nContent-Length: " << reply.length() << "\r\n\r\n" << reply;
 			}
 			catch(const std::exception& e)
 			{
 				response << "HTTP/1.1 400 Bad Request\r\nContent-Length: " << strlen(e.what()) << "\r\n\r\n" << e.what();
 			}
-		};*/
+		};
 	}
 
 	void WebServer::setProgramInterface(ProgramInterface*programInterface)

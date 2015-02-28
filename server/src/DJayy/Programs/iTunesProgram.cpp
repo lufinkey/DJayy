@@ -193,6 +193,7 @@ namespace DJayy
 					}
 				}
 			}
+			return resultList;
 		}
 	}
 }

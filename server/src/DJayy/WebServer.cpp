@@ -18,6 +18,7 @@ namespace DJayy
 		server = new HttpServer(port, 4);
 
 		setup_GET();
+		setup_library();
 		setup_queue();
 		setup_queuevote();
 	}
@@ -161,6 +162,36 @@ namespace DJayy
 				std::cout << "sending queuevote data:" << std::endl << reply << std::endl;
 				
 				response << "HTTP/1.1 200 OK\r\nContent-Length: " << reply.length() << "\r\n\r\n" << reply;
+			}
+			catch(const std::exception& e)
+			{
+				response << "HTTP/1.1 400 Bad Request\r\nContent-Length: " << strlen(e.what()) << "\r\n\r\n" << e.what();
+			}
+		};
+	}
+
+	void WebServer::setup_library()
+	{
+		server->resource["^/library$"]["GET"]=[this](HttpServer::Response& response, std::shared_ptr<HttpServer::Request> request) {
+			try
+			{
+				std::istreambuf_iterator<char> eos;
+				std::string str(std::istreambuf_iterator<char>(request->content), eos);
+				std::cout << "recieved library request:" << std::endl << str << std::endl;
+				
+				String result;
+				if(this->program != nullptr)
+				{
+					result = this->program->getLibrary().toJson();
+				}
+				else
+				{
+					result = "{\"library\":[]}";
+				}
+
+				std::cout << "Sending library data:" << std::endl << result << std::endl;
+
+				response << "HTTP/1.1 200 OK\r\nContent-Length: " << result.length() << "\r\n\r\n" << result;
 			}
 			catch(const std::exception& e)
 			{

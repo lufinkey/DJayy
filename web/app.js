@@ -48,7 +48,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     $scope.client_advanceQueuePage = function(direction) {
         if (direction == 'right') {
             $scope.queue_page_start += 10;
-        } else {
+        } else if (direction == 'left') {
             $scope.queue_page_start -= 10;
         }
 
@@ -76,6 +76,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     function server_getQueue(minEntry, maxEntry) {
         $http.post("/queue", {minEntry: minEntry, maxEntry: maxEntry}).then(function(response) {
             $scope.queue = $scope.queue.concat(response.data);
+            $scope.client_advanceQueuePage('none');    
         });
     };
 

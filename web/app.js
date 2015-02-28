@@ -6,7 +6,10 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     
     //Scope variables
     $scope.queue = [];
-    $scope.library = [];
+    $scope.search = [];
+
+    $scope.queue_page_start = 0;
+    $scope.search_page_start = 0;
 
     //Local variables
     if (typeof $cookieStore.get('djayy_user_id') == 'undefined')
@@ -40,46 +43,58 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
             update_track.votes = response.data.totalVotes;
         });
     };
-    
+
+    $scope.client_advanceQueuePage = function(direction) {
+        if (direction == 'right') {
+            $scope.queue_page_start += 10;
+        } else {
+            $scope.queue_page_start -= 10;
+        }
+    }
+
+    $scope.client_getQueuePage = function() {
+        var endIndex = $scope.queue.length % 10 + 1;
+        return $scope.queue.splic($scope.queue_page_start, $scope.queue_page_start + endIndex);
+    }
+
     //Local functions
     function server_poll() {
         $timeout(function() {
             if (first_connect) {
-                server_getQueue();
-                server_getLibrary();
+                server_getQueue(0, 0);
                 first_connect = false;
             }
-            
+
             server_poll();
         }, 1000);
     };
 
-    function server_getQueue() {
-        $http.get("/queue").then(function(response) {
-            $scope.queue = response.data.queue;
+    function server_getQueue(minEntry, maxEntry) {
+        $http.post("/queue", {minEntry: minEntry, maxEntry: maxEntry).then(function(response) {
+            $scope.query = $scope.query.concat(response.data);
         });
-    };
+        };
 
-    function server_getLibrary() {
-        $http.get("/library").then(function(response) {
-            $scope.library = response.data;
-        });
-    }
-
-    function client_findTrackByQ_Id(queue_id) {
-        for (i = 0; i < $scope.queue.length; i++) {
-            if ($scope.queue[i].queue_id == queue_id)
-                return $scope.queue[i];
+        function server_search(query, minEntry, maxEntry) {
+            $http.post("/search", {query: query, minEntry: minEntry, maxEntry: maxEntry}).then(function(response) {
+                $scope.search = $scope.query.concat(response.data);
+            });
         }
-    };
 
-    function client_get_user_id() {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
-            return v.toString(16);
-        });
-    };
+        function client_findTrackByQ_Id(queue_id) {
+            for (i = 0; i < $scope.queue.length; i++) {
+                if ($scope.queue[i].queue_id == queue_id)
+                    return $scope.queue[i];
+            }
+        };
+
+        function client_get_user_id() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
+                return v.toString(16);
+            });
+        };
 
 
-    server_poll();
-}]);
+        server_poll();
+    }]);

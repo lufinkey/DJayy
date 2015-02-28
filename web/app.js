@@ -3,13 +3,13 @@ var app = angular.module('DJayyApp', ['ngCookies']);
 
 app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieStore', function($scope, $timeout, $http, $cookies, $cookieStore) {
     
-    if (typeof $cookieStore.get('djayy_user_id') == 'undefined')
-        $cookieStore.put('djayy_user_id', client_get_user_id());
-    
     //Scope variables
     $scope.queue = [];
 
     //Local variables
+    if (typeof $cookieStore.get('djayy_user_id') == 'undefined')
+        $cookieStore.put('djayy_user_id', client_get_user_id());
+    
     var user_id = $cookieStore.get('djayy_user_id');
     var first_connect = true;
 
@@ -19,6 +19,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
             var update_track = client_findTrackByQ_Id(response.data.queue_id);
             var button = angular.element($event.target);
 
+            //Manually toggle buttons
             if (response.data.vote == 0) {
                     $(button).removeClass("active");
                 if ($(button).attr("id") == "up") {

@@ -34,7 +34,8 @@
         </div>
 
         <div class="container">
-
+        <div class="row">
+            <div class="col-md-9">
             <h3>Play Queue</h3>
 
             <ul class="list-group">
@@ -55,6 +56,32 @@
                     </div>
                 </li>
             </ul>
+            </div>
+
+            <div class="col-md-3">
+                <h3>
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                    <input type="text" ng-model="q" class="form-control" placeholder="Search Library">
+                </div>
+                </h3>
+
+                <ul class="list-group">
+                    <li ng-repeat="track in queue | filter:q as results" class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-6">{{track.title}} - {{track.artist}}</div>
+                            <div class="col-md-6">
+                                <span class="pull-right">
+                                    <button id="add" ng-click="" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+                                </span>
+                            </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        </div>
 
     </body>
 

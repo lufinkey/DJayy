@@ -3,13 +3,6 @@ var app = angular.module('DJayyApp', ['ngCookies']);
 
 app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieStore', function($scope, $timeout, $http, $cookies, $cookieStore) {
     
-    var client_get_user_id = function() {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
-            return v.toString(16);
-        });
-    };
-
     if (typeof $cookieStore.get('djayy_user_id') == 'undefined')
         $cookieStore.put('djayy_user_id', client_get_user_id());
     
@@ -23,7 +16,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     //Scope functions
     $scope.server_trackVote = function(event, queue_id, vote) {
         $http.post("/queuevote", {user_id: user_id, queue_id: queue_id, vote: vote}).then(function(response) {
-            var update_track = client_findTrackByQ_Id(parseInt(response.data.queue_id));
+            var update_track = client_findTrackByQ_Id(response.data.queue_id);
             var button = angular.element(event.sourceElement);
 
             //TODO handle vote toggling
@@ -33,7 +26,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     };
     
     //Local functions
-    var server_poll = function() {
+    function server_poll() {
         $timeout(function() {
             if (first_connect) {
                 server_getQueue();
@@ -44,17 +37,24 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
         }, 1000);
     };
 
-    var server_getQueue = function() {
+    function server_getQueue() {
         $http.get("/queue").then(function(response) {
             $scope.queue = response.data.queue;
         });
     };
 
-    var client_findTrackByQ_Id = function(q_id) {
+    function client_findTrackByQ_Id(q_id) {
         for (i = 0; i < $scope.queue.length; i++) {
             if ($scope.queue[i].q_id == q_id)
                 return $scope.queue[i];
         }
+    };
+
+    function client_get_user_id() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
+            return v.toString(16);
+        });
     };
 
 

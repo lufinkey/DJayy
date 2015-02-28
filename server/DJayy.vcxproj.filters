@@ -1,2 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" />
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{e0e5f7e2-191b-439f-a6c6-60e16d72cfc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\DJayy">
+      <UniqueIdentifier>{88cc8512-a9b6-4154-ad93-0aaf0b396767}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DJayy\WebServer.cpp">
+      <Filter>src\DJayy</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\DJayy\WebServer.h">
+      <Filter>src\DJayy</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

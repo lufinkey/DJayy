@@ -1,24 +1,13 @@
 
-#include "server_http.hpp"
-#include "client_http.hpp"
+#include "DJayy/WebServer.h"
 
-#include <fstream>
-#include <memory>
-
-typedef SimpleWeb::Server<SimpleWeb::HTTP> HttpServer;
-typedef SimpleWeb::Client<SimpleWeb::HTTP> HttpClient;
+using namespace DJayy;
 
 int main(int argc, char *argv[])
 {
-	HttpServer server(8080, 4);
+	WebServer* server = new WebServer("../web", 8080);
 
-	server.resource["^/string$"]["POST"]=[](HttpServer::Response& response, std::shared_ptr<HttpServer::Request> request) {
-		stringstream ss;
-		request->content >> ss.rdbuf();
-		string content=ss.str();
-        
-		response << "HTTP/1.1 200 OK\r\nContent-Length: " << content.length() << "\r\n\r\n" << content;
-	};
+	std::system("PAUSE");
 
 	return 0;
 }

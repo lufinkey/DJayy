@@ -103,7 +103,7 @@ namespace DJayy
 				{
 					const Queue& queue = this->program->getQueue();
 					const ArrayList<QueueTrack>& tracks = queue.getTracks();
-					result = "{\"queue\":[";
+					result = "[";
 					for(size_t i=0; i<queue.size(); i++)
 					{
 						QueueTrackPacket packet(tracks.get(i),this->program);
@@ -113,11 +113,11 @@ namespace DJayy
 							result += ",";
 						}
 					}
-					result += "]}";
+					result += "]";
 				}
 				else
 				{
-					result = "{\"queue\":[]}";
+					result = "[]";
 				}
 
 				std::cout << "Sending queue data:" << std::endl << result << std::endl;

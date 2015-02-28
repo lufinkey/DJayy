@@ -10,6 +10,18 @@
     <Filter Include="src\Util">
       <UniqueIdentifier>{788ae085-89ff-42e7-9ac1-3047228846a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="external">
+      <UniqueIdentifier>{c1d8e129-f39b-484e-b027-321114abf9dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\jsoncpp">
+      <UniqueIdentifier>{3d42cc6e-df7e-428a-bb97-b8f45a03d936}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\jsoncpp\src">
+      <UniqueIdentifier>{ec541d29-502c-4b7f-8d21-16f832e422ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\jsoncpp\src\lib_json">
+      <UniqueIdentifier>{bf00e534-9270-472e-bece-6d638dbe4169}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -20,6 +32,15 @@
     </ClCompile>
     <ClCompile Include="src\Util\String.cpp">
       <Filter>src\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="external\jsoncpp\src\lib_json\json_value.cpp">
+      <Filter>external\jsoncpp\src\lib_json</Filter>
+    </ClCompile>
+    <ClCompile Include="external\jsoncpp\src\lib_json\json_writer.cpp">
+      <Filter>external\jsoncpp\src\lib_json</Filter>
+    </ClCompile>
+    <ClCompile Include="external\jsoncpp\src\lib_json\json_reader.cpp">
+      <Filter>external\jsoncpp\src\lib_json</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

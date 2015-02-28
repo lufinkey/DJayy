@@ -3,6 +3,7 @@
 
 #include <server_http.hpp>
 #include <string>
+#include "../Util/String.h"
 
 namespace DJayy
 {
@@ -16,6 +17,10 @@ namespace DJayy
 		void start();
 
 	private:
+		void setup_GET();
+		void setup_tracks();
+
+		String webRoot;
 		HttpServer*server;
 	};
 }

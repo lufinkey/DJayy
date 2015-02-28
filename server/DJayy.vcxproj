@@ -11,17 +11,29 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\DJayy\Library\Library.cpp" />
+    <ClCompile Include="src\DJayy\Library\Track.cpp" />
+    <ClCompile Include="src\DJayy\ProgramInterface.cpp" />
     <ClCompile Include="src\DJayy\Programs\DummyProgram.cpp" />
-    <ClCompile Include="src\DJayy\QueueTrack.cpp" />
+    <ClCompile Include="src\DJayy\Queue\Queue.cpp" />
+    <ClCompile Include="src\DJayy\Queue\QueueTrack.cpp" />
+    <ClCompile Include="src\DJayy\Queue\QueueTrackPacket.cpp" />
+    <ClCompile Include="src\DJayy\Queue\UserVote.cpp" />
+    <ClCompile Include="src\DJayy\Queue\UserVoteList.cpp" />
     <ClCompile Include="src\DJayy\WebServer.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Util\String.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\DJayy\Library\Library.h" />
+    <ClInclude Include="src\DJayy\Library\Track.h" />
     <ClInclude Include="src\DJayy\ProgramInterface.h" />
     <ClInclude Include="src\DJayy\Programs\DummyProgram.h" />
-    <ClInclude Include="src\DJayy\QueueTrack.h" />
-    <ClInclude Include="src\DJayy\UserVote.h" />
+    <ClInclude Include="src\DJayy\Queue\Queue.h" />
+    <ClInclude Include="src\DJayy\Queue\QueueTrack.h" />
+    <ClInclude Include="src\DJayy\Queue\QueueTrackPacket.h" />
+    <ClInclude Include="src\DJayy\Queue\UserVote.h" />
+    <ClInclude Include="src\DJayy\Queue\UserVoteList.h" />
     <ClInclude Include="src\DJayy\WebServer.h" />
     <ClInclude Include="src\Util\ArrayList.h" />
     <ClInclude Include="src\Util\String.h" />

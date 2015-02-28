@@ -18,7 +18,7 @@ namespace DJayy
 		server = new HttpServer(port, 4);
 
 		setup_GET();
-		setup_library();
+		//setup_library();
 		setup_queue();
 		setup_queuevote();
 	}
@@ -102,12 +102,11 @@ namespace DJayy
 				if(this->program != nullptr)
 				{
 					const Queue& queue = this->program->getQueue();
-					const Library& library = this->program->getLibrary();
 					const ArrayList<QueueTrack>& tracks = queue.getTracks();
 					result = "{\"queue\":[";
 					for(size_t i=0; i<queue.size(); i++)
 					{
-						QueueTrackPacket packet(tracks.get(i),library);
+						QueueTrackPacket packet(tracks.get(i),this->program);
 						result += packet.toJson();
 						if(i != (tracks.size()-1))
 						{
@@ -170,7 +169,7 @@ namespace DJayy
 		};
 	}
 
-	void WebServer::setup_library()
+	/*void WebServer::setup_library()
 	{
 		server->resource["^/library$"]["GET"]=[this](HttpServer::Response& response, std::shared_ptr<HttpServer::Request> request) {
 			try
@@ -198,7 +197,7 @@ namespace DJayy
 				response << "HTTP/1.1 400 Bad Request\r\nContent-Length: " << strlen(e.what()) << "\r\n\r\n" << e.what();
 			}
 		};
-	}
+	}*/
 
 	void WebServer::setProgramInterface(ProgramInterface*programInterface)
 	{
@@ -207,6 +206,7 @@ namespace DJayy
 	
 	void WebServer::start()
 	{
+		std::cout << "starting web server" << std::endl;
 		server->start();
 	}
 }

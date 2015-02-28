@@ -16,14 +16,14 @@
     <Filter Include="src\DJayy\Queue">
       <UniqueIdentifier>{250f823e-1cfd-4e1b-acef-0485186e7dde}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\DJayy\Library">
-      <UniqueIdentifier>{4fb59d14-f9ae-4111-9782-b075e93af7fa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="external">
       <UniqueIdentifier>{61258444-038c-47da-a94c-acec50ef816d}</UniqueIdentifier>
     </Filter>
     <Filter Include="external\iTunesCOMWindowsSDK">
       <UniqueIdentifier>{b52a0089-56b8-4a51-ba11-aeba909563f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\DJayy\Library">
+      <UniqueIdentifier>{4e1fdb57-8070-4fc2-b864-c7ceb3ab6698}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -45,12 +45,6 @@
     <ClCompile Include="src\DJayy\Queue\Queue.cpp">
       <Filter>src\DJayy\Queue</Filter>
     </ClCompile>
-    <ClCompile Include="src\DJayy\Library\Library.cpp">
-      <Filter>src\DJayy\Library</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DJayy\Library\Track.cpp">
-      <Filter>src\DJayy\Library</Filter>
-    </ClCompile>
     <ClCompile Include="src\DJayy\Queue\UserVote.cpp">
       <Filter>src\DJayy\Queue</Filter>
     </ClCompile>
@@ -68,6 +62,12 @@
     </ClCompile>
     <ClCompile Include="src\DJayy\Programs\iTunesProgram.cpp">
       <Filter>src\DJayy\Programs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DJayy\Library\Track.cpp">
+      <Filter>src\DJayy\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DJayy\Library\TrackCollection.cpp">
+      <Filter>src\DJayy\Library</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -95,12 +95,6 @@
     <ClInclude Include="src\DJayy\Queue\Queue.h">
       <Filter>src\DJayy\Queue</Filter>
     </ClInclude>
-    <ClInclude Include="src\DJayy\Library\Library.h">
-      <Filter>src\DJayy\Library</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DJayy\Library\Track.h">
-      <Filter>src\DJayy\Library</Filter>
-    </ClInclude>
     <ClInclude Include="src\DJayy\Queue\UserVoteList.h">
       <Filter>src\DJayy\Queue</Filter>
     </ClInclude>
@@ -109,6 +103,12 @@
     </ClInclude>
     <ClInclude Include="src\DJayy\Programs\iTunesProgram.h">
       <Filter>src\DJayy\Programs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DJayy\Library\Track.h">
+      <Filter>src\DJayy\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DJayy\Library\TrackCollection.h">
+      <Filter>src\DJayy\Library</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

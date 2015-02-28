@@ -39,5 +39,36 @@ namespace DJayy
 		queue.add(track1.track_id);
 		queue.add(track2.track_id);
 		queue.add(track3.track_id);
+		queue.add(track1.track_id);
+		queue.add(track2.track_id);
+		queue.add(track1.track_id);
+		queue.add(track3.track_id);
+		queue.add(track2.track_id);
+		queue.add(track3.track_id);
+		queue.add(track1.track_id);
+		queue.add(track3.track_id);
+		queue.add(track3.track_id);
+		queue.add(track2.track_id);
+		queue.add(track1.track_id);
+		queue.add(track3.track_id);
+		queue.add(track3.track_id);
+		queue.add(track2.track_id);
+		queue.add(track3.track_id);
+		queue.add(track1.track_id);
+		queue.add(track3.track_id);
+		queue.add(track3.track_id);
+		queue.add(track2.track_id);
+		queue.add(track1.track_id);
+		queue.add(track3.track_id);
+	}
+	
+	Track DummyProgram::getTrackByTrackID(const String&track_id) const
+	{
+		return library.getTrackByTrackID(track_id);
+	}
+	
+	TrackCollection DummyProgram::search(const String&query, size_t startIndex, size_t endIndex) const
+	{
+		return library;
 	}
 }

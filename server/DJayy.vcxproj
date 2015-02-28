@@ -12,8 +12,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\iTunesCOMWindowsSDK\iTunesCOMInterface_i.c" />
-    <ClCompile Include="src\DJayy\Library\Library.cpp" />
     <ClCompile Include="src\DJayy\Library\Track.cpp" />
+    <ClCompile Include="src\DJayy\Library\TrackCollection.cpp" />
     <ClCompile Include="src\DJayy\ProgramInterface.cpp" />
     <ClCompile Include="src\DJayy\Programs\DummyProgram.cpp" />
     <ClCompile Include="src\DJayy\Programs\iTunesProgram.cpp" />
@@ -27,8 +27,8 @@
     <ClCompile Include="src\Util\String.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\DJayy\Library\Library.h" />
     <ClInclude Include="src\DJayy\Library\Track.h" />
+    <ClInclude Include="src\DJayy\Library\TrackCollection.h" />
     <ClInclude Include="src\DJayy\ProgramInterface.h" />
     <ClInclude Include="src\DJayy\Programs\DummyProgram.h" />
     <ClInclude Include="src\DJayy\Programs\iTunesProgram.h" />

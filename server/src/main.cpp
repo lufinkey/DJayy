@@ -1,6 +1,6 @@
 
 #include "DJayy/WebServer.h"
-#include "Util/String.h"
+#include "DJayy/Programs/DummyProgram.h"
 
 #include <stdio.h>
 #ifdef _WIN32
@@ -37,7 +37,10 @@ String getWebRoot()
 
 int main(int argc, char *argv[])
 {
+	DummyProgram* program = new DummyProgram();
+	
 	WebServer server(getWebRoot(), 8080);
+	server.setProgramInterface(program);
 	server.start();
 
 	return 0;

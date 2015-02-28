@@ -10,6 +10,9 @@
     <Filter Include="src\Util">
       <UniqueIdentifier>{788ae085-89ff-42e7-9ac1-3047228846a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\DJayy\Programs">
+      <UniqueIdentifier>{c7967a3f-5385-4520-9d99-b04db758a240}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -21,6 +24,12 @@
     <ClCompile Include="src\Util\String.cpp">
       <Filter>src\Util</Filter>
     </ClCompile>
+    <ClCompile Include="src\DJayy\Programs\DummyProgram.cpp">
+      <Filter>src\DJayy\Programs</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DJayy\QueueTrack.cpp">
+      <Filter>src\DJayy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\DJayy\WebServer.h">
@@ -31,6 +40,15 @@
     </ClInclude>
     <ClInclude Include="src\Util\String.h">
       <Filter>src\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DJayy\ProgramInterface.h">
+      <Filter>src\DJayy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DJayy\Programs\DummyProgram.h">
+      <Filter>src\DJayy\Programs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DJayy\QueueTrack.h">
+      <Filter>src\DJayy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

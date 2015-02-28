@@ -7,10 +7,17 @@
 
 namespace DJayy
 {
-	WebServer::WebServer(const std::string&webRoot, unsigned short port)
+	WebServer::WebServer(const std::string&webroot, unsigned short port)
 	{
+		webRoot = webroot;
 		server = new HttpServer(port, 4);
 
+		setup_GET();
+	}
+
+	void WebServer::setup_GET()
+	{
+		std::string webRoot((const char*)this->webRoot);
 		server->default_resource["GET"]=[webRoot](HttpServer::Response& response, std::shared_ptr<HttpServer::Request> request) {
 			std::string filename=webRoot;
 			
@@ -39,8 +46,8 @@ namespace DJayy
 			if(ifs)
 			{
 				ifs.seekg(0, std::ios::end);
-				size_t length=ifs.tellg();
-			
+				std::streamoff length=ifs.tellg();
+				
 				ifs.seekg(0, std::ios::beg);
 
 				std::string str((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
@@ -72,6 +79,11 @@ namespace DJayy
 				response << "HTTP/1.1 400 Bad Request\r\nContent-Length: " << content.length() << "\r\n\r\n" << content;
 			}
 		};
+	}
+
+	void setup_tracks()
+	{
+
 	}
 	
 	void WebServer::start()

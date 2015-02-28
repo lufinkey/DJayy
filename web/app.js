@@ -45,7 +45,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     };
 
     var server_getQueue = function() {
-        $http.get("queue.json").then(function(response) {
+        $http.get("/queue").then(function(response) {
             $scope.queue = response.data.queue;
         });
     };

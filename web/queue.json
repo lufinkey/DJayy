@@ -1,19 +1,22 @@
 {
     "queue":[
         {   
-            "track_id":"aa3",
+            "id":"aa3",
+            "q_id":"sakd",
             "title":"POWER",
             "artist":"Kanye West",
             "votes":0
         },
         {
-            "track_id":"bc2",
+            "id":"bc2",
+            "q_id":"aksl",
             "title":"Somatic Serenade",
             "artist":"Bluetech",
             "votes":0
         },
         {
-            "track_id":"7e2",
+            "id":"7e2",
+            "q_id":"affd",
             "title":"Knuckle's Rap",
             "artist":"That Rapper from Sonic Adventure 2 Battle",
             "votes":0

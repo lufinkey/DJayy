@@ -7,6 +7,9 @@
     <Filter Include="src\DJayy">
       <UniqueIdentifier>{88cc8512-a9b6-4154-ad93-0aaf0b396767}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Util">
+      <UniqueIdentifier>{788ae085-89ff-42e7-9ac1-3047228846a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -15,10 +18,19 @@
     <ClCompile Include="src\DJayy\WebServer.cpp">
       <Filter>src\DJayy</Filter>
     </ClCompile>
+    <ClCompile Include="src\Util\String.cpp">
+      <Filter>src\Util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\DJayy\WebServer.h">
       <Filter>src\DJayy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Util\ArrayList.h">
+      <Filter>src\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Util\String.h">
+      <Filter>src\Util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

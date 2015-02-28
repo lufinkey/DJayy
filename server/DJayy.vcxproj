@@ -13,9 +13,12 @@
   <ItemGroup>
     <ClCompile Include="src\DJayy\WebServer.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Util\String.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\DJayy\WebServer.h" />
+    <ClInclude Include="src\Util\ArrayList.h" />
+    <ClInclude Include="src\Util\String.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DA7F0DCB-D2E7-4239-B56B-A0EF81B9F02C}</ProjectGuid>

@@ -13,10 +13,10 @@ namespace DJayy
 		String json = "[";
 		size_t length = tracks.size();
 		size_t last = tracks.size()-1;
-		for(size_t i=0; i<length; i++)
+		for(size_t i=(length-1); i!=SIZE_MAX; i--)
 		{
 			json += tracks.get(i).toJson();
-			if(i != last)
+			if(i != 0)
 			{
 				json += ",";
 			}

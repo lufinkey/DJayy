@@ -104,11 +104,11 @@ namespace DJayy
 					const Queue& queue = this->program->getQueue();
 					const ArrayList<QueueTrack>& tracks = queue.getTracks();
 					result = "[";
-					for(size_t i=0; i<queue.size(); i++)
+					for(size_t i=(queue.size()-1); i!=SIZE_MAX; i--)
 					{
 						QueueTrackPacket packet(tracks.get(i),this->program);
 						result += packet.toJson();
-						if(i != (tracks.size()-1))
+						if(i != 0)
 						{
 							result += ",";
 						}

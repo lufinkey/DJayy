@@ -1,5 +1,5 @@
 
-var app = angular.module('DJayyApp', ['ngCookies']);
+var app = angular.module('DJayyApp', ['ngCookies', 'infinite-scroll']);
 
 app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieStore',
         function($scope, $timeout, $http, $cookies, $cookieStore) {
@@ -10,6 +10,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
 
     $scope.queue_page_start = 0;
     $scope.search_page_start = 0;
+    $scope.queue_page_length = 10;
 
     //Local variables
     if (typeof $cookieStore.get('djayy_user_id') == 'undefined')
@@ -43,6 +44,12 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
             update_track.votes = response.data.totalVotes;
         });
     };
+    
+    $scope.client_loadSearch = function(query) {
+       $scope.search_page_start += 10;
+
+       server_search(query, $scope.search_page_start - 10, $scope.search_page_start);
+    }
 
     $scope.client_moveQueuePage = function(amt) {
         $scope.queue_page_start += amt;
@@ -66,7 +73,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     }
 
     $scope.client_queueCanMoveForward = function() {
-        return ($scope.queue_page_start + 10) < $scope.queue.length;
+        return ($scope.queue_page_start + $scope.queue_page_length) < $scope.queue.length;
     }
 
     //Local functions

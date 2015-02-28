@@ -1,6 +1,8 @@
 
 #include "WebServer.h"
 
+#include "Queue/QueueTrackPacket.h"
+
 #include <fstream>
 #include <memory>
 #include <iostream>
@@ -94,12 +96,15 @@ namespace DJayy
 				String result;
 				if(this->program != nullptr)
 				{
-					ArrayList<QueueTrack> queue = this->program->getQueue();
-					result = "{\"tracks\":[";
-					for(unsigned int i=0; i<queue.size(); i++)
+					const Queue& queue = this->program->getQueue();
+					const Library& library = this->program->getLibrary();
+					const ArrayList<QueueTrack>& tracks = queue.getTracks();
+					result = "{\"queue\":[";
+					for(size_t i=0; i<queue.size(); i++)
 					{
-						result += queue.get(i).toJson();
-						if(i != (queue.size()-1))
+						QueueTrackPacket packet(tracks.get(i),library);
+						result += packet.toJson();
+						if(i != (tracks.size()-1))
 						{
 							result += ",";
 						}
@@ -108,7 +113,7 @@ namespace DJayy
 				}
 				else
 				{
-					result = "{\"tracks\":[]}";
+					result = "{\"queue\":[]}";
 				}
 
 				response << "HTTP/1.1 200 OK\r\nContent-Length: " << result.length() << "\r\n\r\n" << result;
@@ -135,11 +140,11 @@ namespace DJayy
 				
 				if(this->program != nullptr)
 				{
-					this->program->vote(queue_id, user_id, vote);
-					totalVotes = this->program->getQueueTrack(queue_id).getTotalVotes();
+					this->program->getQueue().vote(queue_id, user_id, vote);
+					totalVotes = this->program->getQueue().getTrackByQueueID(queue_id).votes.sum();
 				}
 
-				String reply = "{\"queue_id\":\"" + queue_id + "\",\"vote\":" + (int)vote + ",\"totalVotes\":" + totalVotes + "}";
+				String reply = "{\"queue_id\":\"" + queue_id + "\",\"vote\":" + ((int)vote) + ",\"totalVotes\":" + totalVotes + "}";
 				
 				response << "HTTP/1.1 200 OK\r\nContent-Length: " << reply.length() << "\r\n\r\n" << reply;
 			}

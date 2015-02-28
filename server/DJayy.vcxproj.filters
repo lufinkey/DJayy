@@ -13,6 +13,12 @@
     <Filter Include="src\DJayy\Programs">
       <UniqueIdentifier>{c7967a3f-5385-4520-9d99-b04db758a240}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\DJayy\Queue">
+      <UniqueIdentifier>{250f823e-1cfd-4e1b-acef-0485186e7dde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\DJayy\Library">
+      <UniqueIdentifier>{4fb59d14-f9ae-4111-9782-b075e93af7fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -27,8 +33,29 @@
     <ClCompile Include="src\DJayy\Programs\DummyProgram.cpp">
       <Filter>src\DJayy\Programs</Filter>
     </ClCompile>
-    <ClCompile Include="src\DJayy\QueueTrack.cpp">
+    <ClCompile Include="src\DJayy\Queue\QueueTrack.cpp">
+      <Filter>src\DJayy\Queue</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DJayy\Queue\Queue.cpp">
+      <Filter>src\DJayy\Queue</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DJayy\Library\Library.cpp">
+      <Filter>src\DJayy\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DJayy\Library\Track.cpp">
+      <Filter>src\DJayy\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DJayy\Queue\UserVote.cpp">
+      <Filter>src\DJayy\Queue</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DJayy\Queue\UserVoteList.cpp">
+      <Filter>src\DJayy\Queue</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DJayy\ProgramInterface.cpp">
       <Filter>src\DJayy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DJayy\Queue\QueueTrackPacket.cpp">
+      <Filter>src\DJayy\Queue</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -47,11 +74,26 @@
     <ClInclude Include="src\DJayy\Programs\DummyProgram.h">
       <Filter>src\DJayy\Programs</Filter>
     </ClInclude>
-    <ClInclude Include="src\DJayy\QueueTrack.h">
-      <Filter>src\DJayy</Filter>
+    <ClInclude Include="src\DJayy\Queue\QueueTrack.h">
+      <Filter>src\DJayy\Queue</Filter>
     </ClInclude>
-    <ClInclude Include="src\DJayy\UserVote.h">
-      <Filter>src\DJayy</Filter>
+    <ClInclude Include="src\DJayy\Queue\UserVote.h">
+      <Filter>src\DJayy\Queue</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DJayy\Queue\Queue.h">
+      <Filter>src\DJayy\Queue</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DJayy\Library\Library.h">
+      <Filter>src\DJayy\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DJayy\Library\Track.h">
+      <Filter>src\DJayy\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DJayy\Queue\UserVoteList.h">
+      <Filter>src\DJayy\Queue</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DJayy\Queue\QueueTrackPacket.h">
+      <Filter>src\DJayy\Queue</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

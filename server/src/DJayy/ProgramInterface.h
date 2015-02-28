@@ -1,7 +1,8 @@
 
 #pragma once
 
-#include "QueueTrack.h"
+#include "Queue/Queue.h"
+#include "Library/Library.h"
 
 namespace DJayy
 {
@@ -10,8 +11,16 @@ namespace DJayy
 	public:
 		virtual ~ProgramInterface(){}
 
-		virtual ArrayList<QueueTrack> getQueue() = 0;
-		virtual QueueTrack getQueueTrack(const String&queue_id) const = 0;
-		virtual void vote(const String&queue_id, const String&user_id, signed char vote) = 0;
+		virtual void loadLibrary() = 0;
+		
+		Queue& getQueue();
+		const Queue& getQueue() const;
+		const Library& getLibrary() const;
+		
+		void addToQueue(const String&track_id);
+		
+	protected:
+		Library library;
+		Queue queue;
 	};
 }

@@ -11,6 +11,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     $scope.queue_page_start = 0;
     $scope.search_page_start = 0;
     $scope.queue_page_length = 10;
+    $scope.search_page_length = 10;
 
     //Local variables
     if (typeof $cookieStore.get('djayy_user_id') == 'undefined')
@@ -45,10 +46,19 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
         });
     };
     
-    $scope.client_loadSearch = function(query) {
-       $scope.search_page_start += 10;
+    $scope.client_loadMore = function(query) {
+        $http.post("/search", {query: query, minEntry: $scope.search_page_start, maxEntry: $scope.search_page_start + 10})
+            .then(function(response) {
+                $scope.search = $scope.search.concat(response.data);
+            });
+        
+        $scope.search_page_start += 10;
+    }
 
-       server_search(query, $scope.search_page_start - 10, $scope.search_page_start);
+    $scope.server_search = function(query) {
+        $scope.search_page_start = 0;
+
+        $scope.client_loadMore(query);
     }
 
     $scope.client_moveQueuePage = function(amt) {
@@ -87,18 +97,13 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
             server_poll();
         }, 1000);
     };
-   
+
     function server_getQueue(minEntry, maxEntry) {
         $http.post("/queue", {minEntry: minEntry, maxEntry: maxEntry}).then(function(response) {
             $scope.queue = $scope.queue.concat(response.data);
         });
     };
 
-    function server_search(query, minEntry, maxEntry) {
-        $http.post("/search", {query: query, minEntry: minEntry, maxEntry: maxEntry}).then(function(response) {
-            $scope.search = $scope.query.concat(response.data);
-        });
-    }
 
     function client_findTrackByQ_Id(queue_id) {
         for (i = 0; i < $scope.queue.length; i++) {

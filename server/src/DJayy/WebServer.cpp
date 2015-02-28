@@ -141,7 +141,7 @@ namespace DJayy
 				std::cout << "recieved queuevote:" << std::endl << str << std::endl;
 				
 				boost::property_tree::ptree pt;
-				read_json(request->content, pt);
+				read_json(std::istringstream(str), pt);
 
 				String queue_id = pt.get<std::string>("queue_id");
 				String user_id = pt.get<std::string>("user_id");

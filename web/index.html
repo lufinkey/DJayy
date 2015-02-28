@@ -25,6 +25,9 @@
     <!-- App JS -->
     <script src="app.js"></script>
 
+    <!-- App CSS -->
+    <link rel="stylesheet" href="app.css">
+
     </head>
 
     <body ng-controller="MainCtrl">
@@ -35,7 +38,8 @@
 
         <div class="container">
         <div class="row">
-            <div class="col-md-9">
+            <div class="wrapper">
+            <div class="col-md-8">
             <h3>Play Queue</h3>
 
             <ul class="list-group">
@@ -58,7 +62,7 @@
             </ul>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <h3>
                 <div class="input-group">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
@@ -66,8 +70,8 @@
                 </div>
                 </h3>
 
-                <ul class="list-group">
-                    <li ng-repeat="track in queue | filter:q as results" class="list-group-item">
+                <ul class="list-group scrollable">
+                    <li ng-repeat="track in library | filter:q as results" class="list-group-item">
                         <div class="row">
                             <div class="col-md-6">{{track.title}} - {{track.artist}}</div>
                             <div class="col-md-6">
@@ -79,6 +83,7 @@
                         </div>
                     </li>
                 </ul>
+            </div>
             </div>
         </div>
         </div>

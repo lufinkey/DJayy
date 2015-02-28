@@ -1,10 +1,12 @@
 
 var app = angular.module('DJayyApp', ['ngCookies']);
 
-app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieStore', function($scope, $timeout, $http, $cookies, $cookieStore) {
+app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieStore',
+        function($scope, $timeout, $http, $cookies, $cookieStore) {
     
     //Scope variables
     $scope.queue = [];
+    $scope.library = [];
 
     //Local variables
     if (typeof $cookieStore.get('djayy_user_id') == 'undefined')
@@ -44,6 +46,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
         $timeout(function() {
             if (first_connect) {
                 server_getQueue();
+                server_getLibrary();
                 first_connect = false;
             }
             
@@ -56,6 +59,12 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
             $scope.queue = response.data.queue;
         });
     };
+
+    function server_getLibrary() {
+        $http.get("/library").then(function(response) {
+            $scope.library = response.data;
+        }):
+    }
 
     function client_findTrackByQ_Id(queue_id) {
         for (i = 0; i < $scope.queue.length; i++) {

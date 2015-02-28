@@ -1,19 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemGroup>
-    <Filter Include="external">
-      <UniqueIdentifier>{62371fdd-2064-42c8-b962-66acb07c3cc6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="external\asio">
-      <UniqueIdentifier>{ad6cfbea-ed51-4898-869e-60ffffedd425}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="external\asio\src">
-      <UniqueIdentifier>{5d1ebb1f-6a97-458d-ae60-b375945e0f35}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="external\asio\src\asio.cpp">
-      <Filter>external\asio\src</Filter>
-    </ClCompile>
-  </ItemGroup>
-</Project>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" />

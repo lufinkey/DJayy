@@ -14,7 +14,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', function($scope, $tim
         var track = {
             title: title,
             artist: artist,
-            votes: 0
+            userVote: 1
         };
 
         sendTracks.push(track);
@@ -24,7 +24,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', function($scope, $tim
     var serverPoll = function() {
         $timeout(function() {
             getTrackList("tracks.json");
-            sendTracks($scope.tracks);
+            sendTracks(tracksToSend);
 
             serverPoll();
         }, 1000);

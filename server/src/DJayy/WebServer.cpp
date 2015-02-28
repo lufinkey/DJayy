@@ -93,6 +93,10 @@ namespace DJayy
 		server->resource["^/queue$"]["GET"]=[this](HttpServer::Response& response, std::shared_ptr<HttpServer::Request> request) {
 			try
 			{
+				std::istreambuf_iterator<char> eos;
+				std::string str(std::istreambuf_iterator<char>(request->content), eos);
+				std::cout << "recieved queue request:" << std::endl << str << std::endl;
+				
 				String result;
 				if(this->program != nullptr)
 				{
@@ -130,6 +134,10 @@ namespace DJayy
 		server->resource["^/queuevote$"]["POST"]=[this](HttpServer::Response& response, std::shared_ptr<HttpServer::Request> request) {
 			try
 			{
+				std::istreambuf_iterator<char> eos;
+				std::string str(std::istreambuf_iterator<char>(request->content), eos);
+				std::cout << "recieved queuevote:" << std::endl << str << std::endl;
+				
 				boost::property_tree::ptree pt;
 				read_json(request->content, pt);
 

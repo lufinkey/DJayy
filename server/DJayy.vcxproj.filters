@@ -19,6 +19,12 @@
     <Filter Include="src\DJayy\Library">
       <UniqueIdentifier>{4fb59d14-f9ae-4111-9782-b075e93af7fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="external">
+      <UniqueIdentifier>{61258444-038c-47da-a94c-acec50ef816d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\iTunesCOMWindowsSDK">
+      <UniqueIdentifier>{b52a0089-56b8-4a51-ba11-aeba909563f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -57,6 +63,12 @@
     <ClCompile Include="src\DJayy\Queue\QueueTrackPacket.cpp">
       <Filter>src\DJayy\Queue</Filter>
     </ClCompile>
+    <ClCompile Include="external\iTunesCOMWindowsSDK\iTunesCOMInterface_i.c">
+      <Filter>external\iTunesCOMWindowsSDK</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DJayy\Programs\iTunesProgram.cpp">
+      <Filter>src\DJayy\Programs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\DJayy\WebServer.h">
@@ -94,6 +106,9 @@
     </ClInclude>
     <ClInclude Include="src\DJayy\Queue\QueueTrackPacket.h">
       <Filter>src\DJayy\Queue</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DJayy\Programs\iTunesProgram.h">
+      <Filter>src\DJayy\Programs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

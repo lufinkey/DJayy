@@ -11,10 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="external\iTunesCOMWindowsSDK\iTunesCOMInterface_i.c" />
     <ClCompile Include="src\DJayy\Library\Library.cpp" />
     <ClCompile Include="src\DJayy\Library\Track.cpp" />
     <ClCompile Include="src\DJayy\ProgramInterface.cpp" />
     <ClCompile Include="src\DJayy\Programs\DummyProgram.cpp" />
+    <ClCompile Include="src\DJayy\Programs\iTunesProgram.cpp" />
     <ClCompile Include="src\DJayy\Queue\Queue.cpp" />
     <ClCompile Include="src\DJayy\Queue\QueueTrack.cpp" />
     <ClCompile Include="src\DJayy\Queue\QueueTrackPacket.cpp" />
@@ -29,6 +31,7 @@
     <ClInclude Include="src\DJayy\Library\Track.h" />
     <ClInclude Include="src\DJayy\ProgramInterface.h" />
     <ClInclude Include="src\DJayy\Programs\DummyProgram.h" />
+    <ClInclude Include="src\DJayy\Programs\iTunesProgram.h" />
     <ClInclude Include="src\DJayy\Queue\Queue.h" />
     <ClInclude Include="src\DJayy\Queue\QueueTrack.h" />
     <ClInclude Include="src\DJayy\Queue\QueueTrackPacket.h" />
@@ -72,9 +75,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>external\jsoncpp\include;external\Simple-Web-Server;\local\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>external\iTunesCOMWindowsSDK;external\Simple-Web-Server;\local\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WIN32_WINNT=0x0501;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -91,9 +95,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>external\jsoncpp\include;external\Simple-Web-Server;\local\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>external\iTunesCOMWindowsSDK;external\Simple-Web-Server;\local\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WIN32_WINNT=0x0501;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

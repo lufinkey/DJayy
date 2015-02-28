@@ -91,7 +91,7 @@ namespace DJayy
 
 	void WebServer::setup_queue()
 	{
-		server->resource["^/queue$"]["GET"]=[this](HttpServer::Response& response, std::shared_ptr<HttpServer::Request> request) {
+		server->resource["^/queue$"]["POST"]=[this](HttpServer::Response& response, std::shared_ptr<HttpServer::Request> request) {
 			try
 			{
 				std::istreambuf_iterator<char> eos;

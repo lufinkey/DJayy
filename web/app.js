@@ -54,7 +54,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
 
     $scope.client_getQueuePage = function() {
         var endIndex = $scope.queue.length % 10 + 1;
-        return $scope.queue.splic($scope.queue_page_start, $scope.queue_page_start + endIndex);
+        return $scope.queue.splice($scope.queue_page_start, $scope.queue_page_start + endIndex);
     }
 
     //Local functions

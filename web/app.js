@@ -3,11 +3,28 @@ var app = angular.module('DJayyApp', []);
 
 app.controller('MainCtrl', ['$scope', '$timeout', '$http', function($scope, $timeout, $http) {
     
+    //Scope variables
     $scope.tracks = [];
 
+    //Local variables
+    var tracksToSend = [];
+
+    //Scope functions
+    $scope.addTrack = function(title, artist) {
+        var track = {
+            title: title,
+            artist: artist,
+            votes: 0
+        };
+
+        sendTracks.push(track);
+    };
+    
+    //Local functions
     var serverPoll = function() {
         $timeout(function() {
             getTrackList("tracks.json");
+            sendTracks($scope.tracks);
 
             serverPoll();
         }, 1000);
@@ -16,19 +33,14 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', function($scope, $tim
     var getTrackList = function(trackJSON) {
         $http.get(trackJSON).then(function(response) {
             $scope.tracks = response.data.tracks;
-            $scope.$apply();
         });
     };
 
-    var addTrack = function(title, artist) {
-        var track = {
-            title: title,
-            artist: artist,
-            votes: 0
-        };
-
-        $scope.tracks.push(track);
-        $scope.$apply();
+    var sendTracks = function(tracks) {
+        //Send the files to the server
+        var tracksAsJson = JSON.stringify(tracks);
+        
+        tracksToSend = [];
     };
 
     serverPoll();

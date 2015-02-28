@@ -52,7 +52,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
         range = [];
 
         for (i = $scope.queue_page_start; i < $scope.queue_page_start + 9; i++) {
-            if (i > $scope.queue.length)
+            if (i >= $scope.queue.length)
                 return range;
 
             range.push(i);
@@ -62,11 +62,11 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     }
 
     $scope.client_queueCanMoveBack = function() {
-        return ($scope.queue_page_start - 10) > 0;
+        return ($scope.queue_page_start) > 0;
     }
 
     $scope.client_queueCanMoveForward = function() {
-        return ($scope.queue_page_start + 10) < ($scope.queue_page_start + $scope.queue_page_start % 10);
+        return ($scope.queue_page_start + 10) < $scope.queue.length;
     }
 
     //Local functions

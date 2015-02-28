@@ -3,10 +3,11 @@
 
 #include <fstream>
 #include <memory>
+#include <iostream>
 
 namespace DJayy
 {
-	WebServer::WebServer(const std::string&webRoot, unsigned int port)
+	WebServer::WebServer(const std::string&webRoot, unsigned short port)
 	{
 		server = new HttpServer(port, 4);
 
@@ -34,6 +35,7 @@ namespace DJayy
 				filename+="index.html";
 			}
 			ifs.open(filename, std::ifstream::in);
+			std::cout << "Setting file path of server at " << filename;
 			
 			if(ifs)
 			{
@@ -78,5 +80,6 @@ namespace DJayy
 			//Start server
 			serverPtr->start();
 		});
+		server_thread.detach();
 	}
 }

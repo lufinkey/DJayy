@@ -63,12 +63,12 @@
             <div class="row">
                 <div class="col-md-6">
                     <button id="queue_back" ng-click="client_advanceQueuePage('left')"
-                        ng-if="queue_page_start - 10 < 0" type="button" class="btn btn-default">
+                        ng-if="queue_page_start - 10 > 0" type="button" class="btn btn-default">
                         <span class="glyphicon glyphicon-menu-left"></span></button>
                 </div>
                 <div class="col-md-6"><span class="pull-right">
                     <button id="queue_next" ng-click="client_advanceQueuePage('right')"
-                        ng-if="queue_page_start + 10 > queue_page_start + queue_page_start % 10" type="button" class="btn btn-default">
+                        ng-if="queue_page_start + 10 < queue_page_start + queue_page_start % 10" type="button" class="btn btn-default">
                         <span class="glyphicon glyphicon-menu-right"></span></button>
                 </div></span>
             </div>

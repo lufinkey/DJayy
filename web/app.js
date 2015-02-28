@@ -87,9 +87,9 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     }
 
     function client_findTrackByQ_Id(queue_id) {
-        for (i = 0; i < $scope.queue.length; i++) {
-            if ($scope.queue[i].queue_id == queue_id)
-                return $scope.queue[i];
+        for (i = 0; i < $scope.queue_page.length; i++) {
+            if ($scope.queue_page[i].queue_id == queue_id)
+                return $scope.queue_page[i];
         }
     };
 

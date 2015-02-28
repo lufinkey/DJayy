@@ -11,7 +11,7 @@ namespace DJayy
 	public:
 		typedef SimpleWeb::Server<SimpleWeb::HTTP> HttpServer;
 
-		WebServer(const std::string&webRoot, unsigned int port);
+		WebServer(const std::string&webRoot, unsigned short port);
 
 		void start();
 

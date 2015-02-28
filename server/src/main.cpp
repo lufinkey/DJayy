@@ -5,7 +5,8 @@ using namespace DJayy;
 
 int main(int argc, char *argv[])
 {
-	WebServer* server = new WebServer("../web", 8080);
+	WebServer server("../web", 8080);
+	server.start();
 
 	std::system("PAUSE");
 

@@ -20,6 +20,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
             var button = angular.element(event.sourceElement);
 
             if (response.data.vote == 0) {
+                    console.log("both");
                     button.removeClass("active");
                 if (button.attr("id") == "up") {
                     button.next().removeClass("active");
@@ -27,10 +28,11 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
                     button.prev().removeClass("active");
                 }
             } else if (response.data.vote == 1) {
+                console.log("up");
                 button.addClass("active");
                 button.next().removeClass("active");
             } else if (response.data.vote == -1) {
-                //only downvote button is highlighted
+                console.log("down");
                 button.addClass("active");
                 button.prev().removeClass("active");
             }

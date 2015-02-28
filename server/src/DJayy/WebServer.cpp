@@ -120,6 +120,8 @@ namespace DJayy
 					result = "{\"queue\":[]}";
 				}
 
+				std::cout << "Sending queue data:" << std::endl << result << std::endl;
+
 				response << "HTTP/1.1 200 OK\r\nContent-Length: " << result.length() << "\r\n\r\n" << result;
 			}
 			catch(const std::exception& e)
@@ -153,6 +155,8 @@ namespace DJayy
 				}
 
 				String reply = "{\"queue_id\":\"" + queue_id + "\",\"vote\":" + ((int)vote) + ",\"totalVotes\":" + totalVotes + "}";
+
+				std::cout << "sending queuevote data:" << std::endl << reply << std::endl;
 				
 				response << "HTTP/1.1 200 OK\r\nContent-Length: " << reply.length() << "\r\n\r\n" << reply;
 			}

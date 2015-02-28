@@ -19,17 +19,17 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
             var update_track = client_findTrackByQ_Id(response.data.queue_id);
             var button = angular.element(event.sourceElement);
 
-            if (response.data.vote == '0') {
+            if (response.data.vote == 0) {
                     button.removeClass("active");
                 if (button.attr("id") == "up") {
                     button.next().removeClass("active");
                 } else {
                     button.prev().removeClass("active");
                 }
-            } else if (response.data.vote == '1') {
+            } else if (response.data.vote == 1) {
                 button.addClass("active");
                 button.next().removeClass("active");
-            } else if (response.data.vote == '-1') {
+            } else if (response.data.vote == -1) {
                 //only downvote button is highlighted
                 button.addClass("active");
                 button.prev().removeClass("active");

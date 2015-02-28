@@ -16,7 +16,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     //Scope functions
     $scope.server_trackVote = function(event, queue_id, vote) {
         $http.post("/queuevote", {user_id: user_id, queue_id: queue_id, vote: vote}).then(function(response) {
-            var update_track = this.client_findTrackByQ_Id(response.data.queue_id);
+            var update_track = client_findTrackByQ_Id(response.data.queue_id);
             var button = angular.element(event.sourceElement);
 
             //TODO handle vote toggling
@@ -43,9 +43,9 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
         });
     };
 
-    function client_findTrackByQ_Id(q_id) {
+    function client_findTrackByQ_Id(queue_id) {
         for (i = 0; i < $scope.queue.length; i++) {
-            if ($scope.queue[i].q_id == q_id)
+            if ($scope.queue[i].queue_id == queue_id)
                 return $scope.queue[i];
         }
     };

@@ -38,6 +38,7 @@ String getWebRoot()
 int main(int argc, char *argv[])
 {
 	DummyProgram* program = new DummyProgram();
+	program->loadLibrary();
 	
 	WebServer server(getWebRoot(), 8080);
 	server.setProgramInterface(program);

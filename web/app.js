@@ -6,6 +6,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     
     //Scope variables
     $scope.queue = [];
+    $scope.queue_page = []
     $scope.search = [];
 
     $scope.queue_page_start = 0;
@@ -50,12 +51,10 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
         } else {
             $scope.queue_page_start -= 10;
         }
+
+        client_setQueuePage();
     }
 
-    $scope.client_getQueuePage = function() {
-        var endIndex = $scope.queue.length % 10 + 1;
-        return $scope.queue.splice($scope.queue_page_start, $scope.queue_page_start + endIndex);
-    }
 
     //Local functions
     function server_poll() {
@@ -68,33 +67,38 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
             server_poll();
         }, 1000);
     };
+   
+    function client_setQueuePage() {
+        var endIndex = $scope.queue.length % 10 + 1;
+        $scope.queue_page = $scope.queue.splice($scope.queue_page_start, $scope.queue_page_start + endIndex);
+    }
 
     function server_getQueue(minEntry, maxEntry) {
         $http.post("/queue", {minEntry: minEntry, maxEntry: maxEntry}).then(function(response) {
             $scope.query = $scope.query.concat(response.data);
         });
-        };
+    };
 
-        function server_search(query, minEntry, maxEntry) {
-            $http.post("/search", {query: query, minEntry: minEntry, maxEntry: maxEntry}).then(function(response) {
-                $scope.search = $scope.query.concat(response.data);
-            });
+    function server_search(query, minEntry, maxEntry) {
+        $http.post("/search", {query: query, minEntry: minEntry, maxEntry: maxEntry}).then(function(response) {
+            $scope.search = $scope.query.concat(response.data);
+        });
+    }
+
+    function client_findTrackByQ_Id(queue_id) {
+        for (i = 0; i < $scope.queue.length; i++) {
+            if ($scope.queue[i].queue_id == queue_id)
+                return $scope.queue[i];
         }
+    };
 
-        function client_findTrackByQ_Id(queue_id) {
-            for (i = 0; i < $scope.queue.length; i++) {
-                if ($scope.queue[i].queue_id == queue_id)
-                    return $scope.queue[i];
-            }
-        };
-
-        function client_get_user_id() {
-            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-                var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
-                return v.toString(16);
-            });
-        };
+    function client_get_user_id() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
+            return v.toString(16);
+        });
+    };
 
 
-        server_poll();
-    }]);
+    server_poll();
+        }]);

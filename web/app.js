@@ -70,7 +70,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     };
 
     function server_getQueue(minEntry, maxEntry) {
-        $http.post("/queue", {minEntry: minEntry, maxEntry: maxEntry).then(function(response) {
+        $http.post("/queue", {minEntry: minEntry, maxEntry: maxEntry}).then(function(response) {
             $scope.query = $scope.query.concat(response.data);
         });
         };

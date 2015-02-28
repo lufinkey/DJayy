@@ -151,7 +151,9 @@ namespace DJayy
 				if(this->program != nullptr)
 				{
 					this->program->getQueue().vote(queue_id, user_id, vote);
-					totalVotes = this->program->getQueue().getTrackByQueueID(queue_id).votes.sum();
+					const QueueTrack& track = this->program->getQueue().getTrackByQueueID(queue_id);
+					totalVotes = track.votes.sum();
+					vote = track.votes.getVote(user_id);
 				}
 
 				String reply = "{\"queue_id\":\"" + queue_id + "\",\"vote\":" + ((int)vote) + ",\"totalVotes\":" + totalVotes + "}";

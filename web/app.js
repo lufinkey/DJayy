@@ -1,55 +1,64 @@
 
-var app = angular.module('DJayyApp', []);
+var app = angular.module('DJayyApp', ['ngCookies']);
 
-app.controller('MainCtrl', ['$scope', '$timeout', '$http', function($scope, $timeout, $http) {
-    
+app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookieStore', function($scope, $timeout, $http, $cookieStore) {
+
+    if (typeof $cookieStore.get('djayy_user_id') != 'undefined') {
+        $cookieStore.set('djayy_user_id', client_user_idVal());
+    }
+
     //Scope variables
-    $scope.tracks = [];
+    $scope.queue = [];
 
     //Local variables
-    var tracksToSend = [];
+    var user_id = $cookieStore.put('djayy_user_id');
+    var first_connect = true;
 
     //Scope functions
-    $scope.addTrack = function(id, uservote) {
-        var track = {
-            id: id,
-            userVote: uservote 
-        };
+    $scope.server_trackVote = function(event, q_id, vote) {
+        $http.post("/queuevote", {user_id: user_id, q_id: q_id, vote: vote}}).then(function(response) {
+            var update_track = client_findTrackByQ_Id(response.data.q_id);
+            var button = angular.element(event.sourceElement);
 
-        tracksToSend.push(track);
-    };
+            //TODO handle vote toggling
 
-    $scope.trackVote = function(id, vote) {
-        findTrackById(id).vote += vote;
-        $scope.addTrack(id, vote);
+            update_track.votes = totalVotes;
+        });
     };
     
     //Local functions
-    var serverPoll = function() {
+    var server_poll = function() {
         $timeout(function() {
-            getTrackList("/queue");
-            sendTracks(tracksToSend);
+            if (first_connect) {
+                server_getQueue();
+                first_connect = false;
+            }
 
             serverPoll();
         }, 1000);
     };
 
-    var getTrackList = function(trackJSON) {
+    var server_getQueue = function() {
         $http.get(trackJSON).then(function(response) {
-            $scope.tracks = response.data.tracks;
+            $scope.queue = response.data.queue;
         });
     };
 
-    var sendTracks = function(tracks) {
-        //Send the files to the server
-        var tracksAsJson = JSON.stringify(tracks);
+    var client_findTrackByQ_Id = function(q_id) {
+        for (i = 0; i < $scope.queue.length; i++) {
+            if ($scope.queue[i].q_id == q_id)
+                return $scope.queue[i];
+        }
     };
 
-    var findTrackById = function(id) {
-        for (i = 0; i < $scope.tracks.length; i++) {
-            if ($scope.tracks[i].id == id)
-                return $scope.tracks[i];
+    var client_user_idVal = function() {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16).substring(1);
         }
+        
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' + 
+            s4() + '-' + s4() + s4() + s4();
     };
 
     serverPoll();

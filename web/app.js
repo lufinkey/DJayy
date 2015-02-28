@@ -63,7 +63,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     function server_getLibrary() {
         $http.get("/library").then(function(response) {
             $scope.library = response.data;
-        }):
+        });
     }
 
     function client_findTrackByQ_Id(queue_id) {

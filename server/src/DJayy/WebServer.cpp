@@ -35,7 +35,6 @@ namespace DJayy
 				filename+="index.html";
 			}
 			ifs.open(filename, std::ifstream::in);
-			std::cout << "Setting file path of server at " << filename;
 			
 			if(ifs)
 			{
@@ -44,10 +43,12 @@ namespace DJayy
 			
 				ifs.seekg(0, std::ios::beg);
 
-				response << "HTTP/1.1 200 OK\r\nContent-Length: " << length << "\r\n\r\n";
+				std::string str((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
+
+				response << "HTTP/1.1 200 OK\r\nContent-Length: " << str.length() << "\r\n\r\n" << str.c_str();
 			
 				//read and send 128 KB at a time if file-size>buffer_size
-				size_t buffer_size=131072;
+				/*size_t buffer_size=131072;
 				if(length>buffer_size)
 				{
 					std::vector<char> buffer(buffer_size);
@@ -61,7 +62,7 @@ namespace DJayy
 				else
 				{
 					response << ifs.rdbuf();
-				}
+				}*/
 
 				ifs.close();
 			}

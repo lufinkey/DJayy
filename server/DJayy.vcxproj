@@ -21,6 +21,7 @@
     <ClInclude Include="src\DJayy\ProgramInterface.h" />
     <ClInclude Include="src\DJayy\Programs\DummyProgram.h" />
     <ClInclude Include="src\DJayy\QueueTrack.h" />
+    <ClInclude Include="src\DJayy\UserVote.h" />
     <ClInclude Include="src\DJayy\WebServer.h" />
     <ClInclude Include="src\Util\ArrayList.h" />
     <ClInclude Include="src\Util\String.h" />

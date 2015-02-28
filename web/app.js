@@ -22,7 +22,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookieStore', funct
 
             //TODO handle vote toggling
 
-            update_track.votes = totalVotes;
+            update_track.votes = response.data.totalVotes;
         });
     };
     

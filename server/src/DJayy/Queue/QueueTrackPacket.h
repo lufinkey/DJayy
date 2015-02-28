@@ -2,7 +2,7 @@
 #pragma once
 
 #include "QueueTrack.h"
-#include "../Library/Library.h"
+#include "../ProgramInterface.h"
 
 namespace DJayy
 {
@@ -18,7 +18,7 @@ namespace DJayy
 		String album_artist;
 		unsigned int track_num;
 		
-		QueueTrackPacket(const QueueTrack&queuetrack, const Library&library);
+		QueueTrackPacket(const QueueTrack&queuetrack, ProgramInterface*program);
 
 		String toJson() const;
 	};

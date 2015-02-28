@@ -1,19 +1,19 @@
 
-#include "Library.h"
+#include "TrackCollection.h"
 
 namespace DJayy
 {
-	Library::Library()
+	TrackCollection::TrackCollection()
 	{
 		//
 	}
 	
-	Library::Library(const ArrayList<Track>&tracks)
+	TrackCollection::TrackCollection(const ArrayList<Track>&tracks)
 	{
-		Library::tracks = tracks;
+		TrackCollection::tracks = tracks;
 	}
 	
-	String Library::toJson() const
+	String TrackCollection::toJson() const
 	{
 		String json = "[";
 		size_t length = tracks.size();
@@ -30,12 +30,22 @@ namespace DJayy
 		return json;
 	}
 	
-	void Library::add(const Track&track)
+	void TrackCollection::add(const Track&track)
 	{
 		tracks.add(track);
 	}
 	
-	Track Library::getTrackByTrackID(const String&track_id) const
+	size_t TrackCollection::size() const
+	{
+		return tracks.size();
+	}
+	
+	Track TrackCollection::getTrackByIndex(size_t index) const
+	{
+		return tracks.get(index);
+	}
+	
+	Track TrackCollection::getTrackByTrackID(const String&track_id) const
 	{
 		size_t length = tracks.size();
 		for(size_t i=0; i<length; i++)
@@ -49,7 +59,7 @@ namespace DJayy
 		return Track();
 	}
 	
-	ArrayList<Track> Library::getTracksByArtist(const String&artist) const
+	ArrayList<Track> TrackCollection::getTracksByArtist(const String&artist) const
 	{
 		ArrayList<Track> artist_tracks;
 		size_t length = tracks.size();
@@ -64,7 +74,7 @@ namespace DJayy
 		return artist_tracks;
 	}
 	
-	ArrayList<Track> Library::getTracksByAlbum(const String&album, const String&album_artist) const
+	ArrayList<Track> TrackCollection::getTracksByAlbum(const String&album, const String&album_artist) const
 	{
 		ArrayList<Track> album_tracks;
 		size_t length = tracks.size();
@@ -79,7 +89,7 @@ namespace DJayy
 		return album_tracks;
 	}
 	
-	ArrayList<Track> Library::getTracksByAlbumArtist(const String&album_artist) const
+	ArrayList<Track> TrackCollection::getTracksByAlbumArtist(const String&album_artist) const
 	{
 		ArrayList<Track> album_artist_tracks;
 		size_t length = tracks.size();

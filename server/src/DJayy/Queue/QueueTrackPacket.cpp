@@ -3,13 +3,13 @@
 
 namespace DJayy
 {
-	QueueTrackPacket::QueueTrackPacket(const QueueTrack&queuetrack, const Library&library)
+	QueueTrackPacket::QueueTrackPacket(const QueueTrack&queuetrack, ProgramInterface*program)
 	{
 		queue_id = queuetrack.queue_id;
 		track_id = queuetrack.track_id;
 		votes = queuetrack.votes;
 		
-		Track track = library.getTrackByTrackID(track_id);
+		Track track = program->getTrackByTrackID(track_id);
 		if(!track.isNull())
 		{
 			title = track.title;

@@ -6,16 +6,18 @@
 
 namespace DJayy
 {
-	class Library
+	class TrackCollection
 	{
 	public:
-		Library();
-		Library(const ArrayList<Track>& tracks);
+		TrackCollection();
+		TrackCollection(const ArrayList<Track>& tracks);
 		
 		String toJson() const;
 		
 		void add(const Track&track);
+		size_t size() const;
 		
+		Track getTrackByIndex(size_t index) const;
 		Track getTrackByTrackID(const String&track_id) const;
 		ArrayList<Track> getTracksByArtist(const String&artist) const;
 		ArrayList<Track> getTracksByAlbum(const String&album, const String&album_artist) const;

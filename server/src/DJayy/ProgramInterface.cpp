@@ -13,8 +13,8 @@ namespace DJayy
 		return queue;
 	}
 	
-	void ProgramInterface::addToQueue(const String&track_id)
+	String ProgramInterface::addToQueue(const String&track_id)
 	{
-		queue.add(track_id);
+		return queue.add(track_id);
 	}
 }

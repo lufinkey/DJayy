@@ -24,6 +24,7 @@ namespace DJayy
 		void setup_queue();
 		void setup_queuevote();
 		void setup_search();
+		void setup_addqueue();
 
 		String webRoot;
 		HttpServer*server;

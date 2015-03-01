@@ -49,7 +49,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     
     $scope.client_loadMore = function(query) {
 
-        if ($scope.search_page_start != 10) {
+        if ($scope.search_page_start != 0) {
             $http.post("/search", {query: query, minEntry: $scope.search_page_start, maxEntry: $scope.search_page_start
                 + $scope.search_page_length}).then(function(response) {
                     $scope.search = $scope.search.concat(response.data);

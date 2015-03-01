@@ -7,7 +7,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     //Scope variables
     $scope.queue = [];
     $scope.search = [];
-    $scope.nowplaying = ["title": 0];
+    $scope.nowplaying = {"track_id":""};
     $scope.album_src = "";
 
     $scope.queue_page_start = 0;

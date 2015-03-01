@@ -141,10 +141,14 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     function client_getAlbumArtwork(track) {
         $http.get("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=" + lastfm_api_key + "&artist="
                 + track.artist + "&album=" + track.album + "&format=json").then(function(response) {
-                    var images = response.data.image;
+                    var images = response.data.album.image;
 
-                    $scope.album_src = images[images.length - 1]["#text"];
-                    console.log($scope.album_src);
+                    if (typeof images != 'undefined') {
+                        $scope.album_src = images[images.length - 1]["#text"];
+                        console.log($scope.album_src);
+                    } else {
+                        $scope.album_src = "";
+                    }
         });
     }
 

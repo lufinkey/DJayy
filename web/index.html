@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html ng-app="DJayyApp">
     <head>
-
+	
+	<title>DJayy</title>
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0.0">
 
@@ -46,6 +47,7 @@
                     <div style="postion: relative;"><span class="nowplaying_title">{{nowplaying.title}}</span><br/><span class="nowplaying_subtitle">{{nowplaying.artist}} - {{nowplaying.album}}</span></div></img></h1>
             </div>
             <div ng-if="nowplaying.artist"><br><br></div>
+			
             <h2>Play Queue</h2>
 
             <ul class="list-group">
@@ -65,6 +67,7 @@
                         </div>
                     </div>
                 </li>
+				<li ng-if="queue.length == 0" class="list-group-item"><span style="color:#bdbdbd">Queue empty</span></li>
             </ul>
             <div class="row">
                 <div class="col-md-6">

@@ -11,7 +11,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     $scope.queue_page_start = 0;
     $scope.search_page_start = 0;
     $scope.queue_page_length = 10;
-    $scope.search_page_length = 10;
+    $scope.search_page_length = 5;
 
     //Local variables
     if (typeof $cookieStore.get('djayy_user_id') == 'undefined')
@@ -47,12 +47,13 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     };
     
     $scope.client_loadMore = function(query) {
-        $http.post("/search", {query: query, minEntry: $scope.search_page_start, maxEntry: $scope.search_page_start + 10})
+        $http.post("/search", {query: query, minEntry: $scope.search_page_start, maxEntry: $scope.search_page_start
+            + $scope.search_page_length})
             .then(function(response) {
                 $scope.search = $scope.search.concat(response.data);
             });
         
-        $scope.search_page_start += 10;
+        $scope.search_page_start += $scope.search_page_length;
     }
 
     $scope.server_search = function(query) {

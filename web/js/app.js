@@ -47,6 +47,8 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     };
     
     $scope.client_loadMore = function(query) {
+        console.log("Loading more");
+
         $http.post("/search", {query: query, minEntry: $scope.search_page_start, maxEntry: $scope.search_page_start
             + $scope.search_page_length})
             .then(function(response) {
@@ -58,8 +60,10 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
 
     $scope.server_search = function(query) {
         $scope.search_page_start = 0;
+        console.log("server search------");
 
         $scope.client_loadMore(query);
+        console.log("-------------------");
     }
 
     $scope.client_moveQueuePage = function(amt) {

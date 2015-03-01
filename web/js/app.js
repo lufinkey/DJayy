@@ -139,8 +139,18 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     }
     
     function client_getAlbumArtwork(track) {
+
+        var artist;
+        var index = track.artist.indexOf(" feat. ");
+
+        if (index != -1) {
+            artist = artist.substring(0, index);
+        } else {
+            artist = track.artist;
+        }
+
         $http.get("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=" + lastfm_api_key + "&artist="
-                + track.artist + "&album=" + track.album + "&format=json").then(function(response) {
+                + artist + "&album=" + track.album + "&format=json").then(function(response) {
                     var images = response.data.album.image;
 
                     if (typeof images != 'undefined') {

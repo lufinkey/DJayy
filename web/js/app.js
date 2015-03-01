@@ -98,7 +98,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
         });
     };
 
-    $scope.client_songIsPlaying() = function() {
+    $scope.client_nowPlaying() = function() {
         return $scope.nowplaying != "none"; 
     }
 

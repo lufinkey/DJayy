@@ -6,7 +6,7 @@ namespace DJayy
 {
 	static const String default_playlist_name = "DJayy";
 	
-	iTunesProgram::iTunesProgram()
+	iTunesProgram::iTunesProgram(WebServer*server) : ProgramInterface(server)
 	{
 		iTunes = nullptr;
 		library = nullptr;

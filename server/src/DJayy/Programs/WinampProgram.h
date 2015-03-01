@@ -12,7 +12,7 @@ namespace DJayy
 	{
 		friend class WinampChecker;
 	public:
-		WinampProgram();
+		WinampProgram(WebServer*server, const String&musicRoot, const ArrayList<String>&fileExtensions);
 		virtual ~WinampProgram();
 
 		virtual void load() override;

@@ -7,7 +7,7 @@
 
 namespace DJayy
 {
-	FolderLoadInterface::FolderLoadInterface(const String&root, const ArrayList<String>& fileExtensions)
+	FolderLoadInterface::FolderLoadInterface(WebServer*server, const String&root, const ArrayList<String>& fileExtensions) : ProgramInterface(server)
 	{
 		FolderLoadInterface::root = root;
 		FolderLoadInterface::fileExtensions = fileExtensions;

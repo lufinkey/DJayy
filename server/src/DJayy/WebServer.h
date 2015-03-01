@@ -19,6 +19,8 @@ namespace DJayy
 		void setProgramInterface(ProgramInterface*program);
 
 		void start();
+		
+		std::mutex& getMutex();
 
 	private:
 		void setup_GET();
@@ -26,6 +28,7 @@ namespace DJayy
 		void setup_queuevote();
 		void setup_search();
 		void setup_addqueue();
+		void setup_nowplaying();
 
 		String webRoot;
 		HttpServer*server;

@@ -278,4 +278,9 @@ namespace DJayy
 		std::cout << "starting web server" << std::endl << std::endl;
 		server->start();
 	}
+	
+	std::mutex& WebServer::getMutex()
+	{
+		return m_lock;
+	}
 }

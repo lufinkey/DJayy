@@ -9,7 +9,7 @@ namespace DJayy
 	class FolderLoadInterface : public ProgramInterface
 	{
 	public:
-		FolderLoadInterface(const String&root, const ArrayList<String>& fileExtensions);
+		FolderLoadInterface(WebServer*server, const String&root, const ArrayList<String>& fileExtensions);
 		virtual ~FolderLoadInterface();
 		
 		virtual void load() override;

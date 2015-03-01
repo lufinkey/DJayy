@@ -6,15 +6,22 @@
 
 namespace DJayy
 {
+	class WebServer;
+	
 	class ProgramInterface
 	{
 	public:
+		ProgramInterface(WebServer*server)
+		{
+			ProgramInterface::server = server;
+		}
 		virtual ~ProgramInterface(){}
 
 		virtual void load() = 0;
 		
 		Queue& getQueue();
 		const Queue& getQueue() const;
+		WebServer* getWebServer() const;
 		
 		String addToQueue(const String&track_id);
 		
@@ -23,5 +30,8 @@ namespace DJayy
 		
 	protected:
 		Queue queue;
+		
+	private:
+		WebServer*server;
 	};
 }

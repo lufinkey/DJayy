@@ -10,7 +10,7 @@ namespace DJayy
 	class iTunesProgram : public ProgramInterface
 	{
 	public:
-		iTunesProgram();
+		iTunesProgram(WebServer*server);
 		virtual ~iTunesProgram();
 
 		virtual void load() override;

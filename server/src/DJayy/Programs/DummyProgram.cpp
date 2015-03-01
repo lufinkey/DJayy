@@ -3,7 +3,7 @@
 
 namespace DJayy
 {
-	DummyProgram::DummyProgram()
+	DummyProgram::DummyProgram(WebServer*server) : ProgramInterface(server)
 	{
 		//
 	}

@@ -1,4 +1,6 @@
 
+#define _CRT_SECURE_NO_WARNINGS
+
 #include "DJayy/WebServer.h"
 #include "DJayy/Programs/WinampProgram.h"
 //#include "DJayy/Programs/DummyProgram.h"
@@ -38,11 +40,15 @@ String getWebRoot()
 
 int main(int argc, char *argv[])
 {
-	WinampProgram* program = new WinampProgram();
-	//DummyProgram* program = new DummyProgram();
-	program->load();
-	
+	String homeDir = getenv("HOMEPATH");
+	ArrayList<String> fileExtensions;
+	fileExtensions.add("mp3");
+	fileExtensions.add("m4a");
+	fileExtensions.add("aac");
+
 	WebServer server(getWebRoot(), 8080);
+	WinampProgram* program = new WinampProgram(&server, homeDir + "/Music", fileExtensions);
+	program->load();
 	server.setProgramInterface(program);
 	server.start();
 	

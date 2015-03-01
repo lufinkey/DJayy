@@ -1,20 +1,11 @@
 
-#define _CRT_SECURE_NO_WARNINGS
-
 #include "WinampProgram.h"
 #include "WinampChecker.h"
 #include <iostream>
 
 namespace DJayy
 {
-	String extensions[] = {(String)"mp3"};
-#ifdef _WIN32
-	#define HOMEPATH getenv("HOMEPATH")
-#else
-	#define HOMEPATH getenv("HOME")
-#endif
-
-	WinampProgram::WinampProgram() : FolderLoadInterface((String)"" + HOMEPATH + "/Music", ArrayList<String>(extensions,1))
+	WinampProgram::WinampProgram(WebServer*server, const String&root, const ArrayList<String>&fileExtensions) : FolderLoadInterface(server, root, fileExtensions)
 	{
 		checker = new WinampChecker(this);
 	}

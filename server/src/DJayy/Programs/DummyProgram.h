@@ -8,7 +8,7 @@ namespace DJayy
 	class DummyProgram : public ProgramInterface
 	{
 	public:
-		DummyProgram();
+		DummyProgram(WebServer*server);
 
 		virtual void load() override;
 		

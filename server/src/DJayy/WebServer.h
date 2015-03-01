@@ -3,6 +3,7 @@
 
 #include <server_http.hpp>
 #include <string>
+#include <mutex>
 
 #include "ProgramInterface.h"
 
@@ -29,5 +30,6 @@ namespace DJayy
 		String webRoot;
 		HttpServer*server;
 		ProgramInterface*program;
+		std::mutex m_lock;
 	};
 }

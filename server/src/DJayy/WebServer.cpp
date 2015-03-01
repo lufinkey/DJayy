@@ -108,6 +108,7 @@ namespace DJayy
 				String result;
 				if(this->program != nullptr)
 				{
+					this->m_lock.lock();
 					const Queue& queue = this->program->getQueue();
 					const ArrayList<QueueTrack>& tracks = queue.getTracks();
 
@@ -130,6 +131,7 @@ namespace DJayy
 						}
 					}
 					result += "]";
+					this->m_lock.unlock();
 				}
 				else
 				{
@@ -158,7 +160,7 @@ namespace DJayy
 				
 				boost::property_tree::ptree pt;
 				read_json(std::istringstream(str), pt);
-
+				
 				String queue_id = pt.get<std::string>("queue_id");
 				String user_id = pt.get<std::string>("user_id");
 				signed char vote = (signed char)String::asInt(pt.get<std::string>("vote"));
@@ -166,10 +168,12 @@ namespace DJayy
 				
 				if(this->program != nullptr)
 				{
+					this->m_lock.lock();
 					this->program->getQueue().vote(queue_id, user_id, vote);
 					const QueueTrack& track = this->program->getQueue().getTrackByQueueID(queue_id);
 					totalVotes = track.votes.sum();
 					vote = track.votes.getVote(user_id);
+					this->m_lock.unlock();
 				}
 
 				String reply = "{\"queue_id\":\"" + queue_id + "\",\"vote\":" + ((int)vote) + ",\"totalVotes\":" + totalVotes + "}";
@@ -205,7 +209,9 @@ namespace DJayy
 				
 				if(program != nullptr)
 				{
+					this->m_lock.lock();
 					reply = this->program->search(query, minEntry, maxEntry).toJson();
+					this->m_lock.unlock();
 				}
 				else
 				{
@@ -241,7 +247,9 @@ namespace DJayy
 				String reply;
 				if(this->program != nullptr)
 				{
+					this->m_lock.lock();
 					String queue_id = this->program->addToQueue(track_id);
+					this->m_lock.unlock();
 					reply = "{\"queue_id\":\"" + queue_id + "\"}";
 				}
 				else

@@ -1523,7 +1523,7 @@ namespace GameLibrary
 			newStr.characters[left.total+1] = 'a';
 			newStr.characters[left.total+2] = 'l';
 			newStr.characters[left.total+3] = 's';
-			newStr.characters[left.total+3] = 'e';
+			newStr.characters[left.total+4] = 'e';
 			newStr.characters[newTotal] = '\0';
 		}
 		return newStr;

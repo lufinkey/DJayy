@@ -3,7 +3,7 @@
     <head>
 
     <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0.0">
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -27,14 +27,15 @@
     <script src="js/app.js"></script>
 
     <!-- App CSS -->
+    <link href='http://fonts.googleapis.com/css?family=Leckerli+One' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="css/app.css">
 
     </head>
 
     <body ng-controller="MainCtrl">
     
-        <div class="page-header">
-            <h1 class="text-center"><span class="glyphicon glyphicon-music"></span> DJayy</h1>
+        <div class="jumbotron">
+            <h1 class="text-center"><big><span class="glyphicon glyphicon-music"></span> DJ<sub>a</sub>y<sup>y</sup></big></h1>
         </div>
 
         <div class="container">
@@ -77,7 +78,7 @@
 
             <div class="col-md-4">
                 <h3>
-                <form ng-submit="server_search(q)" class="input-group">
+                <form ng-submit="server_search(q)" class="input-group input-group-lg">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
                     <input type="text" ng-model="q" class="form-control" placeholder="Search Library">
                 </form>

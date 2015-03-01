@@ -1,3 +1,10 @@
+
+.jumbotron {
+    padding: 1.5em;
+    background-color: #42f2f7;
+    font-family: 'Leckerli One', cursive;
+}
+
 .scrollable {
     height: auto;
     max-height: 500px;

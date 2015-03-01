@@ -23,3 +23,13 @@ body {
     max-height: 334px;
     overflow-x: hidden;
 }
+
+.nowplaying_title
+{
+	font-weight: bold;
+}
+
+.nowplaying_subtitle
+{
+	font-size: 0.7em;
+}

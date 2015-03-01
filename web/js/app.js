@@ -98,6 +98,10 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
         $http.post("/addqueue", {track_id: track.track_id, user_id: user_id}).then(function(response) {
             //get back the q_id and add modularly
         });
+		if($scope.queue.length==0)
+		{
+			server_getNowPlaying();
+		}
     };
 
     //Local functions

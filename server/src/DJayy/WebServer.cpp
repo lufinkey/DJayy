@@ -22,6 +22,7 @@ namespace DJayy
 		setup_queue();
 		setup_queuevote();
 		setup_addqueue();
+		setup_nowplaying();
 	}
 
 	void WebServer::setup_GET()
@@ -258,6 +259,40 @@ namespace DJayy
 				}
 
 				std::cout << "sending queue add reply data:" << std::endl << reply << std::endl << std::endl;
+				
+				response << "HTTP/1.1 200 OK\r\nContent-Length: " << reply.length() << "\r\n\r\n" << reply;
+			}
+			catch(const std::exception& e)
+			{
+				response << "HTTP/1.1 400 Bad Request\r\nContent-Length: " << strlen(e.what()) << "\r\n\r\n" << e.what();
+			}
+		};
+	}
+	
+	void WebServer::setup_nowplaying()
+	{
+		server->resource["^/nowplaying$"]["GET"]=[this](HttpServer::Response& response, std::shared_ptr<HttpServer::Request> request) {
+			try
+			{
+				std::istreambuf_iterator<char> eos;
+				std::string str(std::istreambuf_iterator<char>(request->content), eos);
+				std::cout << "recieved nowplaying request:" << std::endl << str << std::endl << std::endl;
+				
+				String reply;
+				if(this->program != nullptr)
+				{
+					this->m_lock.lock();
+					Track nowplaying = program->getNowPlaying();
+					bool active = !nowplaying.isNull();
+					reply = (String)"{\"status\":" + active + ",\"track\":" + nowplaying.toJson() + "}";
+					this->m_lock.unlock();
+				}
+				else
+				{
+					reply = "{\"status\":false}";
+				}
+
+				std::cout << "sending nowplaying data:" << std::endl << reply << std::endl << std::endl;
 				
 				response << "HTTP/1.1 200 OK\r\nContent-Length: " << reply.length() << "\r\n\r\n" << reply;
 			}

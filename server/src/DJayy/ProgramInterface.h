@@ -22,6 +22,8 @@ namespace DJayy
 		Queue& getQueue();
 		const Queue& getQueue() const;
 		WebServer* getWebServer() const;
+		void setNowPlaying(const Track&track);
+		const Track& getNowPlaying() const;
 		
 		String addToQueue(const String&track_id);
 		
@@ -33,5 +35,6 @@ namespace DJayy
 		
 	private:
 		WebServer*server;
+		Track nowplaying;
 	};
 }

@@ -283,7 +283,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>external\sqlite;external\taglib;external\dirent\include;external\iTunesCOMWindowsSDK;external\Simple-Web-Server;\local\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>TAGLIB_NOUTPUT;TAGLIB_STATIC;WIN32;_WIN32_WINNT=0x0501;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>TAGLIB_NOUTPUT;TAGLIB_STATIC;BOOST_SPIRIT_THREADSAFE;WIN32;_WIN32_WINNT=0x0501;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
@@ -303,7 +303,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>external\sqlite;external\taglib;external\dirent\include;external\iTunesCOMWindowsSDK;external\Simple-Web-Server;\local\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>TAGLIB_NOUTPUT;TAGLIB_STATIC;WIN32;_WIN32_WINNT=0x0501;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>TAGLIB_NOUTPUT;TAGLIB_STATIC;BOOST_SPIRIT_THREADSAFE;WIN32;_WIN32_WINNT=0x0501;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>

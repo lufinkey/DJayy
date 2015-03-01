@@ -103,18 +103,20 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     }
 
     //Local functions
-    function server_poll() {
+    function queue_poll() {
         $timeout(function() {
             server_getQueue(0, 0);
 
+            queue_poll();
         }, 1000);
+    }
 
+    function nowplaying_poll() {
         $timeout(function() {
             server_getNowPlaying();
 
-        }, 5000);
-        
-        server_poll();
+            nowplaying_poll();
+        }, 5000);    
     }
 
     function server_getQueue(minEntry, maxEntry) {
@@ -147,5 +149,6 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
         });
     }
 
-    server_poll();
+    queue_poll();
+    nowplaying_poll();
         }]);

@@ -375,6 +375,12 @@
     <ClCompile Include="external\sqlite\sqlite3.c">
       <Filter>external\sqlite</Filter>
     </ClCompile>
+    <ClCompile Include="src\Util\PrefManager.cpp">
+      <Filter>src\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Global.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\DJayy\WebServer.h">
@@ -736,6 +742,12 @@
     </ClInclude>
     <ClInclude Include="external\sqlite\sqlite3.h">
       <Filter>external\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Util\PrefManager.h">
+      <Filter>src\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Global.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

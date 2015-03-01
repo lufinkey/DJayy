@@ -49,12 +49,7 @@ int main(int argc, char *argv[])
 	fileExtensions.add("m4a");
 	fileExtensions.add("aac");
 
-	unsigned short port = 8080;
-	if(Global::config.hasValue("port"))
-	{
-		port = (unsigned short)Global::config.getIntValue("port");
-	}
-	
+	unsigned short port = (unsigned short)Global::config.getIntValue("port");
 	WebServer server(getWebRoot(), port);
 	WinampProgram* program = new WinampProgram(&server, homeDir + "/Music", fileExtensions);
 	program->load();

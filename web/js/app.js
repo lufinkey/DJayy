@@ -11,7 +11,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     $scope.queue_page_start = 0;
     $scope.search_page_start = 0;
     $scope.queue_page_length = 10;
-    $scope.search_page_length = 5;
+    $scope.search_page_length = 10;
 
     //Local variables
     if (typeof $cookieStore.get('djayy_user_id') == 'undefined')
@@ -50,8 +50,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
         console.log("Loading more");
 
         $http.post("/search", {query: query, minEntry: $scope.search_page_start, maxEntry: $scope.search_page_start
-            + $scope.search_page_length})
-            .then(function(response) {
+            + $scope.search_page_length}).then(function(response) {
                 $scope.search = $scope.search.concat(response.data);
             });
         
@@ -59,11 +58,13 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     }
 
     $scope.server_search = function(query) {
+        console.log("Search query");
         $scope.search_page_start = 0;
-        console.log("server search------");
 
-        $scope.client_loadMore(query);
-        console.log("-------------------");
+        $http.post("/search", {query: query, minEntry: $scope.search_page_start, maxEntry: $scope.search_page_start
+            + $scope.search_page_length}).then(function(response) {
+                $scope.search = response.data;
+            });
     }
 
     $scope.client_moveQueuePage = function(amt) {
@@ -92,7 +93,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     }
 
     $scope.server_addToQueue = function(track) {
-        $http.post("/add", {track_id: track.id, user_id: user_id}).then(function(response) {
+        $http.post("/addqueue", {track_id: track.track_id, user_id: user_id}).then(function(response) {
             //get back the q_id and add modularly
         });
     }

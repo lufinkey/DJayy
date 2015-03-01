@@ -7,7 +7,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     //Scope variables
     $scope.queue = [];
     $scope.search = [];
-    $scope.nowplaying = [];
+    $scope.nowplaying = ["title": 0];
     $scope.album_src = "";
 
     $scope.queue_page_start = 0;
@@ -138,7 +138,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
         });
     }
     
-    $scope.client_getAlbumArtwork = function(track) {
+    function client_getAlbumArtwork(track) {
         $http.get("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=" + lastfm_api_key + "&artist="
                 + track.artist + "&album=" + track.album + "&format=json").then(function(response) {
                     var images = response.data.album.image;

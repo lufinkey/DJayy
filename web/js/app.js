@@ -100,15 +100,6 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
         });
     };
 
-
-    $scope.client_nowPlaying = function() {
-        if (typeof $scope.nowplaying.title != 'undefined') {
-            client_getAlbumArtwork($scope.nowplaying);     
-        }
-
-        return $scope.nowplaying.title;
-    }
-
     //Local functions
     function queue_poll() {
         $timeout(function() {
@@ -135,6 +126,11 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     function server_getNowPlaying() {
         $http.get("/nowplaying").then(function(response) {
             if (response.data.status) {
+
+                if (response.data.track != $scope.nowplaying) {
+                    client_getAlbumArtwork(response.data.track);
+                }
+
                 $scope.nowplaying = response.data.track;
             } else {
                 $scope.nowplaying = [];
@@ -142,7 +138,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
         });
     }
     
-    function client_getAlbumArtwork() {
+    function client_getAlbumArtwork(track) {
         $http.get("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=" + lastfm_api_key + "&artist="
                 + track.artist + "&album=" + track.album + "&format=json").then(function(response) {
                     var images = response.data.image;

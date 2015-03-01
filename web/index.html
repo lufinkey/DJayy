@@ -5,7 +5,7 @@
 	<title>DJayy</title>
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0.0">
-
+	
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
@@ -46,14 +46,14 @@
                 <h1 class="text-center" ng-if="nowplaying.artist"><img class="albumart" ng-src="{{album_src}}">
                     <div style="postion: relative;"><span class="nowplaying_title">{{nowplaying.title}}</span><br/><span class="nowplaying_subtitle">{{nowplaying.artist}} - {{nowplaying.album}}</span></div></img></h1>
             </div>
-            <div ng-if="nowplaying.artist"><br><br></div>
+            <div ng-if="nowplaying.artist"><br/></div>
 			
-            <h2>Play Queue</h2>
+            <h3>Play Queue</h3>
 
             <ul class="list-group">
                 <li ng-repeat="i in client_queueRange()" class="list-group-item">
                     <div class="row">
-                        <div class="col-md-6">{{queue[i].title}} - {{queue[i].artist}}</div>
+                        <div class="col-md-6"><span class="queue_title">{{queue[i].title}}</span><br/><span class="queue_subtitle">{{queue[i].artist}} - {{queue[i].album}}</span></div>
                         <div class="col-md-6">
                             <span class="pull-right">
                             <div class="btn-group btn-group-xs" data-toggle="buttons">
@@ -111,7 +111,7 @@
             </div>
         </div>
         </div>
-
+		<footer></footer>
     </body>
 
 </html>

@@ -6,7 +6,7 @@ body {
 .jumbotron {
     padding: 0.6em;
     background-color: #42f2f7;
-    font-family: 'Leckerli One', cursive;
+    font-family: 'Leckerli One' cursive sans-serif;
 }
 
 .jumbotron > h1 {
@@ -32,4 +32,14 @@ body {
 .nowplaying_subtitle
 {
 	font-size: 0.7em;
+}
+
+.queue_title
+{
+	font-weight: bold;
+}
+
+.queue_subtitle
+{
+	font-size: 0.9em;
 }

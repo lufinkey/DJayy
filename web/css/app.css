@@ -4,9 +4,13 @@ body {
 }
 
 .jumbotron {
-    padding: 1.em;
+    padding: 0.6em;
     background-color: #42f2f7;
     font-family: 'Leckerli One', cursive;
+}
+
+.jumbotron > h1 {
+	margin-bottom: 0.5em;
 }
 
 .albumart {
@@ -16,6 +20,6 @@ body {
 
 .scrollable {
     height: auto;
-    max-height: 250px;
+    max-height: 334px;
     overflow-x: hidden;
 }

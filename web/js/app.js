@@ -166,6 +166,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
         });
     }
 
+    server_getNowPlaying();
     queue_poll();
     nowplaying_poll();
         }]);

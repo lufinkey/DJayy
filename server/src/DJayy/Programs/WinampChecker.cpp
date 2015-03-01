@@ -82,9 +82,11 @@ namespace DJayy
 			Track track = program->getTrackByTrackID(queueTrack.track_id);
 			if(!track.isNull())
 			{
+				std::cout << "Playing next track in queue: " << track.title << std::endl;
 				//TODO send notification that next track is happening
-				String winampPath = getWinampPath();
-				system("\"" + winampPath + "\" \"" + program->getRootFolder() + '/' + track.path + "\"");
+				String command = "start winamp \"" + program->getRootFolder() + '/' + track.path + "\"";
+				std::cout << "Calling command: " << command << std::endl;
+				system(command);
 			}
 		}
 	}

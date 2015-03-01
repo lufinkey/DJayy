@@ -13,6 +13,7 @@ namespace DJayy
 {
 	WebServer::WebServer(const std::string&webroot, unsigned short port)
 	{
+		m_lock.lock();
 		program = nullptr;
 		webRoot = webroot;
 		server = new HttpServer(port, 4);
@@ -23,6 +24,7 @@ namespace DJayy
 		setup_queuevote();
 		setup_addqueue();
 		setup_nowplaying();
+		m_lock.unlock();
 	}
 
 	void WebServer::setup_GET()
@@ -291,7 +293,7 @@ namespace DJayy
 				{
 					reply = "{\"status\":false}";
 				}
-
+				
 				std::cout << "sending nowplaying data:" << std::endl << reply << std::endl << std::endl;
 				
 				response << "HTTP/1.1 200 OK\r\nContent-Length: " << reply.length() << "\r\n\r\n" << reply;

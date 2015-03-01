@@ -127,7 +127,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
         $http.get("/nowplaying").then(function(response) {
             if (response.data.status) {
 
-                if (response.data.track != $scope.nowplaying) {
+                if (response.data.track.track_id != $scope.nowplaying.track_id) {
                     client_getAlbumArtwork(response.data.track);
                 }
 
@@ -138,7 +138,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
         });
     }
     
-    function client_getAlbumArtwork(track) {
+    $scope.client_getAlbumArtwork = function(track) {
         $http.get("http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=" + lastfm_api_key + "&artist="
                 + track.artist + "&album=" + track.album + "&format=json").then(function(response) {
                     var images = response.data.album.image;

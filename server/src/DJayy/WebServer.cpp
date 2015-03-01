@@ -236,7 +236,7 @@ namespace DJayy
 			{
 				std::istreambuf_iterator<char> eos;
 				std::string str(std::istreambuf_iterator<char>(request->content), eos);
-				std::cout << "recieved add queue request:" << std::endl << str << std::endl << std::endl;
+				std::cout << "recieved queue add request:" << std::endl << str << std::endl << std::endl;
 				
 				boost::property_tree::ptree pt;
 				read_json(std::istringstream(str), pt);
@@ -257,7 +257,7 @@ namespace DJayy
 					reply = "{}";
 				}
 
-				std::cout << "sending add queue data:" << std::endl << reply << std::endl << std::endl;
+				std::cout << "sending queue add reply data:" << std::endl << reply << std::endl << std::endl;
 				
 				response << "HTTP/1.1 200 OK\r\nContent-Length: " << reply.length() << "\r\n\r\n" << reply;
 			}

@@ -1,11 +1,13 @@
 
 #include "WinampChecker.h"
 #include <Psapi.h>
+#include <iostream>
 
 namespace DJayy
 {
 	void WinampCheckerThread(void*data)
 	{
+		std::cout << "Starting Winamp checker thread" << std::endl;
 		WinampChecker*checker = (WinampChecker*)data;
 		while(checker->running)
 		{
@@ -36,6 +38,7 @@ namespace DJayy
 	{
 		if(!running)
 		{
+			running = true;
 			thread = new std::thread(WinampCheckerThread,this);
 		}
 	}

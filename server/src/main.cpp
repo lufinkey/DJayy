@@ -1,7 +1,7 @@
 
 #include "DJayy/WebServer.h"
-//#include "DJayy/Programs/iTunesProgram.h"
-#include "DJayy/Programs/DummyProgram.h"
+#include "DJayy/Programs/WinampProgram.h"
+//#include "DJayy/Programs/DummyProgram.h"
 
 #include <stdio.h>
 #ifdef _WIN32
@@ -38,9 +38,9 @@ String getWebRoot()
 
 int main(int argc, char *argv[])
 {
-	//iTunesProgram* program = new iTunesProgram();
-	DummyProgram* program = new DummyProgram();
-	program->loadLibrary();
+	WinampProgram* program = new WinampProgram();
+	//DummyProgram* program = new DummyProgram();
+	program->load();
 	
 	WebServer server(getWebRoot(), 8080);
 	server.setProgramInterface(program);

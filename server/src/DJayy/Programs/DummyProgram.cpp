@@ -8,7 +8,7 @@ namespace DJayy
 		//
 	}
 	
-	void DummyProgram::loadLibrary()
+	void DummyProgram::load()
 	{
 		Track track1;
 		track1.track_id = "aa3";

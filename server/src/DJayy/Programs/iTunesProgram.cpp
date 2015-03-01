@@ -4,6 +4,8 @@
 
 namespace DJayy
 {
+	static const String default_playlist_name = "DJayy";
+	
 	iTunesProgram::iTunesProgram()
 	{
 		iTunes = nullptr;
@@ -16,7 +18,7 @@ namespace DJayy
 		CoUninitialize();
 	}
 	
-	void iTunesProgram::loadLibrary()
+	void iTunesProgram::load()
 	{
 		HRESULT hRes = ::CoCreateInstance(CLSID_iTunesApp, nullptr, CLSCTX_LOCAL_SERVER, IID_IiTunes, (PVOID*)&iTunes);
 		
@@ -91,8 +93,10 @@ namespace DJayy
 		{
 			return TrackCollection();
 		}
-		IITTrackCollection* results = nullptr;
-		library->Search((BSTR)query.wstring().c_str(), ITPlaylistSearchFieldAll, &results);
+		IITTrackCollection* results = NULL;
+		std::wstring strq = query.wstring();
+		BSTR strw =(BSTR)strq.c_str();
+		HRESULT hRes = library->Search(strw, ITPlaylistSearchFieldAll, &results);
 		if(results == nullptr)
 		{
 			return TrackCollection();

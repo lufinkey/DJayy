@@ -11,7 +11,7 @@ namespace DJayy
 	public:
 		virtual ~ProgramInterface(){}
 
-		virtual void loadLibrary() = 0;
+		virtual void load() = 0;
 		
 		Queue& getQueue();
 		const Queue& getQueue() const;

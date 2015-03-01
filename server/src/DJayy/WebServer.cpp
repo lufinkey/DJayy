@@ -96,7 +96,7 @@ namespace DJayy
 			{
 				std::istreambuf_iterator<char> eos;
 				std::string str(std::istreambuf_iterator<char>(request->content), eos);
-				std::cout << "recieved queue request:" << std::endl << str << std::endl;
+				std::cout << "recieved queue request:" << std::endl << str << std::endl << std::endl;
 				
 				boost::property_tree::ptree pt;
 				read_json(std::istringstream(str), pt);
@@ -135,7 +135,7 @@ namespace DJayy
 					result = "[]";
 				}
 
-				std::cout << "Sending queue data:" << std::endl << result << std::endl;
+				std::cout << "Sending queue data:" << std::endl << result << std::endl << std::endl;
 
 				response << "HTTP/1.1 200 OK\r\nContent-Length: " << result.length() << "\r\n\r\n" << result;
 			}
@@ -153,7 +153,7 @@ namespace DJayy
 			{
 				std::istreambuf_iterator<char> eos;
 				std::string str(std::istreambuf_iterator<char>(request->content), eos);
-				std::cout << "recieved queuevote:" << std::endl << str << std::endl;
+				std::cout << "recieved queuevote:" << std::endl << str << std::endl << std::endl;
 				
 				boost::property_tree::ptree pt;
 				read_json(std::istringstream(str), pt);
@@ -173,7 +173,7 @@ namespace DJayy
 
 				String reply = "{\"queue_id\":\"" + queue_id + "\",\"vote\":" + ((int)vote) + ",\"totalVotes\":" + totalVotes + "}";
 
-				std::cout << "sending queuevote data:" << std::endl << reply << std::endl;
+				std::cout << "sending queuevote data:" << std::endl << reply << std::endl << std::endl;
 				
 				response << "HTTP/1.1 200 OK\r\nContent-Length: " << reply.length() << "\r\n\r\n" << reply;
 			}
@@ -191,7 +191,7 @@ namespace DJayy
 			{
 				std::istreambuf_iterator<char> eos;
 				std::string str(std::istreambuf_iterator<char>(request->content), eos);
-				std::cout << "recieved search query:" << std::endl << str << std::endl;
+				std::cout << "recieved search query:" << std::endl << str << std::endl << std::endl;
 				
 				boost::property_tree::ptree pt;
 				read_json(std::istringstream(str), pt);
@@ -210,6 +210,8 @@ namespace DJayy
 				{
 					reply = "[]";
 				}
+
+				std::cout << "sending search results:" << std::endl << reply << std::endl << std::endl;
 				
 				response << "HTTP/1.1 200 OK\r\nContent-Length: " << reply.length() << "\r\n\r\n" << reply;
 			}
@@ -227,7 +229,7 @@ namespace DJayy
 	
 	void WebServer::start()
 	{
-		std::cout << "starting web server" << std::endl;
+		std::cout << "starting web server" << std::endl << std::endl;
 		server->start();
 	}
 }

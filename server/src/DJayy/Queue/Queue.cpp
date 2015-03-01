@@ -32,6 +32,20 @@ namespace DJayy
 		tracks.add(track);
 	}
 	
+	QueueTrack Queue::next()
+	{
+		if(tracks.size()>0)
+		{
+			QueueTrack track = tracks.get(0);
+			tracks.remove(0);
+			return track;
+		}
+		else
+		{
+			return QueueTrack();
+		}
+	}
+	
 	size_t Queue::size() const
 	{
 		return tracks.size();

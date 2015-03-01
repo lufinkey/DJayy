@@ -47,6 +47,10 @@ namespace DJayy
 	
 	Track TrackCollection::getTrackByTrackID(const String&track_id) const
 	{
+		if(track_id.length() == 0)
+		{
+			return Track();
+		}
 		size_t length = tracks.size();
 		for(size_t i=0; i<length; i++)
 		{

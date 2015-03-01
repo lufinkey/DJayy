@@ -2,7 +2,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include "WinampProgram.h"
-#include <Psapi.h>
+#include "WinampChecker.h"
+#include <iostream>
 
 namespace DJayy
 {
@@ -15,42 +16,31 @@ namespace DJayy
 
 	WinampProgram::WinampProgram() : FolderLoadInterface((String)"" + HOMEPATH + "/Music", ArrayList<String>(extensions,1))
 	{
-		//
+		checker = new WinampChecker(this);
+	}
+
+	WinampProgram::~WinampProgram()
+	{
+		delete checker;
 	}
 	
 	void WinampProgram::load()
 	{
+		std::cout << "starting winamp..." << std::endl;
+		system("start winamp");
+		std::cout << "winamp started" << std::endl;
 		FolderLoadInterface::load();
 		whwnd=FindWindow("Winamp v1.x",NULL);
+		checker->start();
 	}
 	
 	Track WinampProgram::getTrackByTrackID(const String&track_id) const
 	{
-		return Track();
+		return FolderLoadInterface::getTrackByTrackID(track_id);
 	}
 	
 	TrackCollection WinampProgram::search(const String&query, size_t startIndex, size_t endIndex) const
 	{
-		return TrackCollection();
-	}
-	
-	bool WinampProgram::isStopped()
-	{
-		int ret=SendMessage(whwnd,WM_USER, 0, 104);
-		if(ret != 1 && ret != 3)
-		{
-			return true;
-		}
-		return false;
-	}
-	
-	String WinampProgram::getWinampPath()
-	{
-		DWORD processID;
-		GetWindowThreadProcessId(whwnd,&processID);
-		HANDLE processHandle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, processID);
-		char buffer[FILENAME_MAX];
-		GetModuleFileNameEx(processHandle,NULL,buffer,FILENAME_MAX);
-		return buffer;
+		return FolderLoadInterface::search(query, startIndex, endIndex);
 	}
 }

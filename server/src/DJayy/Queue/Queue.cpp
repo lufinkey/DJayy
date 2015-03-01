@@ -1,11 +1,9 @@
 
 #include "Queue.h"
+#include "../../Global.h"
 
 namespace DJayy
 {
-#define QUEUE_BOOST_POINT 5
-#define QUEUE_LOWEST_VOTE -5
-	
 	Queue::Queue()
 	{
 		next_queue_id = 0;
@@ -108,11 +106,11 @@ namespace DJayy
 			{
 				signed char trueVote = track.votes.vote(user_id,vote);
 				long long totalVotes = track.votes.sum();
-				if(trueVote==1 && (totalVotes%QUEUE_BOOST_POINT)==0 && totalVotes>=QUEUE_BOOST_POINT)
+				if(trueVote==1 && (totalVotes%Global::config.getLongValue("vote_queue_boost"))==0 && totalVotes>=Global::config.getLongValue("vote_queue_boost"))
 				{
 					boost(queue_id);
 				}
-				else if(trueVote == -1 && (totalVotes <= QUEUE_LOWEST_VOTE))
+				else if(trueVote == -1 && (totalVotes <= Global::config.getLongValue("vote_queue_remove")))
 				{
 					remove(queue_id);
 				}

@@ -2,6 +2,7 @@
 #include "WebServer.h"
 
 #include "Queue/QueueTrackPacket.h"
+#include "../Global.h"
 
 #include <fstream>
 #include <memory>
@@ -176,7 +177,7 @@ namespace DJayy
 					QueueTrack track = this->program->getQueue().getTrackByQueueID(queue_id);
 					if(track.isNull())
 					{
-						totalVotes = -5;
+						totalVotes = Global::config.getLongValue("vote_queue_remove");
 					}
 					else
 					{

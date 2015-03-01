@@ -11,12 +11,70 @@ namespace DJayy
 	{
 		FolderLoadInterface::root = root;
 		FolderLoadInterface::fileExtensions = fileExtensions;
+		library = nullptr;
+		current_track_id = 0;
+	}
+
+	FolderLoadInterface::~FolderLoadInterface()
+	{
+		if(library != nullptr)
+		{
+			sqlite3_free(library);
+		}
 	}
 	
 	void FolderLoadInterface::load()
 	{
-		std::cout << "loading library from folder: " << root << std::endl;
-		loadFolder("");
+		bool load_folder_inital = false;
+		if(!file_exists("music-library.db"))
+		{
+			load_folder_inital = true;
+		}
+		int ret = sqlite3_open("music-library.db", &library);
+		if(ret != SQLITE_OK)
+		{
+			std::cout << "error while creating committing database: " << ret << ", " << sqlite3_errmsg(library) << std::endl;
+			return;
+		}
+		if(load_folder_inital)
+		{
+			sqlite3_stmt* stmt = nullptr;
+			String query = "CREATE TABLE music("
+				"track_id int not null unique,"
+				"title text(30),"
+				"artist text(30),"
+				"album text(30),"
+				"album_artist text(30),"
+				"track_num int,"
+				"path text(1024),"
+				"primary key(track_id));";
+			sqlite3_prepare_v2(library,query,(int)query.length(),&stmt, nullptr);
+			int ret = sqlite3_step(stmt);
+			while(ret == SQLITE_OK)
+			{
+				int ret = sqlite3_step(stmt);
+			}
+			if(ret != SQLITE_DONE)
+			{
+				std::cout << "error while creating committing database: " << ret << ", " << sqlite3_errmsg(library) << std::endl;
+			}
+			sqlite3_finalize(stmt);
+			loadFolder("");
+			
+			stmt = nullptr;
+			query = "commit;";
+			sqlite3_prepare_v2(library,query,(int)query.length(),&stmt, nullptr);
+			ret = sqlite3_step(stmt);
+			while(ret == SQLITE_OK)
+			{
+				int ret = sqlite3_step(stmt);
+			}
+			if(ret != SQLITE_DONE)
+			{
+				std::cout << "error while creating committing database: " << ret << ", " << sqlite3_errmsg(library) << std::endl;
+			}
+			sqlite3_finalize(stmt);
+		}
 	}
 	
 	void FolderLoadInterface::loadFolder(const String&path)
@@ -109,11 +167,30 @@ namespace DJayy
 				String album = f.tag()->album().toCString();
 				String album_artist;//TODO add loading of album artist somehow
 				unsigned int track_num = f.tag()->track();
-				Track track(path,title,artist,album,album_artist,track_num);
-				track.path = path;
-				library.add(track);
+				
+				sqlite3_stmt* stmt = nullptr;
+				String query = (String)"insert into music (track_id,title,artist,album,album_artist,track_num,path) values("
+					+ current_track_id + ",\"" + title + "\",\"" + artist + "\",\"" + album + "\",\"" + album_artist + "\"," + track_num + ",\"" + path + "\");";
+				current_track_id++;
+				sqlite3_prepare_v2(library,query,(int)query.length(),&stmt, nullptr);
+				int ret = sqlite3_step(stmt);
+				while(ret == SQLITE_OK)
+				{
+					int ret = sqlite3_step(stmt);
+				}
+				if(ret != SQLITE_DONE)
+				{
+					std::cout << "error while creating committing database: " << ret << ", " << sqlite3_errmsg(library) << std::endl;
+				}
+				sqlite3_finalize(stmt);
 			}
 		}
+	}
+	
+	bool FolderLoadInterface::file_exists(const String& name)
+	{
+		struct stat buffer;
+		return (stat(name, &buffer) == 0); 
 	}
 	
 	const String& FolderLoadInterface::getRootFolder() const
@@ -123,11 +200,79 @@ namespace DJayy
 	
 	Track FolderLoadInterface::getTrackByTrackID(const String&track_id) const
 	{
-		return library.getTrackByTrackID(track_id);
+		sqlite3_stmt* stmt = nullptr;
+		String query = "select title, artist, album, album_artist, track_num, path from music where track_id = " + track_id + ";";
+		sqlite3_prepare_v2(library,query,(int)query.length(),&stmt, nullptr);
+		int ret = sqlite3_step(stmt);
+		if(ret == SQLITE_ROW)
+		{
+			String title = (const char*)sqlite3_column_text(stmt,0);
+			String artist = (const char*)sqlite3_column_text(stmt,1);
+			String album = (const char*)sqlite3_column_text(stmt,2);
+			String album_artist = (const char*)sqlite3_column_text(stmt,3);
+			unsigned int track_num = (unsigned int)sqlite3_column_int(stmt,4);
+			String path = (const char*)sqlite3_column_text(stmt,5);
+			Track track(track_id,title,artist,album,album_artist,track_num);
+			track.path = path;
+			
+			sqlite3_finalize(stmt);
+			return track;
+		}
+		else
+		{
+			sqlite3_finalize(stmt);
+			return Track();
+		}
 	}
 	
-	TrackCollection FolderLoadInterface::search(const String&query, size_t startIndex, size_t endIndex) const
+	TrackCollection FolderLoadInterface::search(const String&searchQuery, size_t startIndex, size_t endIndex) const
 	{
-		return TrackCollection();
+		TrackCollection tracks;
+		if(startIndex == endIndex)
+		{
+			return tracks;
+		}
+		sqlite3_stmt* stmt = nullptr;
+		String query = (String)"select track_id, title, artist, album, album_artist, track_num, path "
+			+ "from music "
+			+ "where upper(title) like \"%\" || upper(\"" + searchQuery + "\") || \"%\" "
+			+ "or upper(artist) like \"%\" || upper(\"" + searchQuery + "\") || \"%\" "
+			+ "or upper(album) like \"%\" || upper(\"" + searchQuery + "\") || \"%\" "
+			+ "or upper(album_artist) like \"%\" || upper(\"" + searchQuery + "\") || \"%\";";
+		sqlite3_prepare_v2(library,query,(int)query.length(),&stmt, nullptr);
+		size_t matchCounter = 0;
+		int ret = sqlite3_step(stmt);
+		while(ret == SQLITE_ROW)
+		{
+			if(matchCounter >= startIndex)
+			{
+				String track_id = (String)"" + sqlite3_column_int(stmt,0);
+				String title = (const char*)sqlite3_column_text(stmt,1);
+				String artist = (const char*)sqlite3_column_text(stmt,2);
+				String album = (const char*)sqlite3_column_text(stmt,3);
+				String album_artist = (const char*)sqlite3_column_text(stmt,4);
+				unsigned int track_num = (unsigned int)sqlite3_column_int(stmt,5);
+				String path = (const char*)sqlite3_column_text(stmt,6);
+				Track track(track_id,title,artist,album,album_artist,track_num);
+				track.path = path;
+				tracks.add(track);
+			}
+			matchCounter++;
+			if(matchCounter >= endIndex)
+			{
+				sqlite3_finalize(stmt);
+				return tracks;
+			}
+			else
+			{
+				ret = sqlite3_step(stmt);
+			}
+		}
+		if(ret != SQLITE_DONE)
+		{
+			std::cout << "error while searching database: " << ret << ", " << sqlite3_errmsg(library) << std::endl;
+		}
+		sqlite3_finalize(stmt);
+		return tracks;
 	}
 }

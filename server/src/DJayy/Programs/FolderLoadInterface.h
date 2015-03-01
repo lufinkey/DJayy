@@ -2,6 +2,7 @@
 #pragma once
 
 #include "../ProgramInterface.h"
+#include <sqlite3.h>
 
 namespace DJayy
 {
@@ -9,6 +10,7 @@ namespace DJayy
 	{
 	public:
 		FolderLoadInterface(const String&root, const ArrayList<String>& fileExtensions);
+		virtual ~FolderLoadInterface();
 		
 		virtual void load() override;
 		
@@ -20,11 +22,12 @@ namespace DJayy
 	protected:
 		void loadFolder(const String&path);
 		void loadFile(const String&path);
+		bool file_exists(const String&path);
 		
 	private:
 		String root;
 		ArrayList<String> fileExtensions;
-		
-		TrackCollection library;
+		sqlite3*library;
+		unsigned long long current_track_id;
 	};
 }

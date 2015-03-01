@@ -116,9 +116,14 @@ namespace DJayy
 		}
 	}
 	
+	const String& FolderLoadInterface::getRootFolder() const
+	{
+		return root;
+	}
+	
 	Track FolderLoadInterface::getTrackByTrackID(const String&track_id) const
 	{
-		return Track(); //TODO add quick searching
+		return library.getTrackByTrackID(track_id);
 	}
 	
 	TrackCollection FolderLoadInterface::search(const String&query, size_t startIndex, size_t endIndex) const

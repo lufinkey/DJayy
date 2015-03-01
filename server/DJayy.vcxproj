@@ -114,6 +114,7 @@
     <ClCompile Include="src\DJayy\Programs\DummyProgram.cpp" />
     <ClCompile Include="src\DJayy\Programs\FolderLoadInterface.cpp" />
     <ClCompile Include="src\DJayy\Programs\iTunesProgram.cpp" />
+    <ClCompile Include="src\DJayy\Programs\WinampChecker.cpp" />
     <ClCompile Include="src\DJayy\Programs\WinampProgram.cpp" />
     <ClCompile Include="src\DJayy\Queue\Queue.cpp" />
     <ClCompile Include="src\DJayy\Queue\QueueTrack.cpp" />
@@ -233,6 +234,7 @@
     <ClInclude Include="src\DJayy\Programs\DummyProgram.h" />
     <ClInclude Include="src\DJayy\Programs\FolderLoadInterface.h" />
     <ClInclude Include="src\DJayy\Programs\iTunesProgram.h" />
+    <ClInclude Include="src\DJayy\Programs\WinampChecker.h" />
     <ClInclude Include="src\DJayy\Programs\WinampProgram.h" />
     <ClInclude Include="src\DJayy\Queue\Queue.h" />
     <ClInclude Include="src\DJayy\Queue\QueueTrack.h" />

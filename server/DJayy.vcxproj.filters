@@ -366,6 +366,9 @@
     <ClCompile Include="external\taglib\taglib\xm\xmproperties.cpp">
       <Filter>external\taglib</Filter>
     </ClCompile>
+    <ClCompile Include="src\DJayy\Programs\WinampChecker.cpp">
+      <Filter>src\DJayy\Programs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\DJayy\WebServer.h">
@@ -718,6 +721,9 @@
     </ClInclude>
     <ClInclude Include="external\taglib\taglib\xm\xmproperties.h">
       <Filter>external\taglib</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DJayy\Programs\WinampChecker.h">
+      <Filter>src\DJayy\Programs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

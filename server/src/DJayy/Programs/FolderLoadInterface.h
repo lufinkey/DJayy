@@ -14,6 +14,8 @@ namespace DJayy
 		
 		virtual Track getTrackByTrackID(const String&track_id) const;
 		virtual TrackCollection search(const String&query, size_t startIndex, size_t endIndex) const;
+
+		const String& getRootFolder() const;
 		
 	protected:
 		void loadFolder(const String&path);

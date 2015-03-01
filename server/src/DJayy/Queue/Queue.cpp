@@ -25,11 +25,13 @@ namespace DJayy
 		return json;
 	}
 	
-	void Queue::add(const String&track_id)
+	String Queue::add(const String&track_id)
 	{
-		QueueTrack track((String)""+next_queue_id, track_id);
+		String queue_id = (String)""+next_queue_id;
+		QueueTrack track(queue_id, track_id);
 		next_queue_id++;
 		tracks.add(track);
+		return queue_id;
 	}
 	
 	QueueTrack Queue::next()

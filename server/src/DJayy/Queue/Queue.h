@@ -16,7 +16,7 @@ namespace DJayy
 		
 		String toJson() const;
 		
-		void add(const String&track_id);
+		String add(const String&track_id);
 		QueueTrack next();
 		size_t size() const;
 		

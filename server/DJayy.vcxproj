@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="external\iTunesCOMWindowsSDK\iTunesCOMInterface_i.c" />
+    <ClCompile Include="external\sqlite\sqlite3.c" />
     <ClCompile Include="external\taglib\taglib\ape\apefile.cpp" />
     <ClCompile Include="external\taglib\taglib\ape\apefooter.cpp" />
     <ClCompile Include="external\taglib\taglib\ape\apeitem.cpp" />
@@ -126,6 +127,8 @@
     <ClCompile Include="src\Util\String.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="external\sqlite\sqlite3.h" />
+    <ClInclude Include="external\sqlite\sqlite3ext.h" />
     <ClInclude Include="external\taglib\taglib\ape\apefile.h" />
     <ClInclude Include="external\taglib\taglib\ape\apefooter.h" />
     <ClInclude Include="external\taglib\taglib\ape\apeitem.h" />
@@ -279,7 +282,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>external\taglib;external\dirent\include;external\iTunesCOMWindowsSDK;external\Simple-Web-Server;\local\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>external\sqlite;external\taglib;external\dirent\include;external\iTunesCOMWindowsSDK;external\Simple-Web-Server;\local\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TAGLIB_NOUTPUT;TAGLIB_STATIC;WIN32;_WIN32_WINNT=0x0501;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
@@ -299,7 +302,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>external\taglib;external\dirent\include;external\iTunesCOMWindowsSDK;external\Simple-Web-Server;\local\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>external\sqlite;external\taglib;external\dirent\include;external\iTunesCOMWindowsSDK;external\Simple-Web-Server;\local\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>TAGLIB_NOUTPUT;TAGLIB_STATIC;WIN32;_WIN32_WINNT=0x0501;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>

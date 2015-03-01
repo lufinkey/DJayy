@@ -21,6 +21,7 @@ namespace DJayy
 		setup_search();
 		setup_queue();
 		setup_queuevote();
+		setup_addqueue();
 	}
 
 	void WebServer::setup_GET()
@@ -212,6 +213,43 @@ namespace DJayy
 				}
 
 				std::cout << "sending search results:" << std::endl << reply << std::endl << std::endl;
+				
+				response << "HTTP/1.1 200 OK\r\nContent-Length: " << reply.length() << "\r\n\r\n" << reply;
+			}
+			catch(const std::exception& e)
+			{
+				response << "HTTP/1.1 400 Bad Request\r\nContent-Length: " << strlen(e.what()) << "\r\n\r\n" << e.what();
+			}
+		};
+	}
+	
+	void WebServer::setup_addqueue()
+	{
+		server->resource["^/addqueue$"]["POST"]=[this](HttpServer::Response& response, std::shared_ptr<HttpServer::Request> request) {
+			try
+			{
+				std::istreambuf_iterator<char> eos;
+				std::string str(std::istreambuf_iterator<char>(request->content), eos);
+				std::cout << "recieved add queue request:" << std::endl << str << std::endl << std::endl;
+				
+				boost::property_tree::ptree pt;
+				read_json(std::istringstream(str), pt);
+
+				String user_id = pt.get<std::string>("user_id");
+				String track_id = pt.get<std::string>("track_id");
+				
+				String reply;
+				if(this->program != nullptr)
+				{
+					String queue_id = this->program->addToQueue(track_id);
+					reply = "{\"queue_id\":\"" + queue_id + "\"}";
+				}
+				else
+				{
+					reply = "{}";
+				}
+
+				std::cout << "sending add queue data:" << std::endl << reply << std::endl << std::endl;
 				
 				response << "HTTP/1.1 200 OK\r\nContent-Length: " << reply.length() << "\r\n\r\n" << reply;
 			}

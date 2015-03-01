@@ -63,7 +63,6 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
 
         $http.post("/search", {query: query, minEntry: $scope.search_page_start, maxEntry: $scope.search_page_start
             + $scope.search_page_length}).then(function(response) {
-                console.log(response.data);
                 $scope.search = response.data;
             });
     };

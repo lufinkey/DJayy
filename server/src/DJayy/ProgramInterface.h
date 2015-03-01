@@ -3,6 +3,7 @@
 
 #include "Queue/Queue.h"
 #include "Library/TrackCollection.h"
+#include <mutex>
 
 namespace DJayy
 {
@@ -36,5 +37,6 @@ namespace DJayy
 	private:
 		WebServer*server;
 		Track nowplaying;
+		std::mutex m_lock;
 	};
 }

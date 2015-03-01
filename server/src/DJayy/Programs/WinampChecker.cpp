@@ -87,6 +87,11 @@ namespace DJayy
 				String command = "start winamp \"" + program->getRootFolder() + '/' + track.path + "\"";
 				std::cout << "Calling command: " << command << std::endl;
 				system(command);
+				program->whwnd==nullptr;
+				while(program->whwnd==nullptr)
+				{
+					program->whwnd = FindWindow("Winamp v1.x",NULL);
+				}
 				program->setNowPlaying(track);
 			}
 			else

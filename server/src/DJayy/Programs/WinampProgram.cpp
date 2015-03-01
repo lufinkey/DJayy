@@ -8,6 +8,7 @@ namespace DJayy
 	WinampProgram::WinampProgram(WebServer*server, const String&root, const ArrayList<String>&fileExtensions) : FolderLoadInterface(server, root, fileExtensions)
 	{
 		checker = new WinampChecker(this);
+		whwnd = nullptr;
 	}
 
 	WinampProgram::~WinampProgram()
@@ -21,7 +22,10 @@ namespace DJayy
 		system("start winamp");
 		std::cout << "winamp started" << std::endl;
 		FolderLoadInterface::load();
-		whwnd=FindWindow("Winamp v1.x",NULL);
+		while(whwnd==nullptr)
+		{
+			whwnd=FindWindow("Winamp v1.x",NULL);
+		}
 		checker->start();
 	}
 	

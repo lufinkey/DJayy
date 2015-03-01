@@ -11,6 +11,6 @@ body {
 
 .scrollable {
     height: auto;
-    max-height: 300px;
+    max-height: 250px;
     overflow-x: hidden;
 }

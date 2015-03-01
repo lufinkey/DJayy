@@ -41,8 +41,9 @@
         <div class="container">
         <div class="row">
             <div class="wrapper">
+            <h1 ng-if="client_songIsPlaying()">Now Playing: {{nowplaying}}</h1>
             <div class="col-md-8">
-            <h1>Play Queue</h1>
+            <h2>Play Queue</h2>
 
             <ul class="list-group">
                 <li ng-repeat="i in client_queueRange()" class="list-group-item">

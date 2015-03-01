@@ -7,6 +7,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     //Scope variables
     $scope.queue = [];
     $scope.search = [];
+    $scope.nowplaying = "none";
 
     $scope.queue_page_start = 0;
     $scope.search_page_start = 0;
@@ -18,7 +19,6 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
         $cookieStore.put('djayy_user_id', client_get_user_id());
     
     var user_id = $cookieStore.get('djayy_user_id');
-    var first_connect = true;
 
     //Scope functions
     $scope.server_trackVote = function($event, queue_id, vote) {
@@ -55,7 +55,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
             });
         
         $scope.search_page_start += $scope.search_page_length;
-    }
+    };
 
     $scope.server_search = function(query) {
         console.log("Search query");
@@ -65,11 +65,11 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
             + $scope.search_page_length}).then(function(response) {
                 $scope.search = response.data;
             });
-    }
+    };
 
     $scope.client_moveQueuePage = function(amt) {
         $scope.queue_page_start += amt;
-    }
+    };
 
     $scope.client_queueRange = function() {
         range = [];
@@ -82,20 +82,24 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
         }
 
         return range;
-    }
+    };
 
     $scope.client_queueCanMoveBack = function() {
         return ($scope.queue_page_start) > 0;
-    }
+    };
 
     $scope.client_queueCanMoveForward = function() {
         return ($scope.queue_page_start + $scope.queue_page_length) < $scope.queue.length;
-    }
+    };
 
     $scope.server_addToQueue = function(track) {
         $http.post("/addqueue", {track_id: track.track_id, user_id: user_id}).then(function(response) {
             //get back the q_id and add modularly
         });
+    };
+
+    $scope.client_songIsPlaying() = function() {
+        return $scope.nowplaying != "none"; 
     }
 
     //Local functions
@@ -103,30 +107,45 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
         $timeout(function() {
             server_getQueue(0, 0);
 
-            server_poll();
         }, 1000);
-    };
+
+        $timeout(function() {
+            server_getNowPlaying();
+
+        }, 5000);
+        
+        server_poll();
+    }
 
     function server_getQueue(minEntry, maxEntry) {
         $http.post("/queue", {minEntry: minEntry, maxEntry: maxEntry}).then(function(response) {
             $scope.queue = response.data;
         });
-    };
+    }
 
+    function server_getNowPlaying() {
+        $http.get("/nowplaying").then(function(response) {
+            if (response.data.status) {
+                $scope.nowplaying = response.data.track.title + " - " + response.data.track.artist;
+            } else {
+                $scope.nowplaying = "none";
+            }
+        });
+    }
 
     function client_findTrackByQ_Id(queue_id) {
         for (i = 0; i < $scope.queue.length; i++) {
             if ($scope.queue[i].queue_id == queue_id)
                 return $scope.queue[i];
         }
-    };
+    }
 
     function client_get_user_id() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
             var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
             return v.toString(16);
         });
-    };
+    }
 
     server_poll();
         }]);

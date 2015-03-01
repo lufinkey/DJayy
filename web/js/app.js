@@ -58,7 +58,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     };
 
     $scope.server_search = function(query) {
-        console.log("Search query");
+        console.log("Search query: " + query);
         $scope.search_page_start = 0;
 
         $http.post("/search", {query: query, minEntry: $scope.search_page_start, maxEntry: $scope.search_page_start

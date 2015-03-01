@@ -41,7 +41,7 @@
         <div class="container">
         <div class="row">
             <div class="wrapper">
-            <h1 ng-if="client_nowPlaying()">Now Playing: {{nowplaying}}</h1>
+                <h1 ng-if="nowplaying.title">Now Playing: {{nowplaying.title}} - {{nowplaying.artist}}</h1>
             <div class="col-md-8">
             <h2>Play Queue</h2>
 

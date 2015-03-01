@@ -7,7 +7,8 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     //Scope variables
     $scope.queue = [];
     $scope.search = [];
-    $scope.nowplaying = "none";
+    $scope.nowplaying = [];
+    $scope.album_src = "";
 
     $scope.queue_page_start = 0;
     $scope.search_page_start = 0;
@@ -47,18 +48,18 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     };
     
     $scope.client_loadMore = function(query) {
-        console.log("Loading more");
 
-        $http.post("/search", {query: query, minEntry: $scope.search_page_start, maxEntry: $scope.search_page_start
-            + $scope.search_page_length}).then(function(response) {
-                $scope.search = $scope.search.concat(response.data);
-            });
+        if ($scope.search_page_start != 10) {
+            $http.post("/search", {query: query, minEntry: $scope.search_page_start, maxEntry: $scope.search_page_start
+                + $scope.search_page_length}).then(function(response) {
+                    $scope.search = $scope.search.concat(response.data);
+                });
+        }
         
         $scope.search_page_start += $scope.search_page_length;
     };
 
     $scope.server_search = function(query) {
-        console.log("Search query: " + query);
         $scope.search_page_start = 0;
 
         $http.post("/search", {query: query, minEntry: $scope.search_page_start, maxEntry: $scope.search_page_start
@@ -98,8 +99,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
         });
     };
 
-    $scope.client_nowPlaying = function() {
-        return $scope.nowplaying != "none"; 
+    $scope.client_getAlbumArtwork = function(track) {
     }
 
     //Local functions
@@ -128,9 +128,9 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
     function server_getNowPlaying() {
         $http.get("/nowplaying").then(function(response) {
             if (response.data.status) {
-                $scope.nowplaying = response.data.track.title + " - " + response.data.track.artist;
+                $scope.nowplaying = response.data.track;
             } else {
-                $scope.nowplaying = "none";
+                $scope.nowplaying = [];
             }
         });
     }

@@ -18,6 +18,8 @@ namespace DJayy
 		
 		String add(const String&track_id);
 		QueueTrack next();
+		void boost(const String&queue_id);
+		void remove(const String&queue_id);
 		size_t size() const;
 		
 		const ArrayList<QueueTrack>& getTracks() const;

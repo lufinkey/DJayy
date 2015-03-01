@@ -3,6 +3,9 @@
 
 namespace DJayy
 {
+#define QUEUE_BOOST_POINT 5
+#define QUEUE_LOWEST_VOTE -5
+	
 	Queue::Queue()
 	{
 		next_queue_id = 0;
@@ -48,6 +51,29 @@ namespace DJayy
 		}
 	}
 	
+	void Queue::boost(const String&queue_id)
+	{
+		size_t length = tracks.size();
+		for(size_t i=0; i<length; i++)
+		{
+			QueueTrack track = tracks.get(i);
+			if(track.queue_id.equals(queue_id))
+			{
+				if(i == 0)
+				{
+					return;
+				}
+				tracks.remove(i);
+				tracks.add(i-1, track);
+			}
+		}
+	}
+	
+	void Queue::remove(const String&queue_id)
+	{
+
+	}
+	
 	size_t Queue::size() const
 	{
 		return tracks.size();
@@ -80,7 +106,16 @@ namespace DJayy
 			QueueTrack& track = tracks.get(i);
 			if(track.queue_id.equals(queue_id))
 			{
-				track.votes.vote(user_id,vote);
+				signed char trueVote = track.votes.vote(user_id,vote);
+				long long totalVotes = track.votes.sum();
+				if(trueVote==1 && (totalVotes%QUEUE_BOOST_POINT)==0 && totalVotes>=QUEUE_BOOST_POINT)
+				{
+					boost(queue_id);
+				}
+				else if(trueVote == -1 && (totalVotes <= QUEUE_LOWEST_VOTE))
+				{
+					remove(queue_id);
+				}
 				return;
 			}
 		}

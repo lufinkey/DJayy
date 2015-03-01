@@ -14,7 +14,7 @@ namespace DJayy
 		String toJson() const;
 		void clear();
 		
-		void vote(const String&user_id, signed char vote);
+		signed char vote(const String&user_id, signed char vote);
 		signed char getVote(const String&user_id) const;
 		long long sum() const;
 		

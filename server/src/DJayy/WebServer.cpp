@@ -173,8 +173,15 @@ namespace DJayy
 				{
 					this->m_lock.lock();
 					this->program->getQueue().vote(queue_id, user_id, vote);
-					const QueueTrack& track = this->program->getQueue().getTrackByQueueID(queue_id);
-					totalVotes = track.votes.sum();
+					QueueTrack track = this->program->getQueue().getTrackByQueueID(queue_id);
+					if(track.isNull())
+					{
+						totalVotes = -5;
+					}
+					else
+					{
+						totalVotes = track.votes.sum();
+					}
 					vote = track.votes.getVote(user_id);
 					this->m_lock.unlock();
 				}

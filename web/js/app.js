@@ -86,13 +86,16 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
         return ($scope.queue_page_start + $scope.queue_page_length) < $scope.queue.length;
     }
 
+    $scope.server_addToQueue = function(track) {
+        $http.post("/add", {track_id: track.id, user_id: user_id}).then(function(response) {
+            //get back the q_id and add modularly
+        });
+    }
+
     //Local functions
     function server_poll() {
         $timeout(function() {
-            if (first_connect) {
-                server_getQueue(0, 0);
-                first_connect = false;
-            }
+            server_getQueue(0, 0);
 
             server_poll();
         }, 1000);

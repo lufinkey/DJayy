@@ -42,7 +42,7 @@
         <div class="row">
             <div class="wrapper">
             <div class="col-md-8">
-            <h3>Play Queue</h3>
+            <h1>Play Queue</h1>
 
             <ul class="list-group">
                 <li ng-repeat="i in client_queueRange()" class="list-group-item">
@@ -65,12 +65,12 @@
             <div class="row">
                 <div class="col-md-6">
                     <button id="queue_back" ng-click="client_moveQueuePage(queue_page_length * -1)"
-                        ng-if="client_queueCanMoveBack()" ng-animate="'fade'" type="button" class="btn btn-default">
+                        ng-if="client_queueCanMoveBack()" type="button" class="btn btn-default">
                         <span class="glyphicon glyphicon-menu-left"></span></button>
                 </div>
                 <div class="col-md-6"><span class="pull-right">
                     <button id="queue_next" ng-click="client_moveQueuePage(queue_page_length)"
-                        ng-if="client_queueCanMoveForward()" ng-animate="'fade'" type="button" class="btn btn-default">
+                        ng-if="client_queueCanMoveForward()" type="button" class="btn btn-default">
                         <span class="glyphicon glyphicon-menu-right"></span></button>
                 </div></span>
             </div>
@@ -78,7 +78,7 @@
 
             <div class="col-md-4">
                 <h3>
-                <form ng-submit="server_search(q)" class="input-group">
+                <form ng-submit="server_search(q)" class="input-group input-group-lg">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
                     <input type="text" ng-model="q" class="form-control" placeholder="Search Library">
                 </form>
@@ -91,7 +91,8 @@
                             <div class="col-md-10">{{track.title}} - {{track.artist}}</div>
                             <div class="col-md-2">
                                 <span class="pull-right">
-                                    <button id="add" ng-click="" class="btn btn-default-xs"><span class="glyphicon glyphicon-plus"></span></button>
+                                    <button id="add" ng-click="server_addToQueue(track)" class="btn btn-default-xs">
+                                        <span class="glyphicon glyphicon-plus"></span></button>
                                 </span>
                             </div>
                             </div>

@@ -144,7 +144,7 @@ app.controller('MainCtrl', ['$scope', '$timeout', '$http', '$cookies', '$cookieS
         var index = track.artist.indexOf(" feat. ");
 
         if (index != -1) {
-            artist = artist.substring(0, index);
+            artist = track.artist.substring(0, index);
         } else {
             artist = track.artist;
         }

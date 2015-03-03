@@ -1,6 +1,7 @@
 # DJayy
 Portable jukebox web server for Winamp, and soon, other media players
 
+pic unrelated
 ![alt tag](https://raw.githubusercontent.com/lufinkey/DJayy/master/icon.png)
 
 This program uses the boost libraries, libtag, sqlite, and the [Simple-Web-Server](https://github.com/eidheim/Simple-Web-Server) library

@@ -114,9 +114,9 @@ bool PrefManager::loadFromFile(const String&fileName, bool dynamic)
 			{
 				name = name.substring(1,name.length()-1);
 			}
-			if(value.charAt(0)=='\"' && value.charAt(name.length()-1)=='\"')
+			if(value.charAt(0)=='\"' && value.charAt(value.length()-1)=='\"')
 			{
-				value = value.substring(1,name.length()-1);
+				value = value.substring(1,value.length()-1);
 			}
 				
 			if (dynamic)

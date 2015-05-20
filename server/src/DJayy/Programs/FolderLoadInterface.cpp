@@ -240,10 +240,10 @@ namespace DJayy
 		sqlite3_stmt* stmt = nullptr;
 		String query = (String)"select track_id, title, artist, album, album_artist, track_num, path "
 			+ "from music "
-			+ "where upper(title) like \"%\" || upper(\"" + searchQuery + "\") || \"%\" "
-			+ "or upper(artist) like \"%\" || upper(\"" + searchQuery + "\") || \"%\" "
-			+ "or upper(album) like \"%\" || upper(\"" + searchQuery + "\") || \"%\" "
-			+ "or upper(album_artist) like \"%\" || upper(\"" + searchQuery + "\") || \"%\";";
+			+ "where upper(title) like \"%\" || upper(\"" + real_escape_string(searchQuery) + "\") || \"%\" "
+			+ "or upper(artist) like \"%\" || upper(\"" + real_escape_string(searchQuery) + "\") || \"%\" "
+			+ "or upper(album) like \"%\" || upper(\"" + real_escape_string(searchQuery) + "\") || \"%\" "
+			+ "or upper(album_artist) like \"%\" || upper(\"" + real_escape_string(searchQuery) + "\") || \"%\";";
 		sqlite3_prepare_v2(library,query,(int)query.length(),&stmt, nullptr);
 		size_t matchCounter = 0;
 		int ret = sqlite3_step(stmt);

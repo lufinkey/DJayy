@@ -19,7 +19,7 @@ namespace DJayy
 
 		const String& getRootFolder() const;
 		
-		String real_escape_string(const String&str);
+		static String real_escape_string(const String&str);
 		
 	protected:
 		void loadFolder(const String&path);

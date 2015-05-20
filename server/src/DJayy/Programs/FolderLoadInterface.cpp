@@ -139,7 +139,7 @@ namespace DJayy
 
 	String FolderLoadInterface::real_escape_string(const String&str)
 	{
-		return str.replace("\"","\\\"").replace("\'", "\\\'");
+		return str.replace("\"", "\"\"");
 	}
 	
 	void FolderLoadInterface::loadFile(const String&path)

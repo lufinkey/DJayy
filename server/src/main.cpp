@@ -38,9 +38,13 @@ String getWebRoot()
 	}
 	return workingDir.substring(0,lastSlash) + slash + "web";
 }
+#include <iostream>
+#include <Windows.h>
 
 int main(int argc, char *argv[])
 {
+	SetConsoleCP(65001);
+	std::wcout << L"\ufffd" << std::endl;
 	Global::init();
 	
 	String homeDir = getenv("HOMEPATH");

@@ -136,6 +136,11 @@ namespace DJayy
 		}
 		closedir(dir);
 	}
+
+	String FolderLoadInterface::real_escape_string(const String&str)
+	{
+		return str.replace("\"","\\\"");
+	}
 	
 	void FolderLoadInterface::loadFile(const String&path)
 	{
@@ -170,7 +175,7 @@ namespace DJayy
 				
 				sqlite3_stmt* stmt = nullptr;
 				String query = (String)"insert into music (track_id,title,artist,album,album_artist,track_num,path) values("
-					+ current_track_id + ",\"" + title + "\",\"" + artist + "\",\"" + album + "\",\"" + album_artist + "\"," + track_num + ",\"" + path + "\");";
+					+ current_track_id + ",\"" + real_escape_string(title) + "\",\"" + real_escape_string(artist) + "\",\"" + real_escape_string(album) + "\",\"" + real_escape_string(album_artist) + "\"," + track_num + ",\"" + real_escape_string(path) + "\");";
 				current_track_id++;
 				sqlite3_prepare_v2(library,query,(int)query.length(),&stmt, nullptr);
 				int ret = sqlite3_step(stmt);

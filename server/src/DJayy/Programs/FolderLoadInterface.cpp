@@ -139,7 +139,7 @@ namespace DJayy
 
 	String FolderLoadInterface::real_escape_string(const String&str)
 	{
-		return str.replace("\"","\\\"");
+		return str.replace("\"","\\\"").replace("\'", "\\\'");
 	}
 	
 	void FolderLoadInterface::loadFile(const String&path)
@@ -185,7 +185,7 @@ namespace DJayy
 				}
 				if(ret != SQLITE_DONE)
 				{
-					std::cout << "error while creating committing database: " << ret << ", " << sqlite3_errmsg(library) << std::endl;
+					std::cout << "error while creating committing database: " << ret << ", " << sqlite3_errmsg(library) << std::endl << query;
 				}
 				sqlite3_finalize(stmt);
 			}

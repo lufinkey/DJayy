@@ -11,10 +11,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\djayy\WebServer.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DJayy.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\djayy\WebServer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{4593405B-5DB4-4D96-909B-48CC0B26800F}</ProjectGuid>
@@ -59,7 +63,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>BOOST_SPIRIT_THREADSAFE;WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>/local/boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>/local/boost;external/Simple-Web-Server;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -78,7 +82,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>BOOST_SPIRIT_THREADSAFE;WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>/local/boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>/local/boost;external/Simple-Web-Server;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

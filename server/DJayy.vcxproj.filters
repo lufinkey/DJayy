@@ -4,19 +4,27 @@
     <Filter Include="src">
       <UniqueIdentifier>{9635b4e5-410c-441a-a163-8bf786b2c0d4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\DJayy">
-      <UniqueIdentifier>{74123e58-910f-4f51-bea7-35529aef520d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="external">
       <UniqueIdentifier>{9475e1ca-3041-4d0d-9fbb-66410dec7be7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\djayy">
+      <UniqueIdentifier>{2c235242-bbad-4bcb-b8dc-d73c10f64531}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\djayy\WebServer.cpp">
+      <Filter>src\djayy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DJayy.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\djayy\WebServer.h">
+      <Filter>src\djayy</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

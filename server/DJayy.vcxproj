@@ -252,6 +252,9 @@
     <ClInclude Include="src\Util\PrefManager.h" />
     <ClInclude Include="src\Util\String.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DJayy.rc" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DA7F0DCB-D2E7-4239-B56B-A0EF81B9F02C}</ProjectGuid>
     <RootNamespace>DJayy</RootNamespace>

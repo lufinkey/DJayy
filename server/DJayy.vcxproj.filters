@@ -750,4 +750,7 @@
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DJayy.rc" />
+  </ItemGroup>
 </Project>

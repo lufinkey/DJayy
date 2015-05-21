@@ -38,6 +38,7 @@ namespace DJayy
 		}
 		if(load_folder_inital)
 		{
+			std::cout << "Loading local music library... This may take a minute or two..." << std::endl;
 			sqlite3_stmt* stmt = nullptr;
 			String query = "CREATE TABLE music("
 				"track_id int not null unique,"
@@ -62,18 +63,7 @@ namespace DJayy
 			loadFolder("");
 			
 			stmt = nullptr;
-			query = "commit;";
-			sqlite3_prepare_v2(library,query,(int)query.length(),&stmt, nullptr);
-			ret = sqlite3_step(stmt);
-			while(ret == SQLITE_OK)
-			{
-				int ret = sqlite3_step(stmt);
-			}
-			if(ret != SQLITE_DONE)
-			{
-				std::cout << "error while creating committing database: " << ret << ", " << sqlite3_errmsg(library) << std::endl;
-			}
-			sqlite3_finalize(stmt);
+			std::cout << "Finished loading local music library" << std::endl;
 		}
 	}
 	

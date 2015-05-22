@@ -93,7 +93,8 @@ namespace djayy
 		{
 			std::vector<std::string> tokens;
 			size_t token_start = 0;
-			for(size_t i=0, length=str.length(); i<length; i++)
+			size_t length = str.length();
+			for(size_t i=0; i<length; i++)
 			{
 				std::string::value_type c = str.at(i);
 				if(c == deliminator)
@@ -104,6 +105,10 @@ namespace djayy
 					}
 					token_start = i+1;
 				}
+			}
+			if(token_start != length)
+			{
+				tokens.push_back(str.substr(token_start, length-token_start));
 			}
 			return tokens;
 		}
@@ -304,6 +309,45 @@ namespace djayy
 				}
 				return path_open_asdir(path, indexes, input_stream);
 			}
+		}
+		
+		std::string http_build_query(const std::map<std::string, std::string>& query_data)
+		{
+			std::ostringstream query_string;
+			std::map<std::string, std::string>::const_iterator begin = query_data.begin();
+			std::map<std::string, std::string>::const_iterator end=query_data.end();
+			for(std::map<std::string, std::string>::const_iterator it=begin; it != end; it++)
+			{
+				if(it != begin)
+				{
+					query_string << '&';
+				}
+				query_string << urlencode(it->first) << '=' << urlencode(it->second);
+			}
+			return query_string.str();
+		}
+		
+		std::map<std::string, std::string> parse_querystring(const std::string& query_string)
+		{
+			std::map<std::string, std::string> params;
+			std::vector<std::string> pairs = string_split(query_string, '&');
+			size_t pairs_length = pairs.size();
+			for(size_t i=0; i<pairs_length; i++)
+			{
+				std::vector<std::string> key_value = string_split(pairs[i], '=');
+				if(key_value.size() > 0)
+				{
+					if(key_value.size() < 2)
+					{
+						params[urldecode(key_value[0])] = "";
+					}
+					else
+					{
+						params[urldecode(key_value[0])] = urldecode(key_value[1]);
+					}
+				}
+			}
+			return params;
 		}
 	}
 }

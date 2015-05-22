@@ -1,11 +1,22 @@
 
 #ifdef _WIN32
 	#define _CRT_SECURE_NO_WARNINGS
+	#define _WINSOCK_DEPRECATED_NO_WARNINGS
 #endif
 
 #include "WebUtils.h"
 #include <iomanip>
 #include <sstream>
+
+#ifdef _WIN32
+	#include <WinSock2.h>
+#else
+	#include <sys/socket.h>
+#endif
+
+#ifdef _WIN32
+	//#pragma comment(lib,"ws2_32.lib")
+#endif
 
 namespace djayy
 {
@@ -327,7 +338,7 @@ namespace djayy
 		{
 			std::ostringstream query_string;
 			std::map<std::string, std::string>::const_iterator begin = query_data.begin();
-			std::map<std::string, std::string>::const_iterator end=query_data.end();
+			std::map<std::string, std::string>::const_iterator end = query_data.end();
 			for(std::map<std::string, std::string>::const_iterator it=begin; it != end; it++)
 			{
 				if(it != begin)
@@ -360,6 +371,31 @@ namespace djayy
 				}
 			}
 			return params;
+		}
+		
+		std::vector<std::string> get_ip_addresses()
+		{
+			char ac[80];
+			if (gethostname(ac, sizeof(ac)) == SOCKET_ERROR)
+			{
+				return std::vector<std::string>();
+			}
+			printf("host name is %s\n", ac);
+			
+			struct hostent *phe = gethostbyname(ac);
+			if (phe == 0)
+			{
+				return std::vector<std::string>();
+			}
+			
+			std::vector<std::string> addresses;
+			for(size_t i=0; phe->h_addr_list[i]!=nullptr; i++)
+			{
+				struct in_addr addr;
+				memcpy(&addr, phe->h_addr_list[i], sizeof(struct in_addr));
+				addresses.push_back(inet_ntoa(addr));
+			}
+			return addresses;
 		}
 	}
 }

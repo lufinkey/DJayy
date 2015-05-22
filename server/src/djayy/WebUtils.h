@@ -39,5 +39,7 @@ namespace djayy
 		
 		std::string http_build_query(const std::map<std::string, std::string>& query_data);
 		std::map<std::string, std::string> parse_querystring(const std::string& query_string);
+		
+		std::vector<std::string> get_ip_addresses();
 	}
 }

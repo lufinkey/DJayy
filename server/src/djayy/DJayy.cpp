@@ -119,23 +119,20 @@ namespace djayy
 	
 	void DJayy::start()
 	{
-		server_mutex.lock();
 		if(!server_running)
 		{
-			((HttpServer*)server)->start();
 			server_running = true;
+			((HttpServer*)server)->start();
+			server_running = false;
 		}
 		else
 		{
-			server_mutex.unlock();
 			throw std::logic_error("server is already running");
 		}
-		server_mutex.unlock();
 	}
 	
 	void DJayy::stop()
 	{
-		server_mutex.lock();
 		if(server_running)
 		{
 			((HttpServer*)server)->stop();
@@ -143,9 +140,7 @@ namespace djayy
 		}
 		else
 		{
-			server_mutex.unlock();
 			throw std::logic_error("server is not running");
 		}
-		server_mutex.unlock();
 	}
 }

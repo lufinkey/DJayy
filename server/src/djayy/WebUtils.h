@@ -32,7 +32,10 @@ namespace djayy
 		
 		std::string path_clean_backward_token(const std::string& path);
 		std::string path_combine(const std::string& root, const std::string& path);
-		bool path_open(const std::string& path, const std::vector<std::string>& indexes, std::ifstream* input_stream);
+		std::string path_fileextension(const std::string& path);
+		bool path_open_asfile(const std::string& path, FILE** file, std::string* fullpath=nullptr);
+		bool path_open_asdir(const std::string& path, const std::vector<std::string>& indexes, FILE** file, std::string* fullpath=nullptr);
+		bool path_open(const std::string& path, const std::vector<std::string>& indexes, FILE** file, std::string* fullpath=nullptr);
 		
 		std::string http_build_query(const std::map<std::string, std::string>& query_data);
 		std::map<std::string, std::string> parse_querystring(const std::string& query_string);

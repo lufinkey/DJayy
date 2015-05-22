@@ -1,4 +1,8 @@
 
+#ifdef _WIN32
+	#define _CRT_SECURE_NO_WARNINGS
+#endif
+
 #include "WebUtils.h"
 #include <iomanip>
 #include <sstream>
@@ -142,6 +146,10 @@ namespace djayy
 				{
 					cleansed_path << '.';
 				}
+				else
+				{
+					cleansed_path << token;
+				}
 				if(i != last)
 				{
 					cleansed_path << '/';
@@ -218,7 +226,27 @@ namespace djayy
 			}
 		}
 		
-		bool path_open_asdir(const std::string& path, const std::vector<std::string>& indexes, std::ifstream* input_stream)
+		std::string path_fileextension(const std::string& path)
+		{
+			size_t last_slash = path.find_last_of('/');
+			if(last_slash == std::string::npos)
+			{
+				last_slash = 0;
+			}
+			size_t last_dot = path.find_last_of('.');
+			if(last_dot == std::string::npos)
+			{
+				return "";
+			}
+			if(last_dot < last_slash)
+			{
+				return "";
+			}
+			size_t extension_start = last_dot + 1;
+			return path.substr(extension_start, path.length()-extension_start);
+		}
+		
+		bool path_open_asdir(const std::string& path, const std::vector<std::string>& indexes, FILE** file, std::string* fullpath)
 		{
 			size_t i=0;
 			size_t indexes_size = indexes.size();
@@ -227,16 +255,13 @@ namespace djayy
 			{
 				bool failed = false;
 				std::string filepath = webutils::path_combine(path, indexes[i]);
-				try
+				*file = std::fopen(filepath.c_str(), "rb");
+				if((*file) != nullptr)
 				{
-					input_stream->open(filepath, std::ifstream::in);
-				}
-				catch(const std::ios_base::failure&)
-				{
-					failed = true;
-				}
-				if(!failed && input_stream->good())
-				{
+					if(fullpath != nullptr)
+					{
+						*fullpath = filepath;
+					}
 					succeeded = true;
 				}
 				i++;
@@ -248,35 +273,22 @@ namespace djayy
 			return false;
 		}
 		
-		bool path_open_asfile(const std::string& path, std::ifstream* input_stream)
+		bool path_open_asfile(const std::string& path, FILE** file, std::string* fullpath)
 		{
-			bool failed = false;
-			try
+			*file = std::fopen(path.c_str(), "rb");
+			if((*file) != nullptr)
 			{
-				input_stream->open(path, std::ifstream::in);
-			}
-			catch(const std::ios_base::failure&)
-			{
-				failed = true;
-			}
-			if(!failed && input_stream->good())
-			{
+				if(fullpath != nullptr)
+				{
+					*fullpath = path;
+				}
 				return true;
 			}
 			return false;
 		}
 		
-		bool path_open(const std::string& path, const std::vector<std::string>& indexes, std::ifstream* input_stream)
+		bool path_open(const std::string& path, const std::vector<std::string>& indexes, FILE** file, std::string* fullpath)
 		{
-			if(input_stream == nullptr)
-			{
-				throw std::invalid_argument("input_stream: null");
-			}
-			else if(input_stream->is_open())
-			{
-				throw std::invalid_argument("input_stream: is open");
-			}
-			
 			bool is_dir = false;
 			size_t path_length = path.length();
 			if(path_length > 0)
@@ -290,24 +302,24 @@ namespace djayy
 			
 			if(is_dir)
 			{
-				if(path_open_asdir(path, indexes, input_stream))
+				if(path_open_asdir(path, indexes, file, fullpath))
 				{
 					return true;
 				}
 				else if(path_length>1)
 				{
-					return path_open_asfile(path.substr(0, path_length-1), input_stream);
+					return path_open_asfile(path.substr(0, path_length-1), file, fullpath);
 				}
 				return false;
 			}
 			else
 			{
-				bool succeeded = path_open_asfile(path, input_stream);
+				bool succeeded = path_open_asfile(path, file, fullpath);
 				if(succeeded)
 				{
 					return true;
 				}
-				return path_open_asdir(path, indexes, input_stream);
+				return path_open_asdir(path, indexes, file, fullpath);
 			}
 		}
 		

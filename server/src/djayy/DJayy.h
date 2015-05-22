@@ -1,9 +1,10 @@
 
 #pragma once
 
-#include <string>
 #include <mutex>
 #include <stdexcept>
+#include <string>
+#include <vector>
 
 namespace djayy
 {
@@ -23,6 +24,7 @@ namespace djayy
 		std::string web_root;
 		void* server;
 		std::mutex server_mutex;
+		std::vector<std::string> indexes;
 		bool server_running;
 	};
 }

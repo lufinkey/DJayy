@@ -88,5 +88,222 @@ namespace djayy
 			}
 			return unescaped.str();
 		}
+		
+		std::vector<std::string> string_split(const std::string&str, std::string::value_type deliminator)
+		{
+			std::vector<std::string> tokens;
+			size_t token_start = 0;
+			for(size_t i=0, length=str.length(); i<length; i++)
+			{
+				std::string::value_type c = str.at(i);
+				if(c == deliminator)
+				{
+					if(i != 0)
+					{
+						tokens.push_back(str.substr(token_start, i-token_start));
+					}
+					token_start = i+1;
+				}
+			}
+			return tokens;
+		}
+		
+		std::string path_clean_backward_token(const std::string& path)
+		{
+			std::vector<std::string> path_tokens = webutils::string_split(path, '/');
+			std::ostringstream cleansed_path;
+			if(path.length()>0 && path.at(0) == '/')
+			{
+				cleansed_path << '/';
+			}
+			for(size_t i=0, length=path_tokens.size(), last=(length-1); i<length; i++)
+			{
+				const std::string token = path_tokens.at(i);
+				bool non_period = false;
+				for(size_t j=0, tok_length=token.length(); j<tok_length; j++)
+				{
+					std::string::value_type c = token.at(j);
+					if(c != '.')
+					{
+						non_period = true;
+						j = tok_length;
+					}
+				}
+				if(token.length() == 0)
+				{
+					non_period = true;
+				}
+				if(!non_period)
+				{
+					cleansed_path << '.';
+				}
+				if(i != last)
+				{
+					cleansed_path << '/';
+				}
+			}
+			if(path.length()>1 && path.at(path.length() - 1) == '/')
+			{
+				cleansed_path << '/';
+			}
+			return cleansed_path.str();
+		}
+		
+		std::string path_combine(const std::string& root, const std::string& path)
+		{
+			size_t root_length = root.length();
+			size_t path_length = path.length();
+			if(root_length > 0)
+			{
+				std::string::value_type root_last = root.at(root_length-1);
+				if(root_last=='/' || root_last=='\\')
+				{
+					if(path_length > 0)
+					{
+						std::string::value_type path_first = path.at(0);
+						if(path_first=='/' || path_first=='\\')
+						{
+							return root + path.substr(1, path_length-1);
+						}
+						else
+						{
+							return root + path;
+						}
+					}
+					else
+					{
+						return root;
+					}
+				}
+				else if(path_length > 0)
+				{
+					std::string::value_type path_first = path.at(0);
+					if(path_first=='/' || path_first=='\\')
+					{
+						return root + path;
+					}
+					else
+					{
+						return root + '/' + path;
+					}
+				}
+				else
+				{
+					return root;
+				}
+			}
+			else
+			{
+				if(path_length > 0)
+				{
+					std::string::value_type path_first = path.at(0);
+					if(path_first=='/' || path_first=='\\')
+					{
+						return "." + path;
+					}
+					else
+					{
+						return "./" + path;
+					}
+				}
+				else
+				{
+					return root;
+				}
+			}
+		}
+		
+		bool path_open_asdir(const std::string& path, const std::vector<std::string>& indexes, std::ifstream* input_stream)
+		{
+			size_t i=0;
+			size_t indexes_size = indexes.size();
+			bool succeeded = false;
+			while(!succeeded && i<indexes_size)
+			{
+				bool failed = false;
+				std::string filepath = webutils::path_combine(path, indexes[i]);
+				try
+				{
+					input_stream->open(filepath, std::ifstream::in);
+				}
+				catch(const std::ios_base::failure&)
+				{
+					failed = true;
+				}
+				if(!failed && input_stream->good())
+				{
+					succeeded = true;
+				}
+				i++;
+			}
+			if(succeeded)
+			{
+				return true;
+			}
+			return false;
+		}
+		
+		bool path_open_asfile(const std::string& path, std::ifstream* input_stream)
+		{
+			bool failed = false;
+			try
+			{
+				input_stream->open(path, std::ifstream::in);
+			}
+			catch(const std::ios_base::failure&)
+			{
+				failed = true;
+			}
+			if(!failed && input_stream->good())
+			{
+				return true;
+			}
+			return false;
+		}
+		
+		bool path_open(const std::string& path, const std::vector<std::string>& indexes, std::ifstream* input_stream)
+		{
+			if(input_stream == nullptr)
+			{
+				throw std::invalid_argument("input_stream: null");
+			}
+			else if(input_stream->is_open())
+			{
+				throw std::invalid_argument("input_stream: is open");
+			}
+			
+			bool is_dir = false;
+			size_t path_length = path.length();
+			if(path_length > 0)
+			{
+				std::string::value_type path_last = path.at(path_length-1);
+				if(path_last=='/' || path_last=='\\')
+				{
+					is_dir = true;
+				}
+			}
+			
+			if(is_dir)
+			{
+				if(path_open_asdir(path, indexes, input_stream))
+				{
+					return true;
+				}
+				else if(path_length>1)
+				{
+					return path_open_asfile(path.substr(0, path_length-1), input_stream);
+				}
+				return false;
+			}
+			else
+			{
+				bool succeeded = path_open_asfile(path, input_stream);
+				if(succeeded)
+				{
+					return true;
+				}
+				return path_open_asdir(path, indexes, input_stream);
+			}
+		}
 	}
 }

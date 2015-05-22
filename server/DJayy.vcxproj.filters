@@ -10,21 +10,69 @@
     <Filter Include="src\djayy">
       <UniqueIdentifier>{2c235242-bbad-4bcb-b8dc-d73c10f64531}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\djayy\media">
+      <UniqueIdentifier>{e90d0acc-7baa-4243-8e11-6a04923f4d06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\djayy\queue">
+      <UniqueIdentifier>{e2259adc-5058-4150-bfba-1dfd86c0cd37}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\djayy\WebServer.cpp">
+    <ClCompile Include="src\djayy\WebUtils.cpp">
       <Filter>src\djayy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\djayy\DJayy.cpp">
+      <Filter>src\djayy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\djayy\media\MediaSource.cpp">
+      <Filter>src\djayy\media</Filter>
+    </ClCompile>
+    <ClCompile Include="src\djayy\media\Playable.cpp">
+      <Filter>src\djayy\media</Filter>
+    </ClCompile>
+    <ClCompile Include="src\djayy\media\Playlist.cpp">
+      <Filter>src\djayy\media</Filter>
+    </ClCompile>
+    <ClCompile Include="src\djayy\media\TrackInfo.cpp">
+      <Filter>src\djayy\media</Filter>
+    </ClCompile>
+    <ClCompile Include="src\djayy\queue\UserVote.cpp">
+      <Filter>src\djayy\queue</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DJayy.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\djayy\WebServer.h">
+    <ClInclude Include="src\djayy\WebUtils.h">
       <Filter>src\djayy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\djayy\DJayy.h">
+      <Filter>src\djayy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\djayy\media\MediaSource.h">
+      <Filter>src\djayy\media</Filter>
+    </ClInclude>
+    <ClInclude Include="src\djayy\media\Playable.h">
+      <Filter>src\djayy\media</Filter>
+    </ClInclude>
+    <ClInclude Include="src\djayy\media\PlayableListener.h">
+      <Filter>src\djayy\media</Filter>
+    </ClInclude>
+    <ClInclude Include="src\djayy\media\Playlist.h">
+      <Filter>src\djayy\media</Filter>
+    </ClInclude>
+    <ClInclude Include="src\djayy\media\PlaylistListener.h">
+      <Filter>src\djayy\media</Filter>
+    </ClInclude>
+    <ClInclude Include="src\djayy\media\TrackInfo.h">
+      <Filter>src\djayy\media</Filter>
+    </ClInclude>
+    <ClInclude Include="src\djayy\queue\UserVote.h">
+      <Filter>src\djayy\queue</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -17,8 +17,8 @@ namespace djayy
 		virtual void stop() = 0;
 		
 		virtual double getLength() = 0; //seconds
-		virtual void setPosition(double seconds);
-		virtual double getPosition() const;
+		virtual void setPosition(double seconds) = 0;
+		virtual double getPosition() const = 0;
 		
 		void addPlayableListener(PlayableListener* listener);
 		void removePlayableListener(PlayableListener* listener);

@@ -20,6 +20,8 @@ namespace djayy
 		void stop();
 		
 	private:
+		void setup_api_v1();
+		
 		std::string web_root;
 		void* server;
 		std::vector<std::string> indexes;

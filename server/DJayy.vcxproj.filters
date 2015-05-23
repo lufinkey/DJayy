@@ -27,9 +27,6 @@
     <ClCompile Include="src\djayy\DJayy.cpp">
       <Filter>src\djayy</Filter>
     </ClCompile>
-    <ClCompile Include="src\djayy\media\MediaSource.cpp">
-      <Filter>src\djayy\media</Filter>
-    </ClCompile>
     <ClCompile Include="src\djayy\media\Playable.cpp">
       <Filter>src\djayy\media</Filter>
     </ClCompile>

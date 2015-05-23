@@ -128,6 +128,29 @@ namespace djayy
 			return tokens;
 		}
 		
+		std::string& string_replaceall(std::string& str, const std::string& find, const std::string& replace)
+		{
+			std::string::size_type n = 0;
+			while ((n=str.find(find, n)) != std::string::npos)
+			{
+				str.replace(n, str.length(), replace);
+				n += replace.size();
+			}
+			return str;
+		}
+		
+		std::string string_replaceall(const std::string& str, const std::string& find, const std::string& replace)
+		{
+			std::string str_new = str;
+			std::string::size_type n = 0;
+			while ((n=str_new.find(find, n)) != std::string::npos)
+			{
+				str_new.replace(n, str_new.length(), replace);
+				n += replace.size();
+			}
+			return str_new;
+		}
+		
 		std::string path_clean_backward_token(const std::string& path)
 		{
 			std::vector<std::string> path_tokens = webutils::string_split(path, '/');

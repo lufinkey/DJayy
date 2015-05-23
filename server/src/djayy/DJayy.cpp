@@ -41,6 +41,12 @@ namespace djayy
 		}
 	}
 	
+	void DJayy_respond_with(HttpServer::Response& response, const std::string& header, const std::string&content)
+	{
+		response << header << "\r\nContent-Length: " << content.length() << "\r\n\r\n";
+		response.stream.write(content.c_str(), content.length());
+	}
+	
 	std::string DJayy_determine_mime_type(const std::string& extension)
 	{
 		if(extension == "" || extension=="txt")
@@ -63,12 +69,6 @@ namespace djayy
 		{
 			return "";
 		}
-	}
-	
-	void DJayy_respond_with(HttpServer::Response& response, const std::string& header, const std::string&content)
-	{
-		response << header << "\r\nContent-Length: " << content.length() << "\r\n\r\n";
-		response.stream.write(content.c_str(), content.length());
 	}
 	
 	DJayy::DJayy(const std::string& web_root, unsigned short port, size_t num_threads, size_t timeout_request, size_t timeout_content)
@@ -142,5 +142,10 @@ namespace djayy
 		{
 			throw std::logic_error("server is not running");
 		}
+	}
+	
+	void DJayy::setup_api_v1()
+	{
+		//
 	}
 }

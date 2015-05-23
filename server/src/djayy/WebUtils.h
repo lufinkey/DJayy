@@ -29,6 +29,8 @@ namespace djayy
 		std::string urldecode(const std::string& value);
 		
 		std::vector<std::string> string_split(const std::string& str, std::string::value_type deliminator);
+		std::string& string_replaceall(std::string& str, const std::string& find, const std::string& replace);
+		std::string string_replaceall(const std::string& str, const std::string& find, const std::string& replace);
 		
 		std::string path_clean_backward_token(const std::string& path);
 		std::string path_combine(const std::string& root, const std::string& path);

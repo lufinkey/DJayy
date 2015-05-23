@@ -12,7 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\djayy\DJayy.cpp" />
-    <ClCompile Include="src\djayy\media\MediaSource.cpp" />
     <ClCompile Include="src\djayy\media\Playable.cpp" />
     <ClCompile Include="src\djayy\media\Playlist.cpp" />
     <ClCompile Include="src\djayy\media\TrackInfo.cpp" />

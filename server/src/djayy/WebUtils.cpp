@@ -14,10 +14,6 @@
 	#include <sys/socket.h>
 #endif
 
-#ifdef _WIN32
-	//#pragma comment(lib,"ws2_32.lib")
-#endif
-
 namespace djayy
 {
 	namespace webutils

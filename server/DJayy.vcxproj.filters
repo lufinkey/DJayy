@@ -4,9 +4,6 @@
     <Filter Include="src">
       <UniqueIdentifier>{9635b4e5-410c-441a-a163-8bf786b2c0d4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="external">
-      <UniqueIdentifier>{9475e1ca-3041-4d0d-9fbb-66410dec7be7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\djayy">
       <UniqueIdentifier>{2c235242-bbad-4bcb-b8dc-d73c10f64531}</UniqueIdentifier>
     </Filter>

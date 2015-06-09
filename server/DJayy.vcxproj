@@ -12,6 +12,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\djayy\DJayy.cpp" />
+    <ClCompile Include="src\djayy\mediasources\FilesystemMediaSource.cpp" />
+    <ClCompile Include="src\djayy\mediasources\FilesystemPlayable.cpp" />
     <ClCompile Include="src\djayy\media\MusicFile.cpp" />
     <ClCompile Include="src\djayy\media\Playable.cpp" />
     <ClCompile Include="src\djayy\media\Playlist.cpp" />
@@ -25,6 +27,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\djayy\DJayy.h" />
+    <ClInclude Include="src\djayy\mediasources\FilesystemMediaSource.h" />
+    <ClInclude Include="src\djayy\mediasources\FilesystemPlayable.h" />
     <ClInclude Include="src\djayy\media\MediaSource.h" />
     <ClInclude Include="src\djayy\media\MusicFile.h" />
     <ClInclude Include="src\djayy\media\Playable.h" />

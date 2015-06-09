@@ -14,8 +14,8 @@ namespace djayy
 		~MusicFile();
 		MusicFile& operator=(const MusicFile&) = delete;
 		
-		bool openFromFile(const std::string& path, std::string*error);
-		bool openFromFile(const std::wstring& path, std::string*error);
+		bool openFromFile(const std::string& path, std::string*error=nullptr);
+		bool openFromFile(const std::wstring& path, std::string*error=nullptr);
 		void close();
 		
 		void play();

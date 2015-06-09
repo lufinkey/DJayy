@@ -12,12 +12,14 @@ namespace djayy
 	class Playable
 	{
 	public:
+		virtual ~Playable();
+		
+		virtual bool loaded() const = 0;
 		virtual void play() = 0;
 		virtual void pause() = 0;
 		virtual void stop() = 0;
 		
-		virtual double getLength() = 0; //seconds
-		virtual void setPosition(double seconds) = 0;
+		virtual void setPosition(double pos) = 0;
 		virtual double getPosition() const = 0;
 		
 		void addPlayableListener(PlayableListener* listener);

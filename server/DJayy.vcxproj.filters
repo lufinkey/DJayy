@@ -13,6 +13,9 @@
     <Filter Include="src\djayy\queue">
       <UniqueIdentifier>{e2259adc-5058-4150-bfba-1dfd86c0cd37}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\djayy\mediasource">
+      <UniqueIdentifier>{65e935de-0a3f-4046-a1dc-f4505673c6f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -38,6 +41,12 @@
     </ClCompile>
     <ClCompile Include="src\djayy\media\MusicFile.cpp">
       <Filter>src\djayy\media</Filter>
+    </ClCompile>
+    <ClCompile Include="src\djayy\mediasources\FilesystemMediaSource.cpp">
+      <Filter>src\djayy\mediasource</Filter>
+    </ClCompile>
+    <ClCompile Include="src\djayy\mediasources\FilesystemPlayable.cpp">
+      <Filter>src\djayy\mediasource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +82,12 @@
     </ClInclude>
     <ClInclude Include="src\djayy\media\MusicFile.h">
       <Filter>src\djayy\media</Filter>
+    </ClInclude>
+    <ClInclude Include="src\djayy\mediasources\FilesystemMediaSource.h">
+      <Filter>src\djayy\mediasource</Filter>
+    </ClInclude>
+    <ClInclude Include="src\djayy\mediasources\FilesystemPlayable.h">
+      <Filter>src\djayy\mediasource</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

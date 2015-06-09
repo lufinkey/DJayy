@@ -109,9 +109,8 @@ namespace djayy
 		int lastpos;
 		std::mutex waiting_mutex;
 		std::vector<std::condition_variable*> waiting;
-		bool closing;
 		
-		MusicData() : sound(nullptr), soundptr(nullptr), paused(false), lastpos(0), closing(false)
+		MusicData() : sound(nullptr), soundptr(nullptr), paused(false), lastpos(0)
 		{
 			//
 		}
@@ -139,7 +138,7 @@ namespace djayy
 			{
 				musdat = (MusicData*)music->musicdata;
 			}
-			if(musdat!=nullptr && (event->getReason()==audiere::StopEvent::Reason::STREAM_ENDED || musdat->closing))
+			if(musdat!=nullptr && event->getReason()==audiere::StopEvent::Reason::STREAM_ENDED)
 			{
 				if(musdat->sound->getLength() > (BLIP_OFFSET*2))
 				{
@@ -238,10 +237,17 @@ namespace djayy
 			return;
 		}
 		MusicData* musdat = (MusicData*)musicdata;
-		musdat->closing = true;
 		musdat->sound->stop();
 		MusicFile_removeCurrentlyPlaying(this);
-		delete ((MusicData*)musicdata);
+		musdat->waiting_mutex.lock();
+		size_t waiting_size = musdat->waiting.size();
+		for(size_t i=0; i<waiting_size; i++)
+		{
+			musdat->waiting[i]->notify_all();
+		}
+		musdat->waiting.clear();
+		musdat->waiting_mutex.unlock();
+		delete musdat;
 		musicdata = nullptr;
 	}
 	

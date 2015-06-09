@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\djayy\DJayy.cpp" />
+    <ClCompile Include="src\djayy\media\MusicFile.cpp" />
     <ClCompile Include="src\djayy\media\Playable.cpp" />
     <ClCompile Include="src\djayy\media\Playlist.cpp" />
     <ClCompile Include="src\djayy\media\TrackInfo.cpp" />
@@ -25,6 +26,7 @@
   <ItemGroup>
     <ClInclude Include="src\djayy\DJayy.h" />
     <ClInclude Include="src\djayy\media\MediaSource.h" />
+    <ClInclude Include="src\djayy\media\MusicFile.h" />
     <ClInclude Include="src\djayy\media\Playable.h" />
     <ClInclude Include="src\djayy\media\PlayableListener.h" />
     <ClInclude Include="src\djayy\media\Playlist.h" />
@@ -77,13 +79,13 @@
       <PreprocessorDefinitions>BOOST_SPIRIT_THREADSAFE;WIN32;_WIN32_WINNT=0x0501;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>/usr/local/boost;external/Simple-Web-Server;external/audiere/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>/usr/local/boost/lib32-msvc-12.0;external/audiere/lib/win32-vc12;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>audiere-s-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>audiere-s-d.lib;winmm.lib;Rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -97,7 +99,7 @@
       <PreprocessorDefinitions>BOOST_SPIRIT_THREADSAFE;WIN32;_WIN32_WINNT=0x0501;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>/usr/local/boost;external/Simple-Web-Server;external/audiere/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -105,7 +107,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>/usr/local/boost/lib32-msvc-12.0;external/audiere/lib/win32-vc12;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>audiere-s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>audiere-s.lib;winmm.lib;Rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>

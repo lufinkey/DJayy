@@ -350,7 +350,7 @@ namespace djayy
 			offset = 0;
 		}
 		int actualLength = (length-1)-offset;
-		int posOff = ((double)actualLength)*pos;
+		int posOff = (int)(((double)actualLength)*pos);
 		int new_frame = offset+posOff;
 		musdat->sound->setPosition(new_frame);
 	}

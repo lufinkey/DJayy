@@ -36,6 +36,9 @@
     <ClCompile Include="src\djayy\queue\UserVote.cpp">
       <Filter>src\djayy\queue</Filter>
     </ClCompile>
+    <ClCompile Include="src\djayy\media\MusicFile.cpp">
+      <Filter>src\djayy\media</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="DJayy.rc" />
@@ -67,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="src\djayy\queue\UserVote.h">
       <Filter>src\djayy\queue</Filter>
+    </ClInclude>
+    <ClInclude Include="src\djayy\media\MusicFile.h">
+      <Filter>src\djayy\media</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

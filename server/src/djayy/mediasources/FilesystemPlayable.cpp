@@ -4,7 +4,8 @@
 
 namespace djayy
 {
-	FilesystemPlayable::FilesystemPlayable(const std::string& filepath, FilesystemMediaSource*media_source, const TrackInfo& track_info) : Playable(media_source, track_info)
+	FilesystemPlayable::FilesystemPlayable(const std::string& filepath, FilesystemMediaSource*media_source, const TrackInfo& track_info) : Playable(media_source, track_info),
+		musicFile(nullptr)
 	{
 		musicFile = new MusicFile();
 		bool opened = musicFile->openFromFile(filepath);
@@ -40,6 +41,12 @@ namespace djayy
 			return;
 		}
 		musicFile->play();
+		size_t listeners_size = listeners.size();
+		for(size_t i=0; i<listeners_size; i++)
+		{
+			listeners[i]->onPlay(this);
+		}
+		//TODO add onfinish listener
 	}
 	
 	void FilesystemPlayable::pause()
@@ -49,6 +56,11 @@ namespace djayy
 			return;
 		}
 		musicFile->pause();
+		size_t listeners_size = listeners.size();
+		for(size_t i=0; i<listeners_size; i++)
+		{
+			listeners[i]->onPause(this);
+		}
 	}
 	
 	void FilesystemPlayable::stop()
@@ -58,6 +70,11 @@ namespace djayy
 			return;
 		}
 		musicFile->stop();
+		size_t listeners_size = listeners.size();
+		for(size_t i=0; i<listeners_size; i++)
+		{
+			listeners[i]->onStop(this);
+		}
 	}
 	
 	void FilesystemPlayable::setPosition(double pos)
@@ -67,6 +84,11 @@ namespace djayy
 			return;
 		}
 		musicFile->setPosition(pos);
+		size_t listeners_size = listeners.size();
+		for(size_t i=0; i<listeners_size; i++)
+		{
+			listeners[i]->onSeek(this, pos);
+		}
 	}
 	
 	double FilesystemPlayable::getPosition() const

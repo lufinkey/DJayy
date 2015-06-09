@@ -2,12 +2,12 @@
 #pragma once
 
 #include "TrackInfo.h"
+#include "PlayableListener.h"
 #include <vector>
 
 namespace djayy
 {
 	class MediaSource;
-	class PlayableListener;
 	
 	class Playable
 	{
@@ -31,10 +31,10 @@ namespace djayy
 	protected:
 		Playable(MediaSource*media_source, const TrackInfo& track_info);
 		
+		std::vector<PlayableListener*> listeners;
+		
 	private:
 		MediaSource* media_source;
 		TrackInfo track_info;
-		
-		std::vector<PlayableListener*> listeners;
 	};
 }

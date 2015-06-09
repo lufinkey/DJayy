@@ -3,6 +3,7 @@
 
 #include "../media/Playable.h"
 #include "../media/MusicFile.h"
+#include <thread>
 
 namespace djayy
 {

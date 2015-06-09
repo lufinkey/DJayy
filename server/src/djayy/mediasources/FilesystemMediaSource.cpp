@@ -14,9 +14,15 @@ namespace djayy
 		//
 	}
 	
-	void FilesystemMediaSource::load()
+	bool FilesystemMediaSource::load()
 	{
 		//TODO prepare sqlite database, begin library refresh
+		return false;
+	}
+	
+	std::string FilesystemMediaSource::getSourceID() const
+	{
+		return "filesystem";
 	}
 	
 	std::vector<TrackInfo> FilesystemMediaSource::search(const std::string& query)

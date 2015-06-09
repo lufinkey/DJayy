@@ -11,7 +11,9 @@ namespace djayy
 		FilesystemMediaSource();
 		virtual ~FilesystemMediaSource();
 		
-		virtual void load() override;
+		virtual bool load() override;
+		virtual std::string getSourceID() const override;
+		
 		virtual std::vector<TrackInfo> search(const std::string& query) override;
 		virtual Playable* getTrack(const std::string& track_id) override;
 	};

@@ -16,6 +16,12 @@
     <Filter Include="src\djayy\mediasource">
       <UniqueIdentifier>{65e935de-0a3f-4046-a1dc-f4505673c6f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="external">
+      <UniqueIdentifier>{ee2fb4bd-08c8-4968-a22a-536f8463a87b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\sqlite3">
+      <UniqueIdentifier>{099ffdf4-6ff9-46c3-976e-a46286bb7bd4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -47,6 +53,9 @@
     </ClCompile>
     <ClCompile Include="src\djayy\mediasources\FilesystemPlayable.cpp">
       <Filter>src\djayy\mediasource</Filter>
+    </ClCompile>
+    <ClCompile Include="external\sqlite3\sqlite3.c">
+      <Filter>external\sqlite3</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

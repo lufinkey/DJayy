@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="external\sqlite3\sqlite3.c" />
     <ClCompile Include="src\djayy\DJayy.cpp" />
     <ClCompile Include="src\djayy\mediasources\FilesystemMediaSource.cpp" />
     <ClCompile Include="src\djayy\mediasources\FilesystemPlayable.cpp" />
@@ -82,7 +83,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>BOOST_SPIRIT_THREADSAFE;WIN32;_WIN32_WINNT=0x0501;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>/usr/local/boost;external/Simple-Web-Server;external/audiere/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>/usr/local/boost;external/Simple-Web-Server;external/sqlite3;external/audiere/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -102,7 +103,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>BOOST_SPIRIT_THREADSAFE;WIN32;_WIN32_WINNT=0x0501;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>/usr/local/boost;external/Simple-Web-Server;external/audiere/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>/usr/local/boost;external/Simple-Web-Server;external/sqlite3;external/audiere/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>

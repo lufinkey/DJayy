@@ -10,7 +10,7 @@ namespace djayy
 	public:
 		virtual ~MediaSource(){}
 
-		virtual bool load() = 0;
+		virtual bool load(std::string*error=nullptr) = 0;
 		virtual std::string getSourceID() const = 0;
 		
 		virtual std::vector<TrackInfo> search(const std::string& query) = 0;

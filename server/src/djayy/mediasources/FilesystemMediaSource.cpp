@@ -72,7 +72,7 @@ namespace djayy
 		{
 			if(error!=nullptr)
 			{
-				*error = "error while creating creating music table: " + std::to_string(stepped) + ", " + sqlite3_errmsg(database);
+				*error = "error while creating music table: " + std::to_string(stepped) + ", " + sqlite3_errmsg(database);
 			}
 			sqlite3_finalize(stmt);
 			sqlite3_close_v2(database);

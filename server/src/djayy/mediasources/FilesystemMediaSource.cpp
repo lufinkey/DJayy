@@ -31,7 +31,7 @@ namespace djayy
 		{
 			if(error!=nullptr)
 			{
-				*error = "error while creating opening database: " + std::to_string(opened) + ": " + sqlite3_errmsg(database);
+				*error = "error while opening database: " + std::to_string(opened) + ": " + sqlite3_errmsg(database);
 			}
 			db_mutex.unlock();
 			return false;

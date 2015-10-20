@@ -129,7 +129,7 @@ namespace djayy
 			std::string::size_type n = 0;
 			while ((n=str.find(find, n)) != std::string::npos)
 			{
-				str.replace(n, str.length(), replace);
+				str.replace(n, find.length(), replace);
 				n += replace.size();
 			}
 			return str;
@@ -141,7 +141,7 @@ namespace djayy
 			std::string::size_type n = 0;
 			while ((n=str_new.find(find, n)) != std::string::npos)
 			{
-				str_new.replace(n, str_new.length(), replace);
+				str_new.replace(n, find.length(), replace);
 				n += replace.size();
 			}
 			return str_new;
